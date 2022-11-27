@@ -1,0 +1,88 @@
+﻿
+@{
+    ViewData["Title"] = "Product";
+    Layout = "~/Areas/Admin/Views/Shared/_LayoutAdmin.cshtml";
+}
+@section stylesheet {
+
+    <link rel="stylesheet" href="@Url.Content("~/Content/AdminResources/assets/css/list/style1.css")" />
+    <link rel="stylesheet" href="@Url.Content("~/Content/AdminResources/assets/css/list/bootstrap1.min.css")" />
+}
+<!-- [ Content ] start -->
+<div class="pc-container">
+    <div class="pcoded-content">
+        <!-- [ breadcrumb ] start -->
+        <div class="page-header">
+            <div class="page-block">
+                <div class="row align-items-center">
+                    <div class="col-md-6">
+                        <ul class="breadcrumb">
+                            <li class="breadcrumb-item">Quản lý sản phẩm</li>
+                            <li class="breadcrumb-item">Thú cưng</li>
+                            <li class="breadcrumb-item">Danh sách thú cưng</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- [ breadcrumb ] end -->
+        <!-- [ Main Content ] start -->
+        <div class="row">
+            <div class="row">
+                <h2 style=" font-weight: 800; text-align: center; margin: 10px 0px 40px;">Danh sách thú cưng</h2>
+                <div class="col-md-3">
+                    <div class="white_card position-relative mb_20">
+                        <div class="card-body">
+                            <!-- <div class="ribbon1 rib1-primary">
+                              <span class="text-white text-center rib1-primary"
+                                >50% off</span
+                              >
+                            </div> -->
+                            <img src="~/Content/AdminResources/assets/images/list-product/product-1.jpg"
+                                 alt=""
+                                 class="d-block mx-auto my-4"
+                                 height="150" />
+                            <div class="row my-4">
+                                <div class="col">
+                                    <span class="badge_btn_3 mb-1" style="margin-left: 63px;">Chó Phốc</span>
+                                    <a href="#" class="f_w_400 color_text_3 f_s_14 d-block"
+                                       style="text-align: center;">Phốc sóc mặt gấu</a>
+                                </div>
+                                <div class="col-auto">
+                                    <h4 class="text-dark mt-0" style="margin-left: 46px;">
+                                        30.000.000đ
+
+                                    </h4>
+                                    <ul class="list-inline mb-0 product-review align-self-center" style="margin-left: 35px;">
+                                        <li class="list-inline-item">
+                                            <i class="fas fa-star text-warning font-16"></i>
+                                        </li>
+                                        <li class="list-inline-item">
+                                            <i class="fas fa-star text-warning font-16 ms -n2"></i>
+                                        </li>
+                                        <li class="list-inline-item">
+                                            <i class="fas fa-star text-warning font-16 ms -n2"></i>
+                                        </li>
+                                        <li class="list-inline-item">
+                                            <i class="fas fa-star text-warning font-16 ms -n2"></i>
+                                        </li>
+                                        <li class="list-inline-item">
+                                            <i class="fas fa-star-half text-warning font-16 ms -n2"></i>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+                            <div class="d-grid">
+                                <button class="btn_2">Chi tiết</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- [ Main Content ] end -->
+    </div>
+</div>
+<!-- [ Content ] end -->
+
+

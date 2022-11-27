@@ -1,0 +1,195 @@
+﻿<!DOCTYPE html>
+
+<html>
+<head>
+    <title>@ViewBag.Title</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0, minimal-ui">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="author" content="DashboardKit ">
+
+
+    <!-- Favicon icon -->
+    <link rel="icon" href="~/Content/AdminResources/assets/images/favicon.svg" type="image/x-icon">
+
+    <!-- font css -->
+    <link rel="stylesheet" href="@Url.Content("~/Content/AdminResources/assets/fonts/feather.css")">
+    <link rel="stylesheet" href="@Url.Content("~/Content/AdminResources/assets/fonts/fontawesome.css")">
+    <link rel="stylesheet" href="@Url.Content("~/Content/AdminResources/assets/fonts/material.css")">
+	<link rel="stylesheet" href="@Url.Content("~/Content/AdminResources/assets/css/plugins/bootstrap.css")" />
+    <!-- vendor css -->
+    <link rel="stylesheet" href="@Url.Content("~/Content/AdminResources/assets/css/style.css")" id="main-style-link">
+    @RenderSection("stylesheet", required: false)
+</head>
+<body>
+	<!-- [ Pre-loader ] start -->
+	<div class="loader-bg">
+		<div class="loader-track">
+			<div class="loader-fill"></div>
+		</div>
+	</div>
+	<!-- [ Pre-loader ] End -->
+	<!-- [ Mobile header ] start -->
+	<div class="pc-mob-header pc-header">
+		<div class="pcm-logo">
+			<img src="~/Content/AdminResources/assets/images/logo.png" alt="" class="logo logo-lg">
+		</div>
+		<div class="pcm-toolbar">
+			<a href="#!" class="pc-head-link" id="mobile-collapse">
+				<div class="hamburger hamburger--arrowturn">
+					<div class="hamburger-box">
+						<div class="hamburger-inner"></div>
+					</div>
+				</div>
+			</a>
+			<a href="#!" class="pc-head-link" id="headerdrp-collapse">
+				<i data-feather="align-right"></i>
+			</a>
+			<a href="#!" class="pc-head-link" id="header-collapse">
+				<i data-feather="more-vertical"></i>
+			</a>
+		</div>
+	</div>
+	<!-- [ Mobile header ] End -->
+	<!-- [ navigation menu ] start -->
+	<nav class="pc-sidebar">
+		<div class="navbar-wrapper">
+			<div class="m-header">
+				<a href="@Url.Action("Index", "Admin")" class="b-brand">
+					<!-- ========   change your logo hear   ============ -->
+					<img src="~/Content/AdminResources/assets/images/logo.png" alt="" class="logo logo-lg">
+					<img src="~/Content/AdminResources/assets/images/logo-sm.svg" alt="" class="logo logo-sm">
+				</a>
+			</div>
+			<div class="navbar-content">
+				<ul class="pc-navbar">
+					<li class="pc-item pc-caption">
+						<label>Quản lý</label>
+					</li>
+					<li class="pc-item">
+						<a href="@Url.Action("Index", "Admin")" class="pc-link "><span class="pc-micon"><i class="material-icons-two-tone">home</i></span><span class="pc-mtext">Quản lý chung</span></a>
+					</li>
+					<li class="pc-item pc-caption">
+						<label>Quản lý sản phẩm</label>
+					</li>
+					<li class="pc-item pc-hasmenu">
+						<a href="#!" class="pc-link "><span class="pc-micon"><i data-feather="github">business_center</i></span><span class="pc-mtext">Thú cưng</span><span class="pc-arrow"><i data-feather="chevron-right"></i></span></a>
+						<ul class="pc-submenu">
+							<li class="pc-item"><a class="pc-link" href="@Url.Action("Products", "Product" )">Danh sách thú cưng</a></li>
+							<li class="pc-item"><a class="pc-link" href="@Url.Action("AddProduct", "Product")">Thêm thú cưng</a></li>
+						</ul>
+					</li>
+					<li class="pc-item pc-hasmenu">
+						<a href="#!" class="pc-link "><span class="pc-micon"><i class="material-icons-two-tone">business_center</i></span><span class="pc-mtext">Phụ kiện</span><span class="pc-arrow"><i data-feather="chevron-right"></i></span></a>
+						<ul class="pc-submenu">
+							<li class="pc-item"><a class="pc-link" href="@Url.Action("Accessories", "Accessory")">Danh sách phụ kiện</a></li>
+							<li class="pc-item"><a class="pc-link" href="@Url.Action("AddAccessory", "Accessory")">Thêm phụ kiện</a></li>
+						</ul>
+					</li>
+					<li class="pc-item">
+						<a href="@Url.Action("Order", "Order")" class="pc-link "><span class="pc-micon"><i class="material-icons-two-tone">history_edu</i></span><span class="pc-mtext">Tình trạng đơn hàng</span></a>
+					</li>
+					<li class="pc-item pc-caption">
+						<label>Quản lý tin tức</label>
+					</li>
+					<li class="pc-item pc-hasmenu">
+						<a href="#!" class="pc-link "><span class="pc-micon"><i class="material-icons-two-tone" data-feather="file-minus"></i></span><span class="pc-mtext">Tin tức</span><span class="pc-arrow"><i data-feather="chevron-right"></i></span></a>
+						<ul class="pc-submenu">
+							<li class="pc-item"><a class="pc-link" href="@Url.Action("Blogs", "Blog")">Danh sách tin tức</a></li>
+							<li class="pc-item"><a class="pc-link" href="@Url.Action("AddBlog", "Blog")">Thêm tin tức</a></li>
+						</ul>
+					</li>
+					<li class="pc-item pc-caption">
+						<label>Tài khoản</label>
+					</li>
+					<li class="pc-item pc-hasmenu">
+						<a href="#!" class="pc-link "><span class="pc-micon"><i class="material-icons-two-tone" data-feather="cpu"></i></span><span class="pc-mtext">Admin</span><span class="pc-arrow"><i data-feather="chevron-right"></i></span></a>
+						<ul class="pc-submenu">
+							<li class="pc-item"><a class="pc-link" href="@Url.Action("Admins", "Admin" )">Danh sách admin</a></li>
+							<li class="pc-item"><a class="pc-link" href="@Url.Action("AddAdmin", "Admin")">Thêm admin</a></li>
+						</ul>
+					</li>
+					<li class="pc-item pc-hasmenu">
+						<a href="#!" class="pc-link "><span class="pc-micon"><i class="material-icons-two-tone" data-feather="user"></i></span><span class="pc-mtext">Người dùng</span><span class="pc-arrow"><i data-feather="chevron-right"></i></span></a>
+						<ul class="pc-submenu">
+							<li class="pc-item"><a class="pc-link" href="@Url.Action("Users", "User")">Danh sách người dùng</a></li>
+							<li class="pc-item"><a class="pc-link" href="@Url.Action("AddUser", "User")">Thêm người dùng</a></li>
+						</ul>
+					</li>
+					<li class="pc-item pc-caption">
+						<label>Quản lý bình luận</label>
+					</li>
+					<li class="pc-item">
+						<a href="@Url.Action("Comments", "Comment")" class="pc-link "><span class="pc-micon"><i data-feather="message-circle">history_edu</i></span><span class="pc-mtext">Bình luận</span></a>
+					</li>
+				</ul>
+			</div>
+		</div>
+	</nav>
+	<!-- [ navigation menu ] end -->
+	<!-- [ Header ] start -->
+	<header class="pc-header ">
+		<div class="header-wrapper">
+			<div class="page-header-title">
+				<h5 class="m-b-10" style="margin-top: 28px; font-weight: bolder;">QUẢN LÝ CỬA HÀNG THÚ CƯNG</h5>
+			</div>
+			<div class="ml-auto">
+				<ul class="list-unstyled">
+					<li class="dropdown pc-h-item">
+						<a class="pc-head-link dropdown-toggle arrow-none mr-0" data-toggle="dropdown" href="#" role="button" aria-haspopup="false" aria-expanded="false">
+							<i class="material-icons-two-tone">search</i>
+						</a>
+						<div class="dropdown-menu dropdown-menu-right pc-h-dropdown drp-search">
+							<form class="px-3">
+								<div class="form-group mb-0 d-flex align-items-center">
+									<i data-feather="search"></i>
+									<input type="search" class="form-control border-0 shadow-none" placeholder="Search here. . .">
+								</div>
+							</form>
+						</div>
+					</li>
+					<li class="dropdown pc-h-item">
+						<a class="pc-head-link dropdown-toggle arrow-none mr-0" data-toggle="dropdown" href="#" role="button" aria-haspopup="false" aria-expanded="false">
+							<img src="~/Content/AdminResources/assets/images/user/avatar-2.png" alt="user-image" class="user-avtar">
+							<span>
+								<span class="user-name">Admin</span>
+								<span class="user-desc">Quản lý cấp 1</span>
+							</span>
+						</a>
+						<div class="dropdown-menu dropdown-menu-right pc-h-dropdown">
+							<div class=" dropdown-header">
+								<h5 class="text-overflow m-0"><span class="badge bg-light-primary"><a href="https://gumroad.com/dashboardkit" target="_blank">Thêm admin mới</a></span></h5>
+							</div>
+							<a href="#!" class="dropdown-item">
+								<i class="material-icons-two-tone">account_circle</i>
+								<span>Tài khoản của tôi</span>
+							</a>
+							<a href="#!" class="dropdown-item">
+								<i class="material-icons-two-tone">chrome_reader_mode</i>
+								<span>Đăng xuất</span>
+							</a>
+						</div>
+					</li>
+				</ul>
+			</div>
+
+		</div>
+	</header>
+	<!-- [ Header ] end -->
+	<!-- [ Main Content ] start -->
+	@RenderBody()
+	<!-- [ Main Content ] end -->
+	<!-- Required Js -->
+    <script src="@Url.Content("~/Content/AdminResources/assets/js/vendor-all.min.js")"></script>
+    <script src="@Url.Content("~/Content/AdminResources/assets/js/plugins/bootstrap.js")"></script>
+    <script src="@Url.Content("~/Content/AdminResources/assets/js/plugins/feather.min.js")"></script>
+    <script src="@Url.Content("~/Content/AdminResources/assets/js/pcoded.min.js")"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
+
+    <!-- Apex Chart -->
+    <script src="@Url.Content("~/Content/AdminResources/assets/js/plugins/apexcharts.min.js")"></script>
+    <!-- custom-chart js -->
+    <script src="@Url.Content("~/Content/AdminResources/assets/js/pages/dashboard-sale.js")"></script>
+	@RenderSection("script", required: false)
+</body>
+</html>
