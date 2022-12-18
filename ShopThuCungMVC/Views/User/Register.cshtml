@@ -555,89 +555,142 @@ input {
         <div class="card card-4">
             <div class="card-body">
                 <h2 class="title">Đăng kí</h2>
-                <form method="POST" action="#">
-                    <div class="row row-space">
-                        <div class="col-2">
-                            <div class="input-group">
-                                <label class="label">Họ</label>
-                                <input class="input--style-4" type="text" name="first_name">
-                            </div>
-                        </div>
-                        <div class="col-2">
-                            <div class="input-group">
-                                <label class="label">Tên</label>
-                                <input class="input--style-4" type="text" name="last_name">
-                            </div>
-                        </div>
-                    </div>
-                    <div class="row row-space">
-                        <div class="col-2">
-                            <div class="input-group">
-                                <label class="label">Ngày sinh</label>
-                                <div class="input-group-icon">
-                                    <input class="input--style-4 js-datepicker" type="text" name="birthday">
-                                    <i class="zmdi zmdi-calendar-note input-icon js-btn-calendar"></i>
+                <div id="dynamic-form">
+                    @using (Html.BeginForm("Register", "User"))
+                    {
+                        <form method="POST">
+                            <div class="row row-space">
+                                <div class="col-2">
+                                    <div class="input-group">
+                                        <label class="label">Họ Tên</label>
+                                        <input class="input--style-4" type="text" name="name" id="name" required>
+                                    </div>
                                 </div>
                             </div>
-                        </div>
-                        <div class="col-2">
-                            <div class="input-group" style="display: block;">
-                                <label class="label">Giới tính</label>
-                                <div class="p-t-10">
-                                    <label class="radio-container m-r-45">
-                                        Nam
-                                        <input type="radio" checked="checked" name="gender">
-                                        <span class="checkmark"></span>
-                                    </label>
-                                    <label class="radio-container">
-                                        Nữ
-                                        <input type="radio" name="gender">
-                                        <span class="checkmark"></span>
-                                    </label>
+                            <div class="row row-space">
+                                <div class="col-2">
+                                    <div class="input-group">
+                                        <label class="label">Ngày sinh</label>
+                                        <div class="input-group-icon">
+                                            <input class="input--style-4 js-datepicker" type="date" name="birthday" id="birthday" required>
+                                            <i class="zmdi zmdi-calendar-note input-icon"></i>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-2">
+                                    <div class="input-group" style="display: block;">
+                                        <label class="label">Giới tính</label>
+                                        <div class="p-t-10">
+                                            <label class="radio-container m-r-45">
+                                                Nam
+                                                <input type="radio" name="gender" value="nam">
+                                                <span class="checkmark"></span>
+                                            </label>
+                                            <label class="radio-container">
+                                                Nữ
+                                                <input type="radio" name="gender" value="nu">
+                                                <span class="checkmark"></span>
+                                            </label>
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
-                        </div>
-                    </div>
-                    <div class="row row-space">
-                        <div class="col-2">
-                            <div class="input-group">
-                                <label class="label">Email</label>
-                                <input class="input--style-4" type="email" name="email">
+                            <div class="row row-space">
+                                <div class="col-2">
+                                    <div class="input-group">
+                                        <label class="label">Email</label>
+                                        <input class="input--style-4" type="email" name="email" id="email" required>
+                                    </div>
+                                </div>
+                                <div class="col-2">
+                                    <div class="input-group">
+                                        <label class="label">Số điện thoại</label>
+                                        <input class="input--style-4" type="text" name="phone" id="phone" required>
+                                    </div>
+                                </div>
                             </div>
-                        </div>
-                        <div class="col-2">
-                            <div class="input-group">
-                                <label class="label">Số điện thoại</label>
-                                <input class="input--style-4" type="text" name="phone">
+
+
+                            <div class="row row-space">
+                                <div class="col-2">
+                                    <div class="input-group">
+                                        <label class="label">Tên đăng nhập</label>
+                                        <input class="input--style-4" type="text" name="username" id="username" required>
+                                    </div>
+                                </div>
+                                <div class="col-2">
+                                    <div class="input-group">
+                                        <label class="label">Mật khẩu</label>
+                                        <input class="input--style-4" type="password" id="password" required>
+                                    </div>
+                                </div>
                             </div>
-                        </div>
-                    </div>
+                            <h4 id="error" style="font-size:16px;color:red;text-align: center"></h4>
+                            <div class="p-t-15">
 
+                                <a> <div class="btn btn--radius-2 btn--blue" id="register">Đăng kí</div></a>
 
-                    <div class="row row-space">
-                        <div class="col-2">
-                            <div class="input-group">
-                                <label class="label">Tên đăng nhập</label>
-                                <input class="input--style-4" type="email" name="email">
-                            </div>
-                        </div>
-                        <div class="col-2">
-                            <div class="input-group">
-                                <label class="label">Mật khẩu</label>
-                                <input id="upass" class="input--style-4" type="password">
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="p-t-15">
-
-                        <a href="#"> <div class="btn btn--radius-2 btn--blue" type="text">Đăng kí</div></a>
-
-                    </div> <br>
-                    <span> <a href="@Url.Action("Login", "User")" style="text-decoration: none; color: #555;">Đăng nhập</a></span>
-                </form>
+                            </div> <br>
+                            <span> <a href="@Url.Action("Login", "User")" style="text-decoration: none;color: #555;">Đăng nhập</a></span>
+                        </form>
+                    }
+                </div>
             </div>
         </div>
     </div>
 </div>
+<script src="~/Content/js/jquery-3.3.1.min.js"></script>
+<script>
+    $("#register").click(function () {
+        const name = $("#name").val();
+        const birthday = new Date($('#birthday').val());
+        const birthdayConvert = birthday.getFullYear + "/" + birthday.getMonth + "/" + birthday.getDay;
+        const gender = $("input[type='radio']:checked").val();
+        const email = $("#email").val();
+        const phone = $("#phone").val();
+        const username = $("#username").val();
+        const password = $("#password").val();
+        if (name == null || birthday == null || gender == null || email == null || phone == null || username == null || password == null) {
+            alert("Yêu cầu nhập đầy đủ thông tin");
+        }
+        else {
+        $.ajax({
+            url: "/User/Register",
+            type: "post",
+            data: {
+                name: name,
+                birthday: birthdayConvert,
+                gender: gender,
+                email: email,
+                phone: phone,
+                username: username,
+                password: password
+            },
+            success: function (response) {
+                $("#error").text(response.status);
+                $("#dynamic-form").html(response.html);
+            }
+        });
 
+       }
+    });
+    $("#verifyCode").click(function (e) {
+        e.preventDefault();
+        const code = $("#code").val();
+        if (code.length < 0) {
+            alert("Code không được bỏ trống");
+        } else {
+            $.ajax({
+                url: "/User/Verify",
+                type: "post",
+                data: {
+                    code:code
+                },
+                success: function () {
+                    redirectUrl = Request.Scheme + "://" + Request.Host + "/" + page.PageURL;
+                    window.location.href = redirectUrl;
+                }
+            });
+        }
+    })
+</script>

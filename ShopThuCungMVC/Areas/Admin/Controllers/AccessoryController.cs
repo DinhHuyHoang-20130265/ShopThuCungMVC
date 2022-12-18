@@ -1,4 +1,5 @@
-﻿using System;
+﻿using ShopThuCungMVC.Models;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -10,11 +11,19 @@ namespace ShopThuCungMVC.Areas.Admin.Controllers
     {
         public ActionResult Accessories()
         {
-            return View();
+            UserAccount account = (UserAccount)Session["admin"];
+            if (account != null)
+                return View();
+            else
+                return RedirectToAction("Login", "Auth");
         }
         public ActionResult AddAccessory()
         {
-            return View();
+            UserAccount account = (UserAccount)Session["admin"];
+            if (account != null)
+                return View();
+            else
+                return RedirectToAction("Login", "Auth");
         }
     }
 }

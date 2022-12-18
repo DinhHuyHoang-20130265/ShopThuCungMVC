@@ -5,9 +5,9 @@ namespace ShopThuCungMVC.Models
 {
     public class ShopThuCungDBContext : DbContext
     {
-        public DbSet<AdminUser> admin_user { get; set; }
-        public DbSet<CustomerUser> customer_user { get; set; }
+        public DbSet<UserAccount> user_account { get; set; }
         public DbSet<Contact> contact { get; set; }
+        public DbSet<InforUser> infor_user { get; set; }
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
             optionsBuilder.UseMySQL("server=localhost;database=shopthucungdb;user=root;password=;Charset=utf8;");
@@ -15,12 +15,8 @@ namespace ShopThuCungMVC.Models
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            modelBuilder.Entity<AdminUser>().ToTable("admin_user");
-            modelBuilder.Entity<CustomerUser>(entity =>
-            {
-                entity.HasKey(o => new { o.id_user, o.user_name });
-                entity.ToTable("customer_user");
-            });
+            modelBuilder.Entity<UserAccount>().ToTable("user_account");
+            modelBuilder.Entity<InforUser>().ToTable("infor_user");
             modelBuilder.Entity<Contact>().ToTable("contact");
         }
     }

@@ -1,4 +1,4 @@
-﻿using Microsoft.Extensions.Primitives;
+﻿using ShopThuCungMVC.DAO;
 using ShopThuCungMVC.Models;
 using System;
 using System.Collections.Generic;
@@ -6,22 +6,23 @@ using System.Linq;
 
 namespace ShopThuCungMVC.Services
 {
-    public class AccountService
+    public static class AccountService
     {
-        ShopThuCungDBContext db = new ShopThuCungDBContext();
-        public List<CustomerUser> Users { get; set; }
-        public AccountService() {
-            Users = db.customer_user.ToList();
-        }
-
-        public CustomerUser login(StringValues username, StringValues password)
+        public static UserAccount loginSite(String username, String password)
         {
-            foreach (var user in Users)
-            {
-                if (user.user_name.Equals(username) && user.pass.Equals(password))
-                    return user;
-            }
-            return null;
+            return AccountDAO.loginSite(username, password);
+        }
+        public static UserAccount loginAdmin(String username, String password)
+        {
+            return AccountDAO.loginAdmin(username, password);
+        }
+        public static bool checkEmailExist(String email)
+        {
+            return AccountDAO.checkEmailExist(email);
+        }
+        public static bool checkUsernameExist(String username)
+        {
+            return AccountDAO.checkUsernameExist(username);
         }
     }
 }

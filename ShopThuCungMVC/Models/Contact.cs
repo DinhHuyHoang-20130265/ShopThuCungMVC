@@ -1,7 +1,10 @@
-﻿namespace ShopThuCungMVC.Models
+﻿using System.ComponentModel.DataAnnotations;
+
+namespace ShopThuCungMVC.Models
 {
     public class Contact
     {
+        [Key]
         public int id { get; set; }
         public string name { get; set; }
         public string email { get; set; }
