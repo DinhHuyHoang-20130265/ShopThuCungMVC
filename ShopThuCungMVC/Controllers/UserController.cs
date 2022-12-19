@@ -3,8 +3,11 @@ using ShopThuCungMVC.Services;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net.Mail;
 using System.Web;
+using System.Web.Helpers;
 using System.Web.Mvc;
+using System.Xml.Linq;
 
 namespace ShopThuCungMVC.Controllers
 {
@@ -35,7 +38,7 @@ namespace ShopThuCungMVC.Controllers
                 }
                 else
                 {
-                    ViewBag.Notify = "Tên đăng nhập hoặc mật khẩu không đúng";
+                    ViewBag.Notify = "Tên đăng nhập, mật khẩu không đúng hoặc tài khoản của bạn đã bị vô hiệu hóa";
                     return View();
                 }
             }
@@ -54,7 +57,7 @@ namespace ShopThuCungMVC.Controllers
             else
                 return RedirectToAction("Index", "Home");
         }
-
+        [HttpGet]
         public ActionResult ForgotPassWord()
         {
             UserAccount account = (UserAccount)Session["user"];
@@ -62,6 +65,32 @@ namespace ShopThuCungMVC.Controllers
                 return View();
             else
                 return RedirectToAction("Index", "Home");
+        }
+        [HttpPost]
+        public ActionResult ForgotPassWord(string email)
+        {
+            if (AccountService.checkEmailExist(email))
+            {
+               if (!AccountService.checkStatusEmailAccount(email))
+                {
+                    return Json(new { status = "Tài khoản này đã bị vô hiệu hóa" }, JsonRequestBehavior.AllowGet);
+                }
+               else
+                {
+                    DateTime nowDate = new DateTime();
+                    DateTime timeExistsTypeDate = new DateTime(nowDate.Millisecond + 3 * 60);
+                    Session["timeExists"] = timeExistsTypeDate.Millisecond;
+                    string code = GenerateVerifyCode.GenerateNewRandom();
+                    Session["email"] = email;
+                    Session["code"] = code;
+                    MailService.SendMailForForgotPassword(code, email);
+                    return Json(new { check = true }, JsonRequestBehavior.AllowGet);
+                }
+            } 
+            else
+            {
+                return Json(new { status = "Email không tồn tại" }, JsonRequestBehavior.AllowGet);
+            }
         }
         [HttpPost]
         public ActionResult Register(string name, string birthday, string gender, string email, string phone, string username, string password)
@@ -75,7 +104,14 @@ namespace ShopThuCungMVC.Controllers
             }
             else
             {
-                Session["code"] = "123456";
+                DateTime nowDate = new DateTime();
+                DateTime timeExistsTypeDate = new DateTime(nowDate.Millisecond + 3*60);
+                Session["timeExists"] = timeExistsTypeDate.Millisecond;
+                string code = GenerateVerifyCode.GenerateNewRandom();
+                Session["code"] = code;
+                RegisterModel registerModel = new RegisterModel(username, password, name, email, phone, gender, birthday);
+                MailService.SendMailForSignUp(code, email);
+                Session["registerModel"] = registerModel;
                 return Json(new { check = true }, JsonRequestBehavior.AllowGet);
             }
         }
@@ -84,13 +120,45 @@ namespace ShopThuCungMVC.Controllers
         public ActionResult Verify(string code)
         {
             string codecomfirm = (string) Session["code"];
-            if (code.Equals(codecomfirm))
+            if ((int)Session["timeExists"] >= new DateTime().Millisecond)
             {
-                Session["registerSuccess"] = "Chúc mừng bạn đã đăng ký thành công, mời bạn đăng nhập";
-                return Json(new { success = true });
+                if (code.Equals(codecomfirm))
+                {
+                    AccountService.InsertUser((RegisterModel) Session["registerModel"]);
+                    Session["registerSuccess"] = "Chúc mừng bạn đã đăng ký thành công, mời bạn đăng nhập";
+                    return Json(new { success = true });
+                }
+                else
+                    return Json(new { success = false });
+            } else
+            {
+                return Json(new { timeout = true });
             }
-            else 
-                return Json(new { success = false });
+            
+        }
+        [HttpPost]
+        public ActionResult VerifyForgot(String code)
+        {
+            string codecomfirm = (string)Session["code"];
+            if ((int)Session["timeExists"] >= new DateTime().Millisecond)
+            {
+                if (code.Equals(codecomfirm))
+                {
+                    return Json(new { success = true });
+                }
+                else
+                    return Json(new { success = false });
+            }
+            else
+            {
+                return Json(new { timeout = true });
+            }
+        }
+        [HttpPost]
+        public ActionResult ChangePassWord(string pass) {
+            AccountService.UpdateUser(MD5.CreateMD5(pass), pass, null, (string)Session["email"], null, null, null);
+            Session["registerSuccess"] = "Chúc mừng bạn đã đổi mật khẩu thành công, mời bạn đăng nhập";
+            return RedirectToAction("Login", "User");
         }
     }
 }

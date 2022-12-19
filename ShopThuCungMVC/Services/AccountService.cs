@@ -24,5 +24,19 @@ namespace ShopThuCungMVC.Services
         {
             return AccountDAO.checkUsernameExist(username);
         }
+        public static void InsertUser(RegisterModel registerModel)
+        {
+            AccountDAO.InsertUser(registerModel.name, registerModel.birthday, registerModel.gender, registerModel.email, registerModel.phone, registerModel.user_name, registerModel.pass);
+        }
+
+        public static bool checkStatusEmailAccount(string email)
+        {
+            return AccountDAO.checkStatusEmailAccount(email);
+        }
+
+        public static void UpdateUser(string passMaHoa, string pass, string name, string email, string phone, string address, string avt)
+        {
+            AccountDAO.UpdateUser(passMaHoa, pass, name, email, phone, address, avt);
+        }
     }
 }

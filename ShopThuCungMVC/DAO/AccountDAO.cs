@@ -1,7 +1,10 @@
-﻿using Microsoft.Extensions.Primitives;
+﻿using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Primitives;
+using Org.BouncyCastle.Asn1.Cms;
 using ShopThuCungMVC.Models;
 using System;
 using System.Collections.Generic;
+using System.Data.SqlClient;
 using System.Linq;
 using System.Text;
 
@@ -92,11 +95,47 @@ namespace ShopThuCungMVC.DAO
         }
         public static void RemoveUser(string id)
         {
+            InforUser info = db.infor_user.Find(id);
+            db.infor_user.Remove(info);
+            db.SaveChanges();
             UserAccount account = db.user_account.Find(id);
             db.user_account.Remove(account);
             db.SaveChanges();
-            InforUser info = db.infor_user.Find(id);
-            db.infor_user.Remove(info);
+        }
+        public static UserAccount getAccountByEmail(string email)
+        {
+            var column = "iu.email";
+            return db.user_account.FromSqlRaw($"Select ua.id, ua.user_name, ua.passMaHoa, ua.pass, ua.status, ua.role from user_account ua INNER JOIN infor_user iu ON ua.id =iu.id_user WHERE {column}= '{email}'").FirstOrDefault();
+        }
+        public static bool checkStatusEmailAccount(string email)
+        {
+            if (getAccountByEmail(email).status == 0)
+                return false;
+            else 
+                return true;
+        }
+
+        public static void UpdateUser(string passMaHoa, string pass, string name, string email, string phone, string address, string avt)
+        {
+            UserAccount account = getAccountByEmail(email);
+            if (pass != null)
+                account.pass = pass;
+            if (passMaHoa != null)
+                account.passMaHoa = passMaHoa;
+            InforUser inforUser = db.infor_user.Find(account.id);
+            if (name != null)
+                inforUser.name = name;
+            if (email != null)
+                inforUser.email = email;
+            if (phone != null)
+                inforUser.phone = phone;
+            if (address != null)
+                inforUser.address = address;
+            if (avt != null)
+                inforUser.avt = avt;
+            db.user_account.Update(account);
+            db.SaveChanges();
+            db.infor_user.Update(inforUser);
             db.SaveChanges();
         }
     }

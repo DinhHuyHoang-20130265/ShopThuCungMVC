@@ -52,6 +52,8 @@
                                         </label>
                                     </div>
                                 </div>
+                                <h4 id="errorlogin" style="font-size:16px;color:red;text-align: center">@ViewBag.error</h4>
+                                <h4 id="errorpass" style="font-size:16px;color:green;text-align: center">@Session["changepass"]</h4>
                                 <button class="btn btn-block btn-primary mb-4">Đăng nhập</button>
                                 <p class="mb-0 text-muted">
                                     <a href="@Url.Action("ForgotPassWord", "Auth")" class="f-w-400">
