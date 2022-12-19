@@ -8,19 +8,19 @@ namespace ShopThuCungMVC.Services
 {
     public static class AccountService
     {
-        public static UserAccount loginSite(String username, String password)
+        public static UserAccount loginSite(string username, string password)
         {
             return AccountDAO.loginSite(username, password);
         }
-        public static UserAccount loginAdmin(String username, String password)
+        public static UserAccount loginAdmin(string username, string password)
         {
             return AccountDAO.loginAdmin(username, password);
         }
-        public static bool checkEmailExist(String email)
+        public static bool checkEmailExist(string email)
         {
             return AccountDAO.checkEmailExist(email);
         }
-        public static bool checkUsernameExist(String username)
+        public static bool checkUsernameExist(string username)
         {
             return AccountDAO.checkUsernameExist(username);
         }
