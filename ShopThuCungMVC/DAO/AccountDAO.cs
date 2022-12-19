@@ -13,7 +13,7 @@ namespace ShopThuCungMVC.DAO
         {
             foreach (var user in db.user_account.ToList())
             {
-                if (user.user_name.Equals(username) && user.passMaHoa.Equals(MD5.CreateMD5(password)) && user.role == 0 && user.status == 0)
+                if (user.user_name.Equals(username) && user.passMaHoa.Equals(MD5.CreateMD5(password)) && user.role == 0 && user.status == 1)
                 {
                     return user;
                 }
