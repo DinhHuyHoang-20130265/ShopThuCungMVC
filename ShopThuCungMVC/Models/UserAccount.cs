@@ -12,7 +12,6 @@ namespace ShopThuCungMVC.Models
 
         public int status { get; set; }
         public int role { get; set; }
-
         public UserAccount(string id, string user_name, string passMaHoa, string pass, int status, int role)
         {
             this.id = id;

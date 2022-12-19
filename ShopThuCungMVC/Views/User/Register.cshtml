@@ -628,7 +628,7 @@ input {
                             </div> <br>
                             <span> <a href="@Url.Action("Login", "User")" style="text-decoration: none;color: #555;">Đăng nhập</a></span>
                         </form>
-                            <form method="POST" id="form-code" style="display: none;">
+                        <form method="POST" id="form-code" style="display: none;">
                                 <div class="row row-space">
                                     <div class="col-2">
                                         <div class="input-group">
@@ -642,7 +642,7 @@ input {
                                     <a> <div class="btn btn--radius-2 btn--blue" id="verify">Xác nhận</div></a>
                                 </div> <br>
                                 <span> <a href="@Url.Action("Login", "User")" style="text-decoration: none;color: #555;">Đăng nhập</a></span>
-                            </form>
+                        </form>
                 </div>
             </div>
         </div>
@@ -678,7 +678,7 @@ input {
             success: function (response) {
                 $("#error").text(response.status);
                 if (response.status == null) {
-                    $("#form-register").css("display", "none");
+                    $("#form-register").remove();
                     $("#form-code").css("display", "block");
                 }
             }
@@ -696,15 +696,20 @@ input {
                 url: "/User/Verify",
                 type: "post",
                 data: {
-                    code:code
+                    code: code
                 },
                 success: function (response) {
                     if (response.success) {
-                        var redirectUrl = window.location.protocol + "//" + window.location.host+"/User/Login";
+                        var redirectUrl = window.location.protocol + "//" + window.location.host + "/User/Login";
                         console.log(redirectUrl);
                         window.location.href = redirectUrl;
                     } else {
-                        $("#errorCode").text("Mã code sai");
+                        if (response.timeout) {
+                            $("#error1").text("Mã code đã hết hạn !");
+                        }
+                        else {
+                            $("#error1").text("Mã code sai !");
+                        }
                     }
                 }
             });
