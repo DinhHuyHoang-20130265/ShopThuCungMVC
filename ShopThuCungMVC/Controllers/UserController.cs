@@ -20,35 +20,25 @@ namespace ShopThuCungMVC.Controllers
                 return RedirectToAction("Index", "Admin");
         }
         [HttpPost]
-        public ActionResult Login(String username, String password)
+        public ActionResult Login(string username, string password)
         {
             UserAccount account = (UserAccount)Session["user"];
             if (account != null)
-            {
                 return RedirectToAction("Index", "Admin");
-            }
-            if (String.IsNullOrEmpty(username))
-            {
-                ViewData["username"] = "Phải nhập tên đăng nhập";
-            }
-            else if (String.IsNullOrEmpty(username))
-            {
-                ViewData["password"] = "Phải nhập mật khẩu";
-            }
             else
             {
-                //Gán giá trị cho đối tượng được tạo mới (user)
                 UserAccount cus = AccountService.loginSite(username, password);
                 if (cus != null)
                 {
-                    ViewBag.Notify = "Chúc mừng đăng nhập thành công";
                     Session["user"] = cus;
                     return RedirectToAction("Index", "Home");
                 }
                 else
+                {
                     ViewBag.Notify = "Tên đăng nhập hoặc mật khẩu không đúng";
+                    return View();
+                }
             }
-            return RedirectToAction("Login", "User");
         }
         public ActionResult LogOut()
         {
@@ -85,28 +75,22 @@ namespace ShopThuCungMVC.Controllers
             }
             else
             {
-                string html =
-                        "<form method=\"POST\">\r\n                        " +
-                        "<div class=\"row row-space\">\r\n                            " +
-                        "<div class=\"col-2\">\r\n                               " +
-                        " <div class=\"input-group\">\r\n                                  " +
-                        "  <label class=\"label\">Nhập mã xác thực email</label>\r\n" +
-                        "<input class=\"input--style-4\" type=\"text\" name=\"code\" id=\"code\" required>\r\n" +
-                        "</div>\r\n                            " +
-                        "</div>\r\n                        " +
-                        "</div>" +
-                        "<div class=\"p-t-15\">\r\n\r\n" +
-                        "<a><div class=\"btn btn--radius-2 btn--blue\" id=\"verifyCode\">Xác thực</div></a>" +
-                        "</div>" +
-                        "</form>";
-                return Json(new { html }, JsonRequestBehavior.AllowGet);
+                Session["code"] = "123456";
+                return Json(new { check = true }, JsonRequestBehavior.AllowGet);
             }
         }
 
         [HttpPost]
-        public ActionResult Verify(String code)
+        public ActionResult Verify(string code)
         {
-            return RedirectToAction("Index", "Home");
+            string codecomfirm = (string) Session["code"];
+            if (code.Equals(codecomfirm))
+            {
+                Session["registerSuccess"] = "Chúc mừng bạn đã đăng ký thành công, mời bạn đăng nhập";
+                return Json(new { success = true });
+            }
+            else 
+                return Json(new { success = false });
         }
     }
 }

@@ -21,18 +21,18 @@ namespace ShopThuCungMVC.Areas.Admin.Controllers
 
         }
         [HttpPost]
-        public ActionResult Login(String username, String password)
+        public ActionResult Login(string username, string password)
         {
             UserAccount account = (UserAccount)Session["admin"];
             if (account != null)
             {
                 return RedirectToAction("Index", "Admin");
             }
-            if (String.IsNullOrEmpty(username))
+            if (string.IsNullOrEmpty(username))
             {
                 ViewData["username"] = "Phải nhập tên đăng nhập";
             }
-            else if (String.IsNullOrEmpty(username))
+            else if (string.IsNullOrEmpty(username))
             {
                 ViewData["password"] = "Phải nhập mật khẩu";
             }
