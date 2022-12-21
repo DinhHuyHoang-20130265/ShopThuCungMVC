@@ -19,6 +19,7 @@ namespace ShopThuCungMVC.Controllers
 
         public ActionResult Blog()
         {
+           
             return View();
         }
         [HttpGet]
