@@ -24,6 +24,13 @@ namespace ShopThuCungMVC.Services
         public static List<Product> searchByName(String txt)
         {
             return ProductCategoryDAO.searchByName(txt);
+        public static List<Product> listProductDogAndCatbyCate(String id)
+        {
+            return ProductCategoryDAO.listProductDogAndCatbyCate(id);
+        }
+        public static List<Product> listProductAccessorybyCate(String id)
+        {
+            return ProductCategoryDAO.listProductAccessorybyCate(id);
         }
     }
 }

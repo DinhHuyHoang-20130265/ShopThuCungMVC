@@ -10,6 +10,7 @@ namespace ShopThuCungMVC.Models
         public DbSet<Product> product { get; set; }
         public DbSet<ProductCategory> product_category { get; set; }
         public DbSet<ProductFromCate> product_from_cate { get; set; }
+        public DbSet<Blog> blogs { get; set; }
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
             optionsBuilder.UseMySQL("server=localhost;database=shopthucungdb;user=root;password=;Charset=utf8;Convert Zero Datetime=True;allow zero datetime=no");
@@ -23,6 +24,7 @@ namespace ShopThuCungMVC.Models
             modelBuilder.Entity<Product>().ToTable("product");
             modelBuilder.Entity<ProductCategory>().ToTable("product_category");
             modelBuilder.Entity<ProductFromCate>().ToTable("product_from_cate");
+            modelBuilder.Entity<Blog>().ToTable("blogs");
         }
     }
 }

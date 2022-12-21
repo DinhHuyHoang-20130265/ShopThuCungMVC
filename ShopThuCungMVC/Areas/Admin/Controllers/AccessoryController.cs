@@ -1,4 +1,5 @@
 ﻿using ShopThuCungMVC.Models;
+using ShopThuCungMVC.Services;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -11,9 +12,10 @@ namespace ShopThuCungMVC.Areas.Admin.Controllers
     {
         public ActionResult Accessories()
         {
+            List<Product> listProductById = ProductCateService.listProductAccessorybyCate(null);
             UserAccount account = (UserAccount)Session["admin"];
             if (account != null)
-                return View();
+                return View(listProductById);
             else
                 return RedirectToAction("Login", "Auth");
         }

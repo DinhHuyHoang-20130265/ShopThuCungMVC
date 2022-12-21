@@ -1155,6 +1155,7 @@ ol {
     text-align: right;
 }
 
+
 .price-range-wrap .price-range {
     border-radius: 0;
 }
@@ -1903,7 +1904,7 @@ ol {
     }
 
         .shoping__cart__table table thead tr {
-            border-bottom: 1px solid #ebebeb;
+            border-bottom: 1px solid #b9b9b9;
         }
 
         .shoping__cart__table table thead th {
@@ -2284,6 +2285,8 @@ ol {
         width: 100%;
         margin-top: 10px;
     }
+
+
 
 /*---------------------
   Blog
@@ -3671,6 +3674,7 @@ ol {
     border-radius: 0 0 28px 0;
 }
 
+
 .tl:before {
     content: "";
 }
@@ -3686,6 +3690,7 @@ ol {
 .br:before {
     content: "";
 }
+
 
 .add-button:hover .sub-button {
     width: 48px;
@@ -3721,19 +3726,15 @@ ol {
     border-radius: 28px;
 }
 
+
+
 .content_policy {
-    height: fit-content;
-    max-width: 1200px;
-    padding-top: 20px;
-    padding-bottom: 20px;
+    height: 2345px;
+    width: 1200px;
+    /* border: #000 solid 2px; */
+    margin-left: 12%;
 }
 
-.content_policy p {
-    margin-bottom: 2px;
-}
-
-@media (max-width: 767px) {
-    .card-4 .card-body {
-        padding: 50px 40px;
+    .content_policy p {
+        margin-bottom: 2px;
     }
-}

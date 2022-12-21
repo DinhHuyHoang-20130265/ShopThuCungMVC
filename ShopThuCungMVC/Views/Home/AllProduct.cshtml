@@ -7,7 +7,7 @@
     <script src="@Url.Content("~/Content/js/list-products.js")"></script>
 }
 <!-- Breadcrumb Section Begin -->
-<section class="breadcrumb-section set-bg" data-setbg="../img/breadcrumb.jpg">
+<section class="breadcrumb-section set-bg" data-setbg="https://localhost:44322/Content/img/breadcrumb.jpg">
     <div class="container">
         <div class="row">
             <div class="col-lg-12 text-center">
@@ -266,7 +266,7 @@
                                     </ul>
                                 </div>
                                 <div class="product__item__text">
-                                    <h6><a href="product-details.html">@item.ProductName</a></h6>
+                                    <h6>@Html.ActionLink(item.ProductName, "ProductDetails", "Details", new { @Id = item.productId }, null)</h6>
                                     <h5>@item.Price đ</h5>
                                 </div>
                             </div>

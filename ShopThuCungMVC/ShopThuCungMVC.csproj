@@ -261,10 +261,13 @@
     <Compile Include="Controllers\SearchController.cs" />
     <Compile Include="Controllers\UserController.cs" />
     <Compile Include="DAO\AccountDAO.cs" />
+    <Compile Include="DAO\BlogsDAO.cs" />
     <Compile Include="DAO\ProductCategoryDAO.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Models\Blog.cs" />
+    <Compile Include="Models\ListProductAdmin.cs" />
     <Compile Include="Models\RegisterModel.cs" />
     <Compile Include="Models\GenerateVerifyCode.cs" />
     <Compile Include="Models\InforUser.cs" />
@@ -272,11 +275,13 @@
     <Compile Include="Models\Product.cs" />
     <Compile Include="Models\ProductCategory.cs" />
     <Compile Include="Models\ProductFromCate.cs" />
+    <Compile Include="Models\ShoppingCartViewModel.cs" />
     <Compile Include="Models\UserAccount.cs" />
     <Compile Include="Models\Contact.cs" />
     <Compile Include="Models\ShopThuCungDBContext.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Services\AccountService.cs" />
+    <Compile Include="Services\BlogsService.cs" />
     <Compile Include="Services\ProductCateService.cs" />
     <Compile Include="Services\MailService.cs" />
   </ItemGroup>

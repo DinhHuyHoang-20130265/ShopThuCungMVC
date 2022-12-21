@@ -1,4 +1,6 @@
-﻿using System;
+﻿using ShopThuCungMVC.Models;
+using ShopThuCungMVC.Services;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -8,11 +10,16 @@ namespace ShopThuCungMVC.Controllers
 {
 	public class DetailsController : Controller
 	{
-		public ActionResult BlogDetails()
+		public ActionResult BlogDetails(string id)
 		{
-			return View();
+			if (id == null)
+			{
+                return RedirectToAction("Blog", "Home");
+            }
+            Blog blog = BlogsService.BlogById(id);
+            return View(blog);
 		}
-		public ActionResult ProductDetails()
+        public ActionResult ProductDetails()
 		{
 			return View();
 		}
