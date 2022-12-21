@@ -5,7 +5,7 @@
 }
 
 <!-- Breadcrumb Section Begin -->
-<section class="breadcrumb-section set-bg" data-setbg="../img/breadcrumb.jpg" style="background-image: url(&quot;img/breadcrumb.jpg&quot;);">
+<section class="breadcrumb-section set-bg" data-setbg="https://localhost:44322/Content/img/breadcrumb.jpg" style="background-image: url(&quot;img/breadcrumb.jpg&quot;);">
     <div class="container">
         <div class="row">
             <div class="col-lg-12 text-center">
@@ -88,102 +88,33 @@
             </div>
             <div class="col-lg-8 col-md-7">
                 <div class="row">
-                    <div class="col-lg-6 col-md-6 col-sm-6">
-                        <div class="blog__item">
-                            <div class="blog__item__pic">
-                                <img src="../img/blog/blog-2.jpg" alt="">
+                    @{
+                        List<ShopThuCungMVC.Models.Blog> list = ShopThuCungMVC.Services.BlogsService.listBlog();
+                        foreach (var item in list)
+                        {
+                            <div class="col-lg-6 col-md-6 col-sm-6">
+                                <div class="blog__item">
+                                    <div class="blog__item__pic">
+                                        <img src="@item.Image" alt="">
+                                    </div>
+                                    <div class="blog__item__text">
+                                        <ul>
+                                            <li><i class="fa fa-calendar-o"></i> @item.CreateDate</li>
+
+                                        </ul>
+                                        <h5>@Html.ActionLink(item.BlogName, "BlogDetails", "Details", new { @Id = item.BlogId }, null)</h5>
+                                        <p>@item.Desription</p>
+                                        
+                                        @*<a href="blog-details.html" class="blog__btn">ĐỌC THÊM <span class="arrow_right"></span></a>*@
+                                    </div>
+                                </div>
                             </div>
-                            <div class="blog__item__text">
-                                <ul>
-                                    <li><i class="fa fa-calendar-o"></i> 12/10/2022</li>
-                                    <li><i class="fa fa-comment-o"></i> 5</li>
-                                </ul>
-                                <h5><a href="blog-details.html">Hãy dừng lại nếu bạn đang cho chó mèo ăn chay</a></h5>
-                                <p>Hãy dừng ngay lại việc cho chó mèo ăn chay hoặc rau củ quả với hàm lượng lớn trong một ...</p>
-                                <a href="blog-details.html" class="blog__btn">ĐỌC THÊM <span class="arrow_right"></span></a>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-lg-6 col-md-6 col-sm-6">
-                        <div class="blog__item">
-                            <div class="blog__item__pic">
-                                <img src="../img/blog/blog-3.jpg" alt="">
-                            </div>
-                            <div class="blog__item__text">
-                                <ul>
-                                    <li><i class="fa fa-calendar-o"></i> 12/10/2022</li>
-                                    <li><i class="fa fa-comment-o"></i> 5</li>
-                                </ul>
-                                <h5><a href="blog-details.html">Phải làm sao khi chó bị đau chân và đi khập khiễng ?</a></h5>
-                                <p>Chó bị đau chân cà nhắc có thể do nhiều nguyên nhân bởi loài chó rất hiếu động ...</p>
-                                <a href="blog-details.html" class="blog__btn">ĐỌC THÊM <span class="arrow_right"></span></a>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-lg-6 col-md-6 col-sm-6">
-                        <div class="blog__item">
-                            <div class="blog__item__pic">
-                                <img src="../img/blog/blog-1.jpg" alt="">
-                            </div>
-                            <div class="blog__item__text">
-                                <ul>
-                                    <li><i class="fa fa-calendar-o"></i> 12/10/2022</li>
-                                    <li><i class="fa fa-comment-o"></i> 5</li>
-                                </ul>
-                                <h5><a href="blog-details.html">Giống chó Alaskan Malamute: khổng lồ liệu giá có rẻ?</a></h5>
-                                <p>Giống chó Alaskan Malamute hay chó Alaska, là một trong những giống chó kéo xe cổ xưa ...</p>
-                                <a href="blog-details.html" class="blog__btn">ĐỌC THÊM <span class="arrow_right"></span></a>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-lg-6 col-md-6 col-sm-6">
-                        <div class="blog__item">
-                            <div class="blog__item__pic">
-                                <img src="../img/blog/blog-4.jpg" alt="">
-                            </div>
-                            <div class="blog__item__text">
-                                <ul>
-                                    <li><i class="fa fa-calendar-o"></i> 12/10/2022</li>
-                                    <li><i class="fa fa-comment-o"></i> 5</li>
-                                </ul>
-                                <h5><a href="blog-details.html">Tẩy giun cho chó và những điều bạn cần phải biết</a></h5>
-                                <p>Tẩy giun cho chó và phòng ngừa giun sán là việc rất quan trọng. Cũng giống như con người ...</p>
-                                <a href="blog-details.html" class="blog__btn">ĐỌC THÊM <span class="arrow_right"></span></a>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-lg-6 col-md-6 col-sm-6">
-                        <div class="blog__item">
-                            <div class="blog__item__pic">
-                                <img src="../img/blog/blog-5.jpg" alt="">
-                            </div>
-                            <div class="blog__item__text">
-                                <ul>
-                                    <li><i class="fa fa-calendar-o"></i> 12/10/2022</li>
-                                    <li><i class="fa fa-comment-o"></i> 5</li>
-                                </ul>
-                                <h5><a href="blog-details.html">Cách chăm sóc chó mang thai tại nhà cần phải biết</a></h5>
-                                <p>Việc chăm sóc chó mang thai tại nhà cũng không hề đơn giản. Nếu bạn không có kiến thức ...</p>
-                                <a href="blog-details.html" class="blog__btn">ĐỌC THÊM <span class="arrow_right"></span></a>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-lg-6 col-md-6 col-sm-6">
-                        <div class="blog__item">
-                            <div class="blog__item__pic">
-                                <img src="../img/blog/blog-6.jpg" alt="">
-                            </div>
-                            <div class="blog__item__text">
-                                <ul>
-                                    <li><i class="fa fa-calendar-o"></i> 12/10/2022</li>
-                                    <li><i class="fa fa-comment-o"></i> 5</li>
-                                </ul>
-                                <h5><a href="blog-details.html">Danh sách các thuốc tẩy giun cho chó con an toàn</a></h5>
-                                <p>Mua thuốc tẩy giun cho chó con là một việc nhất thiết bạn phải làm khi nuôi một chú chó ...</p>
-                                <a href="blog-details.html" class="blog__btn">ĐỌC THÊM <span class="arrow_right"></span></a>
-                            </div>
-                        </div>
-                    </div>
+
+                           
+                        }
+                    }
+                    
+
                     <div class="col-lg-12">
                         <div class="product__pagination blog__pagination">
                             <a href="#">1</a>
