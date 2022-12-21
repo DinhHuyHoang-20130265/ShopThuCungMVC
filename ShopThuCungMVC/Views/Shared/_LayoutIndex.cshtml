@@ -1,4 +1,5 @@
 ﻿@using ShopThuCungMVC.Models;
+
 <!DOCTYPE html>
 <html lang="zxx">
 <head>
@@ -10,10 +11,10 @@
     <title>@ViewBag.Title</title>
 
     <!-- Google Font -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css" 
-    integrity="sha512-xh6O/CkQoPOWDdYTDqeRdPCVd1SpvCA9XXcUnZS2FmJNp1coAFzvtCN9BmamE+4aHK8yyUHUSCcJHgXloTyT2A==" 
-    crossorigin="anonymous" referrerpolicy="no-referrer"/>
-    <link rel="icon" type="image/png" sizes="16x16"  href="~/img/favicons/favicon-16x16.png">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css"
+          integrity="sha512-xh6O/CkQoPOWDdYTDqeRdPCVd1SpvCA9XXcUnZS2FmJNp1coAFzvtCN9BmamE+4aHK8yyUHUSCcJHgXloTyT2A=="
+          crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="icon" type="image/png" sizes="16x16" href="~/img/favicons/favicon-16x16.png">
     <!-- Css Styles -->
     <link rel="stylesheet" href="@Url.Content("~/Content/css/bootstrap.min.css")" type="text/css">
     <link rel="stylesheet" href="@Url.Content("~/Content/css/font-awesome.min.css")" type="text/css">
@@ -164,9 +165,18 @@
                             <li>
                                 <a href="@Url.Action("AllProduct", "Home")">Thú Cưng</a>
                                 <ul class="header__menu__dropdown">
-                                    <li><a href="#">Chó</a></li>
-                                    <li><a href="#">Mèo</a></li>
-                                    <li><a href="#">Phụ Kiện</a></li>
+                                    @{
+                                        List<ProductCategory> list = ShopThuCungMVC.Services.ProductCateService.listProductCate();
+                                        foreach (var item in list)
+                                        {
+                                            if (item.ParentID == null)
+                                            {
+                                                <li>
+                                                    @Html.ActionLink(item.CatName, "AllProduct", "Home", new { @Id = item.CatId }, null)
+                                                </li>
+                                            }
+                                        }
+                                    }
                                 </ul>
                             </li>
                             <li><a href="@Url.Action("Blog", "Home")">Tin Tức</a></li>
@@ -203,17 +213,19 @@
                             <span>Danh mục</span>
                         </div>
                         <ul>
-                            <li><a href="#">Chó Alaska</a></li>
-                            <li><a href="#">Chó Beagle</a></li>
-                            <li><a href="#">Chó Corgi</a></li>
-                            <li><a href="#">Chó Golden Retriever</a></li>
-                            <li><a href="#">Chó Husky</a></li>
-                            <li><a href="#">Chó Phốc sóc</a></li>
-                            <li><a href="#">Mèo Anh</a></li>
-                            <li><a href="#">Mèo lông ngắn</a></li>
-                            <li><a href="#">Mèo chân ngắn</a></li>
-                            <li><a href="#">Mèo tai cụp</a></li>
-                            <li><a href="#">Mèo tam thể</a></li>
+                            @{
+
+                                foreach (var item in list)
+                                {
+                                    if (item.ParentID != null)
+                                    {
+                                        <li>
+                                            @Html.ActionLink(item.CatName, "AllProduct", "Home", new { @Id = item.CatId }, null)
+                                        </li>
+                                    }
+                                }
+                            }
+
                         </ul>
                     </div>
                 </div>

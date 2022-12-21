@@ -1,4 +1,6 @@
 ﻿using Microsoft.Extensions.Logging;
+using ShopThuCungMVC.Models;
+using ShopThuCungMVC.Services;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -19,10 +21,17 @@ namespace ShopThuCungMVC.Controllers
         {
             return View();
         }
-
+        [HttpGet]
         public ActionResult AllProduct()
         {
-            return View();
+            List<Product> listProductById = ProductCateService.listProductbyCate(null);
+            return View(listProductById);
+        }
+        [HttpPost]
+        public ActionResult AllProduct(String Id)
+        {
+            List<Product> listProductById = ProductCateService.listProductbyCate(Id);
+            return View(listProductById);
         }
 
         public ActionResult Contact()
@@ -33,5 +42,6 @@ namespace ShopThuCungMVC.Controllers
         {
             return View();
         }
+
     }
 }
