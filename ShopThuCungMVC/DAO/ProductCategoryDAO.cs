@@ -3,13 +3,15 @@ using MySqlX.XDevAPI.Relational;
 using ShopThuCungMVC.Models;
 using System;
 using System.Collections.Generic;
+using System.Data.Common;
 using System.Linq;
+using System.Threading.Tasks;
 using System.Web;
 using System.Web.Helpers;
 
 namespace ShopThuCungMVC.DAO
 {
-    public class ProductCategoryDAO
+    public static class ProductCategoryDAO
     {
         static readonly ShopThuCungDBContext db = new ShopThuCungDBContext();
         public static List<ProductCategory> listProductCate()
@@ -58,6 +60,16 @@ namespace ShopThuCungMVC.DAO
                 return db.product.FromSqlRaw($"select pd.productId, pd.ProductName, pd.`Status`,pd.Image,pd.Price,pd.PromotionalPrice,pd.Quantity,pd.Warranty,pd.New,pd.Desription,pd.Dital,pd.CreateBy,pd.CreateDate,pd.UpdateBy,pd.UpdateDate,pd.giong,pd.mausac,pd.cannang from product pd inner join product_from_cate pc on pd.productId=pc.product_id WHERE {column}= '{id}'")
                     .ToList();
             }
+        }
+
+        public static List<Product> searchByName(string txt)
+        {
+            var column = "pd.ProductName";
+            
+            List<Product> list = db.product.FromSqlRaw($"select pd.productId, pd.ProductName, pd.`Status`,pd.Image,pd.Price, pd.PromotionalPrice,pd.Quantity,pd.Warranty,pd.New,pd.Desription," +
+                $"pd.Dital,pd.CreateBy,pd.CreateDate,pd.UpdateBy,pd.UpdateDate,pd.giong,pd.mausac,pd.cannang from product pd WHERE {column} LIKE '%{txt}%'")
+                    .ToList();
+            return list;
         }
     }
 }

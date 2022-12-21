@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using ShopThuCungMVC.Models;
+using System.Threading.Tasks;
 
 namespace ShopThuCungMVC.Services
 {
@@ -19,6 +20,10 @@ namespace ShopThuCungMVC.Services
         {
             return ProductCategoryDAO.listProductbyCate(id);
         }
+
+        public static List<Product> searchByName(String txt)
+        {
+            return ProductCategoryDAO.searchByName(txt);
         public static List<Product> listProductDogAndCatbyCate(String id)
         {
             return ProductCategoryDAO.listProductDogAndCatbyCate(id);
