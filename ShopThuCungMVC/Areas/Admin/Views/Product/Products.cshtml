@@ -1,6 +1,6 @@
-﻿
+﻿@model List<ShopThuCungMVC.Models.Product>
 @{
-    ViewData["Title"] = "Product";
+    ViewData["Title"] = "Products";
     Layout = "~/Areas/Admin/Views/Shared/_LayoutAdmin.cshtml";
 }
 @section stylesheet {
@@ -30,6 +30,8 @@
         <div class="row">
             <div class="row">
                 <h2 style=" font-weight: 800; text-align: center; margin: 10px 0px 40px;">Danh sách thú cưng</h2>
+                @foreach (var item in Model)
+                {
                 <div class="col-md-3">
                     <div class="white_card position-relative mb_20">
                         <div class="card-body">
@@ -38,19 +40,19 @@
                                 >50% off</span
                               >
                             </div> -->
-                            <img src="~/Content/AdminResources/assets/images/list-product/product-1.jpg"
+                            <img src="@item.Image"
                                  alt=""
                                  class="d-block mx-auto my-4"
                                  height="150" />
                             <div class="row my-4">
                                 <div class="col">
-                                    <span class="badge_btn_3 mb-1" style="margin-left: 63px;">Chó Phốc</span>
+                                    <span class="badge_btn_3 mb-1" style="margin-left: 63px;">@item.giong</span>
                                     <a href="#" class="f_w_400 color_text_3 f_s_14 d-block"
-                                       style="text-align: center;">Phốc sóc mặt gấu</a>
+                                       style="text-align: center;">@item.ProductName</a>
                                 </div>
                                 <div class="col-auto">
                                     <h4 class="text-dark mt-0" style="margin-left: 46px;">
-                                        30.000.000đ
+                                        @item.Price đ
 
                                     </h4>
                                     <ul class="list-inline mb-0 product-review align-self-center" style="margin-left: 35px;">
@@ -78,11 +80,10 @@
                         </div>
                     </div>
                 </div>
+                }
             </div>
         </div>
         <!-- [ Main Content ] end -->
     </div>
 </div>
 <!-- [ Content ] end -->
-
-
