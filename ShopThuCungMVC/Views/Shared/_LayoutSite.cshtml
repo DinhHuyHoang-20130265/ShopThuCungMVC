@@ -251,12 +251,22 @@
                     </div>
                 </div>
                 <div class="col-lg-9">
-                    <div class="hero__search">
+                    <div class="hero__search" style="overflow: unset !important">
                         <div class="hero__search__form">
                             <form action="#">
-                                <input type="text" placeholder="Bạn cần tìm gì ?">
+                                <input id="search-keyword" type="text" oninput="searchByName(this)" placeholder="Bạn cần tìm gì ?">
                                 <button type="submit" class="site-btn">Tìm Kiếm</button>
                             </form>
+                            <div id="result-search" style="display: none">
+                                <ul class="result"
+                                    style="list-style-type: none; overflow-y: scroll; height: 500px; overflow-x: unset; background: white; border: 1px solid #b9b9b9; position: relative; z-index: 1; border-radius: 0px 0px 6px 6px;">
+                                    <li class="search" style="margin-bottom: 10px;border: #b9b9b9">
+                                        <h3 style="text-align: center; font-size: 14px; margin-top: 10px; color: #9c9c9d">
+                                            Nhập từ khóa cần tìm...
+                                        </h3>
+                                    </li>
+                                </ul>
+                            </div>
                         </div>
                         <div class="hero__search__phone">
                             <div class="hero__search__phone__icon">
@@ -341,6 +351,53 @@
     <script src="@Url.Content("~/Content/js/mixitup.min.js")"></script>
     <script src="@Url.Content("~/Content/js/owl.carousel.min.js")"></script>
     <script src="@Url.Content("~/Content/js/main.js")"></script>
+    <script>
+        $(document).ready(function () {
+            $("#search-keyword").focus(function () {
+                $("#result-search").css("display", "block");
+            })
+            $("#search-keyword").on("blur", function () {
+                $("#result-search").css("display", "none");
+            })
+        })
+        function searchByName(param) {
+            const txtSearch = param.value;
+            if (txtSearch.length > 0) {
+                $.ajax({
+                    url: "@Url.Action("GetAllProd", "Search")",
+                    type: "get",
+                    data: {
+                        txtSearch: txtSearch
+                    },
+                    dataType: 'json',
+                    contentType: 'application/json;charset=utf-8',
+                    success: function (result) {
+                        var str = "";
+                        $.each(result.data, function (index, value) {
+                            str += "<li class='search' style=' border-bottom: 1px solid #b9b9b9; margin-bottom: 10px; '>";
+                            str += "<a href='#' style='display: inline-flex;'>";
+                            str += "<div class='product-img' style='margin-left: 5px; width: 60px; height: 60px; margin: 5px;'>";
+                            str += "<img src='" + value.Image + "'>";
+                            str += "</div>";
+                            str += "<div class='item-infor' style='margin-left: 5px; display: inline-flex; justify-content: center; align-items: center;'>";
+                            str += "<h6 style='width: 350px; text-align: left; padding-left: 10px'>" + value.ProductName + "</h6>";
+                            str += "<strong class='price' style='width: 90px; text-align: center; font-size: medium; color: #0a53be'>" + value.Price + "</strong>"
+                            str += "</div></a></li>";
+                        });
+                        console.log(str)
+                        $("#result-search .result").html(str);
+                    },
+                    error: function (xhr) {
+                        //Do Something to handle error
+                    }
+                });
+            } else {
+                $("#result-search .result").html(`<li class="search" style="margin-bottom: 10px;">
+           <h3 style="text-align: center; font-size: 14px; margin-top: 10px; color: #9c9c9d">Nhập từ khóa cần tìm...</h3>
+</li>`)
+            }
+        }
+    </script>
     @RenderSection("script", required: false)
 </body>
 
