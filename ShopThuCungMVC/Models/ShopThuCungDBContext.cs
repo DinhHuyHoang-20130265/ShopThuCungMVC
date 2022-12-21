@@ -12,7 +12,7 @@ namespace ShopThuCungMVC.Models
         public DbSet<ProductFromCate> product_from_cate { get; set; }
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
-            optionsBuilder.UseMySQL("server=localhost;database=shopthucungdb;user=root;password=;Charset=utf8;");
+            optionsBuilder.UseMySQL("server=localhost;database=shopthucungdb;user=root;password=;Charset=utf8;Convert Zero Datetime=True;allow zero datetime=no");
         }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)

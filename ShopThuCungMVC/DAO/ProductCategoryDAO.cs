@@ -1,8 +1,11 @@
-﻿using ShopThuCungMVC.Models;
+﻿using Microsoft.EntityFrameworkCore;
+using MySqlX.XDevAPI.Relational;
+using ShopThuCungMVC.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
+using System.Web.Helpers;
 
 namespace ShopThuCungMVC.DAO
 {
@@ -16,13 +19,17 @@ namespace ShopThuCungMVC.DAO
 
         public static List<Product> listProductbyCate(String id)
         {
-            List<Product> list = null;
-            List<ProductFromCate> listPdCat= db.product_from_cate.Where(a => a.cate_id == id).ToList();
-            foreach (var item in listPdCat)
+            if (id == null)
             {
-                list = db.product.Where(n => n.productId == item.product_id).ToList();
+                return db.product.FromSqlRaw($"select pd.productId, pd.ProductName, pd.`Status`,pd.Image,pd.Price,pd.PromotionalPrice,pd.Quantity,pd.Warranty,pd.New,pd.Desription,pd.Dital,pd.CreateBy,pd.CreateDate,pd.UpdateBy,pd.UpdateDate,pd.giong,pd.mausac,pd.cannang from product pd inner join product_from_cate pc on pd.productId=pc.product_id")
+                .ToList();
             }
-            return list;
+            else
+            {
+                var column = "pc.cate_id";
+                return db.product.FromSqlRaw($"select pd.productId, pd.ProductName, pd.`Status`,pd.Image,pd.Price,pd.PromotionalPrice,pd.Quantity,pd.Warranty,pd.New,pd.Desription,pd.Dital,pd.CreateBy,pd.CreateDate,pd.UpdateBy,pd.UpdateDate,pd.giong,pd.mausac,pd.cannang from product pd inner join product_from_cate pc on pd.productId=pc.product_id WHERE {column}= '{id}'")
+                    .ToList();
+            }
         }
     }
 }
