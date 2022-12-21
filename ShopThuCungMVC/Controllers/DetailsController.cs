@@ -1,4 +1,5 @@
-﻿using System;
+﻿using ShopThuCungMVC.Models;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -12,9 +13,10 @@ namespace ShopThuCungMVC.Controllers
 		{
 			return View();
 		}
-		public ActionResult ProductDetails()
+		public ActionResult ProductDetails(String id)
 		{
-			return View();
+			Product detail = Services.ProductCateService.Detail(id);
+			return View(detail);
 		}
 	}
 }

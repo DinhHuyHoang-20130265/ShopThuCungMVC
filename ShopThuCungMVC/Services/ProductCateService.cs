@@ -19,5 +19,10 @@ namespace ShopThuCungMVC.Services
         {
             return ProductCategoryDAO.listProductbyCate(id);
         }
+
+        public static Product Detail(String id)
+        {
+            return ProductCategoryDAO.Detail(id);
+        }
     }
 }

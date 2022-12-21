@@ -42,6 +42,5 @@ namespace ShopThuCungMVC.Controllers
         {
             return View();
         }
-
     }
 }
