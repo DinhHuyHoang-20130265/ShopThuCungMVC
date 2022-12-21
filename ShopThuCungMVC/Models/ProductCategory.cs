@@ -8,8 +8,6 @@ namespace ShopThuCungMVC.Models
 {
     public class ProductCategory
     {
-        private string updateBy;
-
         [Key]
         public string CatId { get; set; }
         public string CatName { get; set; }
