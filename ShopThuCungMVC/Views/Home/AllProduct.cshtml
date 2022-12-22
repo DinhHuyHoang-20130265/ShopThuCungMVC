@@ -1,4 +1,4 @@
-﻿@model List<ShopThuCungMVC.Models.Product>
+@model List<ShopThuCungMVC.Models.Product>
 @using System.Globalization;
 @{
     ViewData["Title"] = "AllProduct";
@@ -311,7 +311,7 @@
                             <div class="product__item">
                                 <div class="product__item__pic set-bg" data-setbg="@Model.ElementAt(i).Image">
                                     <ul class="product__item__pic__hover">
-                                        <li><a href="#"><i class="fa fa-shopping-cart"></i></a></li>
+                                        <li><a href="#" class="btnAddToCart" data-id="@item.productId"><i class="fa fa-shopping-cart"></i></a></li>
                                     </ul>
                                 </div>
                                 <div class="product__item__text">
@@ -331,8 +331,29 @@
         </div>
     </div>
 </section>
+
 <!-- Product Section End -->
-<script src="~/Content/js/jquery-3.3.1.min.js"></script>
+<script src="~/Scripts/jquery-3.6.1.js"></script>
+<script>
+    $(document).ready(function () {
+        $('.product__item').on('click', '.btnAddToCart', function (e) {
+            e.preventDefault();
+            var id = $(this).data('id');
+            var quantity = 1;
+            alert(id +", " + quantity);
+            $.ajax({
+                url: '/ProductBagController/AddToCart',
+                type: 'POST', 
+                data: { id: id, quantity: quantity },
+                success: function (rs) {
+                    if (rs.success) {
+                        alert(rs.msg);
+                    }
+                }
+            })
+        })
+    })
+</script>
 <script>
     $("#loadMoreA").on("click", function (e) {
         console.log("abc");
