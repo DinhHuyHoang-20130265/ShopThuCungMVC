@@ -22,17 +22,18 @@ namespace ShopThuCungMVC.Controllers
            
             return View();
         }
-        [HttpGet]
-        public ActionResult AllProduct()
-        {
-            List<Product> listProductById = ProductCateService.listProductbyCate(null);
-            return View(listProductById);
-        }
-        [HttpPost]
         public ActionResult AllProduct(String Id)
         {
-            List<Product> listProductById = ProductCateService.listProductbyCate(Id);
-            return View(listProductById);
+            if (Id == null)
+            {
+                List<Product> listProductById = ProductCateService.listAllProduct();
+                return View(listProductById);
+            }
+            else
+            {
+                List<Product> listProductById = ProductCateService.listProductbyCate(Id);
+                return View(listProductById);
+            }
         }
 
         public ActionResult Contact()
