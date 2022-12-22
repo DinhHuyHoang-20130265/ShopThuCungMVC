@@ -263,7 +263,6 @@
     <Compile Include="DAO\AccountDAO.cs" />
     <Compile Include="DAO\BlogsDAO.cs" />
     <Compile Include="DAO\ProductCategoryDAO.cs" />
-    <Compile Include="DAO\ShoppingCartDAO.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -276,7 +275,7 @@
     <Compile Include="Models\Product.cs" />
     <Compile Include="Models\ProductCategory.cs" />
     <Compile Include="Models\ProductFromCate.cs" />
-    <Compile Include="Models\ShoppingCart.cs" />
+    <Compile Include="Models\ShoppingCartViewModel.cs" />
     <Compile Include="Models\UserAccount.cs" />
     <Compile Include="Models\Contact.cs" />
     <Compile Include="Models\ShopThuCungDBContext.cs" />
@@ -747,9 +746,6 @@
     <Content Include="Content\sass\_shoping-cart.scss" />
     <Content Include="Content\sass\_sidebar.scss" />
     <Content Include="Content\sass\_variable.scss" />
-    <Content Include="..\.editorconfig">
-      <Link>.editorconfig</Link>
-    </Content>
     <None Include="Scripts\jquery-3.6.1.intellisense.js" />
     <Content Include="Scripts\jquery-3.6.1.js" />
     <Content Include="Scripts\jquery-3.6.1.min.js" />
