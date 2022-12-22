@@ -6,6 +6,7 @@
 @section script {
     <script src="@Url.Content("~/Content/js/list-products.js")"></script>
 }
+<script src="./assets/js/jquery-3.6.1.min.js"></script>
 <!-- Breadcrumb Section Begin -->
 <section class="breadcrumb-section set-bg" data-setbg="https://localhost:44322/Content/img/breadcrumb.jpg">
     <div class="container">
@@ -114,45 +115,7 @@
                             </div>
                         </div>
                     </div>
-                    <div class="sidebar__item sidebar__item__color--option">
-                        <h4>Màu sắc</h4>
-                        <div class="sidebar__item__color sidebar__item__color--white">
-                            <label for="white">
-                                Trắng
-                                <input type="radio" id="white">
-                            </label>
-                        </div>
-                        <div class="sidebar__item__color sidebar__item__color--gray">
-                            <label for="gray">
-                                Xám
-                                <input type="radio" id="gray">
-                            </label>
-                        </div>
-                        <div class="sidebar__item__color sidebar__item__color--red">
-                            <label for="red">
-                                Xám Trắng
-                                <input type="radio" id="red">
-                            </label>
-                        </div>
-                        <div class="sidebar__item__color sidebar__item__color--black">
-                            <label for="black">
-                                Vàng
-                                <input type="radio" id="black">
-                            </label>
-                        </div>
-                        <div class="sidebar__item__color sidebar__item__color--blue">
-                            <label for="blue">
-                                Đen
-                                <input type="radio" id="blue">
-                            </label>
-                        </div>
-                        <div class="sidebar__item__color sidebar__item__color--green">
-                            <label for="green">
-                                Xám Nhạt
-                                <input type="radio" id="green">
-                            </label>
-                        </div>
-                    </div>
+
                     <div class="sidebar__item">
                         <h4>Kích Cỡ</h4>
                         <div class="sidebar__item__size">
@@ -444,7 +407,9 @@
                     <!--                                </div>-->
                     <!--                            </div>-->
                     <!--                        </div>-->
-
+                    <div class="row row-product" id="products">
+                        <!-- loadProduct o day -->
+                    </div>
                 </div>
                 <div class="loadmore" id="loadMore">
                     <a style="cursor: pointer; margin-left: 370px; color: #fff; border-radius: 20px;" class="loadmore-btn site-btn">Tải thêm <span class="arrow_carrot-down"></span></a>
@@ -458,5 +423,25 @@
             </div>
         </div>
     </div>
+    <script>
+    function filter(e) {
+        e.preventDefault();
+        const price = $("input[type='radio']:checked.checkGia").val();
+        $.ajax({
+            type: 'post',
+            url: "Controllers/DetailsControllers",
+            data: {
+                price: price,
+                category: category
+            },
+            success: function (data) {
+                $("#products").html(data);
+            }
+        });
+    }
+    </script>
 </section>
+
+
 <!-- Product Section End -->
+    

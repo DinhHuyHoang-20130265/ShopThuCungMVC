@@ -1,8 +1,6 @@
-﻿using ShopThuCungMVC.Models;
-<<<<<<< HEAD
-=======
+﻿using Antlr.Runtime.Misc;
+using ShopThuCungMVC.Models;
 using ShopThuCungMVC.Services;
->>>>>>> 0f01d35cf128b8dbbb4828ebde0e3213c3bedb9c
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -22,14 +20,19 @@ namespace ShopThuCungMVC.Controllers
             Blog blog = BlogsService.BlogById(id);
             return View(blog);
 		}
-<<<<<<< HEAD
+
 		public ActionResult ProductDetails(String id)
-=======
-        public ActionResult ProductDetails()
->>>>>>> 0f01d35cf128b8dbbb4828ebde0e3213c3bedb9c
+       /* public ActionResult ProductDetails()*/
 		{
 			Product detail = Services.ProductCateService.Detail(id);
 			return View(detail);
 		}
-	}
+
+		public ActionResult Filter(string order_by, String cate_id
+			, String price, String size, String search)
+		{
+			List<Product> filter = ProductCateService.Filter(order_by, cate_id, price, size, search);
+			return View(filter);
+		}
+    }
 }
