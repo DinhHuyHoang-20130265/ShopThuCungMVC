@@ -262,7 +262,7 @@
                                     <ul class="product__item__pic__hover">
                                         <li><a href="#"><i class="fa fa-heart"></i></a></li>
                                         <li><a href="#"><i class="fa fa-retweet"></i></a></li>
-                                        <li><a href="#"><i class="fa fa-shopping-cart"></i></a></li>
+                                        <li><a href="#" class="btnAddToCart" data-id="@item.productId"><i class="fa fa-shopping-cart"></i></a></li>
                                     </ul>
                                 </div>
                                 <div class="product__item__text">
@@ -408,4 +408,26 @@
         </div>
     </div>
 </section>
+
 <!-- Product Section End -->
+<script src="~/Scripts/jquery-3.6.1.js"></script>
+<script>
+    $(document).ready(function () {
+        $('.product__item').on('click', '.btnAddToCart', function (e) {
+            e.preventDefault();
+            var id = $(this).data('id');
+            var quantity = 1;
+            alert(id +", " + quantity);
+            $.ajax({
+                url: '/ProductBagController/AddToCart',
+                type: 'POST', 
+                data: { id: id, quantity: quantity },
+                success: function (rs) {
+                    if (rs.success) {
+                        alert(rs.msg);
+                    }
+                }
+            })
+        })
+    })
+</script>
