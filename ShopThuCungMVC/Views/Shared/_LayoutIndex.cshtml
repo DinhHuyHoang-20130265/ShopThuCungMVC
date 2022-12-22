@@ -102,11 +102,17 @@
                 }
                 else
                 {
-                    <a href="#"><i class="fa fa-user"></i> Xin chào @session.user_name</a>
-                    <a href="@Url.Action("InforUser", "User")"><i class="fa fa-user"></i> Thông tin tài khoản</a>
-                    <a href="@Url.Action("Logout", "User")"><i class="fa fa-user"></i> Đăng Xuất</a>
-                }
-            </div>
+                    <nav class="header__menu">
+                        <li>
+                            <a href="#"><i class="fa fa-user"></i> Xin chào @session.user_name</a>
+                            <ul class="header__menu__dropdown">
+                                <a href="@Url.Action("InforUser", "User")"><i class="fa fa-user"></i> Thông tin tài khoản</a>
+                                <a href="@Url.Action("Logout", "User")"><i class="fa fa-user"></i> Đăng Xuất</a>
+                            </ul>
+                        </li>
+                      </nav>
+                        }
+                </div>
         </div>
         <nav class="humberger__menu__nav mobile-menu">
             <ul>
@@ -163,9 +169,14 @@
                                 }
                                 else
                                 {
-                                    <a href="#"><i class="fa fa-user"></i> Xin chào @session.user_name</a>
+                                    <nav class="header__menu">
+                            <li><a href="#"><i class="fa fa-user"></i> Xin chào @session.user_name</a>
+                                <ul class="header__menu__dropdown">
                                     <a href="@Url.Action("InforUser", "User")"><i class="fa fa-user"></i> Thông tin tài khoản</a>
                                     <a href="@Url.Action("Logout", "User")"><i class="fa fa-user"></i> Đăng Xuất</a>
+                                </ul>                               
+                            </li>
+                                    </nav>
                                 }
                             </div>
                         </div>
