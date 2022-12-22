@@ -470,7 +470,7 @@
             var quantity = 1;
             alert(id +", " + quantity);
             $.ajax({
-                url: '/ProductBagController/AddToCart',
+                url: '/ProductBag/AddToCart',
                 type: 'POST', 
                 data: { id: id, quantity: quantity },
                 success: function (rs) {
