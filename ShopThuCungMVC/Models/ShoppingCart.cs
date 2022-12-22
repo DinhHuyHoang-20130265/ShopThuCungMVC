@@ -11,24 +11,24 @@ namespace ShopThuCungMVC.Models
 
     public class ShoppingCart
     {
-        Dictionary<string, Product> data;
+        Dictionary<string, int> data;
 
-        public ShoppingCart(Dictionary<string, Product> data)
+        public ShoppingCart()
         {
-            this.data = data;
+            data = new Dictionary<string, int>();
         } 
 
-        public int Put(string id, Product p)
+        public int Put(string id, int quantity)
         {
             if (data.ContainsKey(id))
             {
-                Product temp = data[id];
-                temp.QuantityCart = temp.QuantityCart + p.QuantityCart;
-                Put(id, p);
+                int temp = data[id];
+
+                data[id] = temp + quantity;
             }
             else
             {
-                Put(id, p);
+                data.Add(id, quantity);
             }
             return 0;
         }
@@ -36,16 +36,14 @@ namespace ShopThuCungMVC.Models
         {
             return data.Remove(id);
         }
-       //public int getQuantityCart()
-       // {
-       //    List<string> keyid = new List<string>(this.data.Keys);
-       //    int count = 0
-       //    for(string id: keyid)
-       //    {
-       //         count += data[id].QuantityCart;   
-       //    }
-       //}
+        public int getQuantityCart()
+         {
+            int count = 0;
+            foreach (var id in data.Keys)
+            {
+                 count += data[id];   
+            }
+            return count;
+        }
     }
-
-
 }

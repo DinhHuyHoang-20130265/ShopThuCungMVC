@@ -15,9 +15,13 @@ namespace ShopThuCungMVC.Controllers
             return View();
         }
         [HttpPost]
-        public ActionResult Put(string id, int quantity)
+        public ActionResult AddToCart(string id, int quantity)
         {
-           return Json(new { id, quantity });
+            ShoppingCart cart = (ShoppingCart)Session["cart"];
+            cart.Put(id, quantity);
+            Session["cart"] = cart;
+            int quantity1 = cart.getQuantityCart();
+            return Json(new { id = id, quantity = quantity1 }, JsonRequestBehavior.AllowGet);
         }
     }
 }

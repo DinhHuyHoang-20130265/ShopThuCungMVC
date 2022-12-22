@@ -30,7 +30,6 @@ namespace ShopThuCungMVC.Models
         public string giong { get; set; }
         public string mausac { get; set; }
         public string cannang { get; set; }
-        public int QuantityCart { get; set; }
 
         public Product(string productId, string ProductName, int status, string image, double price, string promotionalPrice, int quantity, int warranty, string @new, string desription, string dital, string createBy, string createDate, string updateBy, string updateDate, string giong, string mausac, string cannang)
         {
