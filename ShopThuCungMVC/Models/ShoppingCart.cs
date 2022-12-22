@@ -11,12 +11,12 @@ namespace ShopThuCungMVC.Models
 
     public class ShoppingCart
     {
-        Dictionary<String, Product> data;
+        Dictionary<string, Product> data;
 
         public ShoppingCart(Dictionary<string, Product> data)
         {
             this.data = data;
-        }
+        } 
 
         public int Put(string id, Product p)
         {
@@ -30,21 +30,21 @@ namespace ShopThuCungMVC.Models
             {
                 Put(id, p);
             }
-            return data[id].
+            return 0;
         }
         public bool remove(string id)
         {
             return data.Remove(id);
         }
-        public int getQuantityCart()
-        {
-            List<string> keyid = new List<string>(this.data.Keys);
-            int count = 0
-            for(string id: keyid)
-            {
-
-            }
-        }
+       //public int getQuantityCart()
+       // {
+       //    List<string> keyid = new List<string>(this.data.Keys);
+       //    int count = 0
+       //    for(string id: keyid)
+       //    {
+       //         count += data[id].QuantityCart;   
+       //    }
+       //}
     }
 
 
