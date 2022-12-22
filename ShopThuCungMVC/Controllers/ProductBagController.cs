@@ -1,10 +1,5 @@
 ﻿using ShopThuCungMVC.Models;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
 using System.Web.Mvc;
-using static ShopThuCungMVC.Models.ShoppingCart;
 
 namespace ShopThuCungMVC.Controllers
 {
@@ -21,7 +16,7 @@ namespace ShopThuCungMVC.Controllers
             cart.Put(id, quantity);
             Session["cart"] = cart;
             int quantity1 = cart.getQuantityCart();
-            return Json(new { id = id, quantity = quantity1 }, JsonRequestBehavior.AllowGet);
+            return Json(new { id, quantity = quantity1 }, JsonRequestBehavior.AllowGet);
         }
     }
 }

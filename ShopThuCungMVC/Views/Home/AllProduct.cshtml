@@ -102,26 +102,32 @@
                         <h4>Kích Cỡ</h4>
                         <div class="sidebar__item__size">
                             <label for="large">
+                                Trên 10kg
+                                <input type="radio" class="checkSize" id="large" value="10-100">
+                            </label>
+                        </div>
+                        <div class="sidebar__item__size">
+                            <label for="large">
                                 5kg - 10kg
-                                <input type="radio" id="large" value="5-100">
+                                <input type="radio" class="checkSize" id="large" value="5-10">
                             </label>
                         </div>
                         <div class="sidebar__item__size">
                             <label for="medium">
                                 3kg - 5kg
-                                <input type="radio" id="medium" value="3-5">
+                                <input type="radio" class="checkSize" id="medium" value="3-5">
                             </label>
                         </div>
                         <div class="sidebar__item__size">
                             <label for="small">
                                 2kg-3kg
-                                <input type="radio" id="small" value="2-3">
+                                <input type="radio" class="checkSize" id="small" value="2-3">
                             </label>
                         </div>
                         <div class="sidebar__item__size">
                             <label for="tiny">
                                 dưới 2kg
-                                <input type="radio" id="tiny" value="0-2">
+                                <input type="radio" class="checkSize" id="tiny" value="0-2">
                             </label>
                         </div>
                     </div>
@@ -148,9 +154,12 @@
                             </div>
                         </div>
                         <div class="col-lg-4 col-md-3">
-                            <div class="filter__option">
-                                <span class="icon_grid-2x2"></span>
-                                <span class="icon_ul"></span>
+                            <div class="sortby2 hidden" style="float: right;">
+                                <div class="dropdown">
+                                    <button class="btn btn-dark dropdown-toggle" id="filter">
+                                        Lọc sản phẩm
+                                    </button>
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -170,7 +179,14 @@
                             <div class="product__item">
                                 <div class="product__item__pic set-bg" data-setbg="@Model.ElementAt(i).Image">
                                     <ul class="product__item__pic__hover">
-                                        <li><a class="btnAddToCart" data-id="@Model.ElementAt(i).productId"><i class="fa fa-shopping-cart"></i></a></li>
+                                        @if (Session["user"] == null)
+                                        {
+                                            <li><a href="@Url.Action("Login", "User")"><i class="fa fa-shopping-cart"></i></a></li>
+                                        }
+                                        else
+                                        {
+                                            <li><a class="btnAddToCart" data-id="@Model.ElementAt(i).productId"><i class="fa fa-shopping-cart"></i></a></li>
+                                        }
                                     </ul>
                                 </div>
                                 <div class="product__item__text">
@@ -204,7 +220,7 @@
                 type: 'POST', 
                 data: { id: id, quantity: quantity },
                 success: function (rs) {
-                    alert(rs.id + ", " + rs.quantity)
+                    $(".header__cart ul li a span").text(rs.quantity)
                 }
             })
         })
@@ -254,4 +270,55 @@
             }
         })
     })
+</script>
+
+<script>
+    $(document).ready(function () {
+        $("input[type='radio']").each(function () {
+            this.addEventListener("click", function (e) {
+                filter(e);
+            })
+        })
+    })
+    function filter(e) {
+        e.preventDefault();
+        const category = $("#cateId").val();
+        const price = $("input[type='radio']:checked.checkGia").val();
+        const size = $("input[type='radio']:checked.checkSize").val();
+        $.ajax({
+            type: 'get',
+            url: "/Home/Filter",
+            data: {
+                price: price,
+                category: category,
+                size: size
+            },
+            dataType: 'json',
+            contentType: 'application/json;charset=utf-8',
+            success: function (result) {
+                var str = "";
+                console.log(result.data);
+                const formatter = new Intl.NumberFormat('vn-VN');
+                $.each(result.data, function (index, value) {
+                    str += `<div class="col-lg-4 col-md-6 col-sm-6">
+                            <div class="product__item">
+                                <div class="product__item__pic set-bg" data-setbg="` + value.Image + `" style="background-image: url('` + value.Image + `');">
+                                    <ul class="product__item__pic__hover">
+                                        <li><a href="#"><i class="fa fa-shopping-cart"></i></a></li>
+                                    </ul>
+                                </div>
+                                <div class="product__item__text">
+                                    <h6><a href="/Details/ProductDetails/` + value.productId + `">` + value.ProductName + `</a></h6>
+                                    <h5>` + formatter.format(value.Price) + ` ₫</h5>
+                                </div>
+                            </div>
+                        </div>`;
+                });
+                $("#items").html(str);
+            },
+            error: function (xhr) {
+                //Do Something to handle error
+            }
+        });
+    }
 </script>

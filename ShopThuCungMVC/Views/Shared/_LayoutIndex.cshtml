@@ -102,11 +102,17 @@
                 }
                 else
                 {
-                    <a href="#"><i class="fa fa-user"></i> Xin chào @session.user_name</a>
-                    <a href="@Url.Action("InforUser", "User")"><i class="fa fa-user"></i> Thông tin tài khoản</a>
-                    <a href="@Url.Action("Logout", "User")"><i class="fa fa-user"></i> Đăng Xuất</a>
-                }
-            </div>
+                    <nav class="header__menu">
+                        <li>
+                            <a href="#"><i class="fa fa-user"></i> Xin chào @session.user_name</a>
+                            <ul class="header__menu__dropdown">
+                                <a href="@Url.Action("InforUser", "User")"><i class="fa fa-user"></i> Thông tin tài khoản</a>
+                                <a href="@Url.Action("Logout", "User")"><i class="fa fa-user"></i> Đăng Xuất</a>
+                            </ul>
+                        </li>
+                      </nav>
+                        }
+                </div>
         </div>
         <nav class="humberger__menu__nav mobile-menu">
             <ul>
@@ -163,9 +169,14 @@
                                 }
                                 else
                                 {
-                                    <a href="#"><i class="fa fa-user"></i> Xin chào @session.user_name</a>
+                                    <nav class="header__menu">
+                            <li><a href="#"><i class="fa fa-user"></i> Xin chào @session.user_name</a>
+                                <ul class="header__menu__dropdown">
                                     <a href="@Url.Action("InforUser", "User")"><i class="fa fa-user"></i> Thông tin tài khoản</a>
                                     <a href="@Url.Action("Logout", "User")"><i class="fa fa-user"></i> Đăng Xuất</a>
+                                </ul>                               
+                            </li>
+                                    </nav>
                                 }
                             </div>
                         </div>
@@ -211,8 +222,13 @@
                 <div class="col-lg-3">
                     <div class="header__cart">
                         <ul>
-                            <li><a href="@Url.Action("ListLike","ProductBag")"><i class="fa fa-heart"></i> <span>1</span></a></li>
-                            <li><a href="@Url.Action("Cart","ProductBag")"><i class="fa fa-shopping-bag"></i> <span>3</span></a></li>
+                            @if (Session["user"] == null)
+                            {
+                                <li><a href="@Url.Action("Login","User")"><i class="fa fa-shopping-bag"></i></a></li>
+                            } else {
+                                ShoppingCart cart = (ShoppingCart)Session["cart"];
+                                <li><a href="@Url.Action("Cart","ProductBag")"><i class="fa fa-shopping-bag"></i><span>@cart.getQuantityCart()</span></a></li>
+                            }
                         </ul>
                         <div class="header__cart__price">Giỏ hàng: <span>85.000.000 Đồng</span></div>
                     </div>

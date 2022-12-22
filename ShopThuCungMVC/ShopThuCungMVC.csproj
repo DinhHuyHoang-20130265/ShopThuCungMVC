@@ -1111,11 +1111,11 @@
     <Content Include="Views\User\ForgotPassWord.cshtml" />
     <Content Include="Views\User\Login.cshtml" />
     <Content Include="Views\User\Register.cshtml" />
-    <Content Include="Views\User\InforUser.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="Areas\Admin\Data\" />
+    <Folder Include="Controllers\App_LocalResources\" />
     <Folder Include="Views\Search\" />
   </ItemGroup>
   <ItemGroup>

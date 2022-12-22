@@ -52,6 +52,10 @@ namespace ShopThuCungMVC.Services
         {
             return ProductCategoryDAO.get3Blog();
         }
-       
+        public static List<Product> Filter(String id, String price,String size)
+        {
+            return ProductCategoryDAO.Filter(id,price,size);
+        }
+
     }
 }
