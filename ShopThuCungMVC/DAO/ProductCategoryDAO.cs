@@ -87,5 +87,34 @@ namespace ShopThuCungMVC.DAO
             List<Blog> list = db.blogs.FromSqlRaw($"SELECT * from blogs LIMIT 3").ToList();
             return list;
         }
+
+        public static List<Product> Filter(String price, String category, String size)
+        {
+            String query = $"SELECT DISTINCT p.* FROM product p INNER JOIN product_from_cate pc ON p.productId = pc.product_id WHERE p.`Status`=1 ";
+            if(price != null)
+            {
+                if (!price.Equals("-1"))
+                {
+                    String[] splited = price.Split('-');
+                    query += $" AND p.price >= {Double.Parse(splited[0])} AND p.price <= {Double.Parse(splited[1])} ";
+                }
+            }
+            if (category != null)
+            {
+                if (!category.Equals("AllProduct"))
+                {
+                    query += $" AND pc.cate_id = '{category}'";
+                }
+            }
+
+            if (size != null)
+            {
+                    String[] splited = size.Split('-');
+                    query += $" AND p.cannang >= {Double.Parse(splited[0])} AND p.cannang <= {Double.Parse(splited[1])} ";
+            }
+            string final = query;
+            List<Product> list = db.product.FromSqlRaw(final).ToList();
+            return list;
+        }
     }
 }
