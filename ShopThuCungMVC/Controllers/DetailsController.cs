@@ -1,5 +1,9 @@
+<<<<<<< HEAD
 ﻿using Antlr.Runtime.Misc;
 using ShopThuCungMVC.Models;
+=======
+﻿using ShopThuCungMVC.Models;
+>>>>>>> 93e37e9fd386e73b6fcb4f753603c8e5333b55bc
 using ShopThuCungMVC.Services;
 using System;
 using System.Collections.Generic;
@@ -20,10 +24,18 @@ namespace ShopThuCungMVC.Controllers
             Blog blog = BlogsService.BlogById(id);
             return View(blog);
 		}
+<<<<<<< HEAD
 
 		public ActionResult ProductDetails(String id)
        /* public ActionResult ProductDetails()*/
+=======
+		public ActionResult ProductDetails(String id)
+>>>>>>> 93e37e9fd386e73b6fcb4f753603c8e5333b55bc
 		{
+			if (string.IsNullOrEmpty(id))
+			{
+                return RedirectToAction("AllProduct", "Home");
+            }
 			Product detail = Services.ProductCateService.Detail(id);
 			return View(detail);
 		}

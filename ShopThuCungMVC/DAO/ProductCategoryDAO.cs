@@ -4,13 +4,15 @@ using ShopThuCungMVC.Models;
 using System;
 using System.Collections.Generic;
 using System.Data.Entity;
+using System.Data.Common;
 using System.Linq;
+using System.Threading.Tasks;
 using System.Web;
 using System.Web.Helpers;
 
 namespace ShopThuCungMVC.DAO
 {
-    public class ProductCategoryDAO
+    public static class ProductCategoryDAO
     {
         static readonly ShopThuCungDBContext db = new ShopThuCungDBContext();
         public static List<ProductCategory> listProductCate()
@@ -18,20 +20,17 @@ namespace ShopThuCungMVC.DAO
             return db.product_category.ToList();
         }
 
-        public static List<Product> listProductbyCate(String id)
+        public static List<Product> listAllProduct()
         {
-            if (id == null)
-            {
-                return db.product.FromSqlRaw($"select distinct pd.productId, pd.ProductName, pd.`Status`,pd.Image,pd.Price,pd.PromotionalPrice,pd.Quantity,pd.Warranty,pd.New,pd.Desription,pd.Dital,pd.CreateBy,pd.CreateDate,pd.UpdateBy,pd.UpdateDate,pd.giong,pd.mausac,pd.cannang from product pd inner join product_from_cate pc on pd.productId=pc.product_id")
+            return db.product.FromSqlRaw($"select distinct pd.productId, pd.ProductName, pd.`Status`,pd.Image,pd.Price,pd.PromotionalPrice,pd.Quantity,pd.Warranty,pd.New,pd.Desription,pd.Dital,pd.CreateBy,pd.CreateDate,pd.UpdateBy,pd.UpdateDate,pd.giong,pd.mausac,pd.cannang from product pd inner join product_from_cate pc on pd.productId=pc.product_id")
 
                 .ToList();
-            }
-            else
-            {
-                var column = "pc.cate_id";
-                return db.product.FromSqlRaw($"select pd.productId, pd.ProductName, pd.`Status`,pd.Image,pd.Price,pd.PromotionalPrice,pd.Quantity,pd.Warranty,pd.New,pd.Desription,pd.Dital,pd.CreateBy,pd.CreateDate,pd.UpdateBy,pd.UpdateDate,pd.giong,pd.mausac,pd.cannang from product pd inner join product_from_cate pc on pd.productId=pc.product_id WHERE {column}= '{id}'")
-                    .ToList();
-            }
+        }
+        public static List<Product> listProductbyCate(String id)
+        {
+            var column = "pc.cate_id";
+            return db.product.FromSqlRaw($"select pd.productId, pd.ProductName, pd.`Status`,pd.Image,pd.Price,pd.PromotionalPrice,pd.Quantity,pd.Warranty,pd.New,pd.Desription,pd.Dital,pd.CreateBy,pd.CreateDate,pd.UpdateBy,pd.UpdateDate,pd.giong,pd.mausac,pd.cannang from product pd inner join product_from_cate pc on pd.productId=pc.product_id WHERE {column} = {id}")
+                .ToList();
         }
         public static List<Product> listProductDogAndCatbyCate(String id)
         {
@@ -51,7 +50,11 @@ namespace ShopThuCungMVC.DAO
         {
             if (id == null)
             {
+<<<<<<< HEAD
                 return db.product.FromSqlRaw($"select pd.productId, pd.ProductName, pd.`Status`,pd.Image,pd.Price,pd.PromotionalPrice,pd.Quantity,pd.Warranty,pd.New,pd.Desription,pd.Dital,pd.CreateBy,pd.CreateDate,pd.UpdateBy,pd.UpdateDate,pd.giong,pd.mausac,pd.cannang from product pd inner join product_from_cate pc on pd.productId=pc.product_id")
+=======
+                return db.product.FromSqlRaw($"select distinct pd.productId, pd.ProductName, pd.`Status`,pd.Image,pd.Price,pd.PromotionalPrice,pd.Quantity,pd.Warranty,pd.New,pd.Desription,pd.Dital,pd.CreateBy,pd.CreateDate,pd.UpdateBy,pd.UpdateDate,pd.giong,pd.mausac,pd.cannang from product pd inner join product_from_cate pc on pd.productId=pc.product_id where pc.cate_id = 3")
+>>>>>>> 93e37e9fd386e73b6fcb4f753603c8e5333b55bc
                 .ToList();
             }
             else
@@ -67,6 +70,7 @@ namespace ShopThuCungMVC.DAO
             return db.product.FromSqlRaw($"select distinct pd.productId, pd.ProductName, pd.`Status`,pd.Image,pd.Price,pd.PromotionalPrice,pd.Quantity,pd.Warranty,pd.New,pd.Desription,pd.Dital,pd.CreateBy,pd.CreateDate,pd.UpdateBy,pd.UpdateDate,pd.giong,pd.mausac,pd.cannang from product pd WHERE pd.productId= '{id}' ").FirstOrDefault();
         }
 
+<<<<<<< HEAD
         public static List<Product> Filter(string order_by, String cate_id
             , String price,String size, String search)
         {
@@ -90,6 +94,28 @@ namespace ShopThuCungMVC.DAO
                 }
             }
             return db.product.FromSqlRaw(query).ToList();
+=======
+        public static List<Product> searchByName(string txt)
+        {
+            var column = "pd.ProductName";
+
+            List<Product> list = db.product.FromSqlRaw($"select pd.productId, pd.ProductName, pd.`Status`,pd.Image,pd.Price, pd.PromotionalPrice,pd.Quantity,pd.Warranty,pd.New,pd.Desription," +
+                $"pd.Dital,pd.CreateBy,pd.CreateDate,pd.UpdateBy,pd.UpdateDate,pd.giong,pd.mausac,pd.cannang from product pd WHERE {column} LIKE '%{txt}%'")
+                    .ToList();
+            return list;
+        }
+
+        public static List<Product> getTop8BestSelling()
+        {
+            List<Product> list = db.product.FromSqlRaw($"SELECT pd.productId, pd.ProductName, pd.`Status`,pd.Image,pd.Price,pd.PromotionalPrice,pd.Quantity,pd.Warranty,pd.New,pd.Desription,pd.Dital,pd.CreateBy,pd.CreateDate,pd.UpdateBy,pd.UpdateDate,pd.giong,pd.mausac,pd.cannang FROM orderdetail o join product pd ON o.ProductID = pd.productId GROUP BY ProductName ORDER BY SUM(o.Quantity) DESC limit 8").ToList();
+            return list;
+        }
+
+        public static List<Blog> get3Blog()
+        {
+            List<Blog> list = db.blogs.FromSqlRaw($"SELECT * from blogs LIMIT 3").ToList();
+            return list;
+>>>>>>> 93e37e9fd386e73b6fcb4f753603c8e5333b55bc
         }
     }
 }

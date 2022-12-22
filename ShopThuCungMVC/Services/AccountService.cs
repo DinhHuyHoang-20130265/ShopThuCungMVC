@@ -38,5 +38,10 @@ namespace ShopThuCungMVC.Services
         {
             AccountDAO.UpdateUser(passMaHoa, pass, name, email, phone, address, avt);
         }
+
+        public static InforUser getInforUserById(string id)
+        {
+            return AccountDAO.getInforUserById(id);
+        }
     }
 }
