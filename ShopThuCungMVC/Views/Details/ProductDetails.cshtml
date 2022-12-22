@@ -1,4 +1,5 @@
 ﻿@model ShopThuCungMVC.Models.Product
+@using System.Globalization;
 @{
     ViewData["Title"] = "ProductDetails";
     Layout = "~/Views/Shared/_LayoutSite.cshtml";
@@ -58,7 +59,7 @@
                         <i class="fa fa-star-half-o"></i>
                         <span>(18 người đã mua)</span>
                     </div>
-                    <div class="product__details__price">@Model.Price</div>
+                    <div class="product__details__price">@Model.Price.ToString("N0") ₫</div>
                     <p>
                        @Model.Desription
                     </p>
@@ -70,7 +71,6 @@
                         </div>
                     </div>
                     <a href="#" class="primary-btn">Thêm vào giỏ hàng</a>
-                    <a href="#" class="heart-icon"><span class="icon_heart_alt"></span></a>
                     <ul>
                         <li><b>Giống: </b> <span>@Model.giong</span></li>
                         <li><b>Màu Sắc: </b> <span>@Model.mausac</span></li>
@@ -133,7 +133,6 @@
                     </div>
                 </div>
             </div>
-            }
         </div>
     </div>
 </section>
