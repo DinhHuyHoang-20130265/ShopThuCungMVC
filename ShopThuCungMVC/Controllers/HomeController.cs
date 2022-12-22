@@ -19,6 +19,7 @@ namespace ShopThuCungMVC.Controllers
 
         public ActionResult Blog()
         {
+           
             return View();
         }
         [HttpGet]
@@ -42,6 +43,5 @@ namespace ShopThuCungMVC.Controllers
         {
             return View();
         }
-
     }
 }

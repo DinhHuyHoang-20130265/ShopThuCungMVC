@@ -7,7 +7,7 @@
     <script src="@Url.Content("~/Content/js/list-products.js")"></script>
 }
 <!-- Breadcrumb Section Begin -->
-<section class="breadcrumb-section set-bg" data-setbg="../img/breadcrumb.jpg">
+<section class="breadcrumb-section set-bg" data-setbg="https://localhost:44322/Content/img/breadcrumb.jpg">
     <div class="container">
         <div class="row">
             <div class="col-lg-12 text-center">
@@ -32,7 +32,12 @@
                     <div class="sidebar__item">
                         <h4>Danh mục</h4>
                         <ul>
-                            <li><a href="#">Chó Alaska</a></li>
+                            <li>
+                                <label for="cat0" name="option1">
+                                    <input type="radio" class="form-cate" id="cat0">
+                                    Chó Alaska
+                                </label>
+                            </li>
                             <li><a href="#">Chó Beagle</a></li>
                             <li><a href="#">Chó Corgi</a></li>
                             <li><a href="#">Chó Golden Retriever</a></li>
@@ -46,7 +51,54 @@
                         </ul>
                     </div>
                     <div class="sidebar__item">
-                        <h4>Giá Tiền</h4>
+                        <h4>Khoảng giá</h4>
+
+                        <ul id="khoanggia" class="product__filter-ckeckbox">
+                            <li class="product__filter-item">
+                                <label class="form-check-label" for="kg0">
+                                    <input type="radio" class="form-check-input checkGia" id="kg0"
+                                           name="optradio"
+                                           value="-1"><span>Tất cả</span>
+                                </label>
+                            </li>
+                            <bR>
+                            <li class="product__filter-item">
+                                <label class="form-check-label" for="kg1">
+                                    <input type="radio" class="form-check-input checkGia" id="kg1" name="optradio"
+                                           value="0-5000000"><span>Dưới 5,000,000đ</span>
+                                </label>
+                            </li>
+                            <bR>
+                            <li class="product__filter-item">
+                                <label class="form-check-label" for="kg2">
+                                    <input type="radio" class="form-check-input checkGia" id="kg2" name="optradio"
+                                           value="5000000-10000000"><span> 5,000,000đ - 10,000,000đ</span>
+                                </label>
+                            </li>
+                            <bR>
+                            <li class="product__filter-item">
+                                <label class="form-check-label" for="kg3">
+                                    <input type="radio" class="form-check-input checkGia" id="kg3" name="optradio"
+                                           value="10000000-15000000"><span>10,000,000đ - 15,000,000đ</span>
+                                </label>
+                            </li>
+                            <bR>
+                            <li class="product__filter-item">
+                                <label class="form-check-label" for="kg4">
+                                    <input type="radio" class="form-check-input checkGia" id="kg4" name="optradio"
+                                           value="15000000-20000000"><span>15,000,000đ - 20,000,000đ</span>
+                                </label>
+                            </li>
+                            <bR>
+                            <li class="product__filter-item">
+                                <label class="form-check-label" for="kg5">
+                                    <input type="radio" class="form-check-input checkGia" id="kg5" name="optradio"
+                                           value="20000000-100000000"><span>Trên 20,000,000đ</span>
+                                </label>
+                            </li>
+                            <bR>
+                        </ul>
+
                         <div class="price-range-wrap">
                             <div class="price-range ui-slider ui-corner-all ui-slider-horizontal ui-widget ui-widget-content"
                                  data-min="5" data-max="100">
@@ -105,26 +157,26 @@
                         <h4>Kích Cỡ</h4>
                         <div class="sidebar__item__size">
                             <label for="large">
-                                Rất Lớn
-                                <input type="radio" id="large">
+                                5kg - 10kg
+                                <input type="radio" id="large" value="5-100">
                             </label>
                         </div>
                         <div class="sidebar__item__size">
                             <label for="medium">
-                                Lớn
-                                <input type="radio" id="medium">
+                                3kg - 5kg
+                                <input type="radio" id="medium" value="3-5">
                             </label>
                         </div>
                         <div class="sidebar__item__size">
                             <label for="small">
-                                Vừa
-                                <input type="radio" id="small">
+                                2kg-3kg
+                                <input type="radio" id="small" value="2-3">
                             </label>
                         </div>
                         <div class="sidebar__item__size">
                             <label for="tiny">
-                                Nhỏ
-                                <input type="radio" id="tiny">
+                                dưới 2kg
+                                <input type="radio" id="tiny" value="0-2">
                             </label>
                         </div>
                     </div>
@@ -136,11 +188,11 @@
                         <h2>Giảm Giá</h2>
                     </div>
                     <div class="row">
-                        <div class="product__discount__slider owl-carousel">
+                        <div class="product__discount__slider owl-carousel" style="z-index: -1">
                             <div class="col-lg-4">
                                 <div class="product__discount__item">
                                     <div class="product__discount__item__pic set-bg"
-                                         data-setbg="../img/products/dog/sp1.jpg">
+                                         data-setbg="img/products/dog/sp1.jpg">
                                         <div class="product__discount__percent">-20%</div>
                                         <ul class="product__item__pic__hover">
                                             <li><a href="#"><i class="fa fa-heart"></i></a></li>
@@ -157,7 +209,7 @@
                             <div class="col-lg-4">
                                 <div class="product__discount__item">
                                     <div class="product__discount__item__pic set-bg"
-                                         data-setbg="../img/products/cat/sp01.jpg">
+                                         data-setbg="img/products/cat/sp01.jpg">
                                         <div class="product__discount__percent">-20%</div>
                                         <ul class="product__item__pic__hover">
                                             <li><a href="#"><i class="fa fa-heart"></i></a></li>
@@ -174,7 +226,7 @@
                             <div class="col-lg-4">
                                 <div class="product__discount__item">
                                     <div class="product__discount__item__pic set-bg"
-                                         data-setbg="../img/products/dog/sp3.png">
+                                         data-setbg="img/products/dog/sp3.png">
                                         <div class="product__discount__percent">-20%</div>
                                         <ul class="product__item__pic__hover">
                                             <li><a href="#"><i class="fa fa-heart"></i></a></li>
@@ -191,7 +243,7 @@
                             <div class="col-lg-4">
                                 <div class="product__discount__item">
                                     <div class="product__discount__item__pic set-bg"
-                                         data-setbg="../img/products/cat/sp02.jpg">
+                                         data-setbg="img/products/cat/sp02.jpg">
                                         <div class="product__discount__percent">-20%</div>
                                         <ul class="product__item__pic__hover">
                                             <li><a href="#"><i class="fa fa-heart"></i></a></li>
@@ -208,7 +260,7 @@
                             <div class="col-lg-4">
                                 <div class="product__discount__item">
                                     <div class="product__discount__item__pic set-bg"
-                                         data-setbg="../img/products/dog/sp4.png">
+                                         data-setbg="img/products/dog/sp4.png">
                                         <div class="product__discount__percent">-20%</div>
                                         <ul class="product__item__pic__hover">
                                             <li><a href="#"><i class="fa fa-heart"></i></a></li>
@@ -232,11 +284,10 @@
                                 <span>Sắp xếp</span>
                                 <select>
                                     <option value="0">Mặc Định</option>
-                                    <option value="0">Bán Chạy</option>
-                                    <option value="0">Phổ Biến</option>
-                                    <option value="0">Giá Tăng Dần</option>
-                                    <option value="0">Giá Giảm Dần</option>
-
+                                    <option value="1">Bán Chạy</option>
+                                    <option value="2">Phổ Biến</option>
+                                    <option value="3">Giá Tăng Dần</option>
+                                    <option value="4">Giá Giảm Dần</option>
                                 </select>
                             </div>
                         </div>
@@ -266,7 +317,7 @@
                                     </ul>
                                 </div>
                                 <div class="product__item__text">
-                                    <h6><a href="product-details.html">@item.ProductName</a></h6>
+                                    <h6>@Html.ActionLink(item.ProductName, "ProductDetails", "Details", new { @Id = item.productId }, null)</h6>
                                     <h5>@item.Price đ</h5>
                                 </div>
                             </div>
