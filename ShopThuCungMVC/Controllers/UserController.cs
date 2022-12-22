@@ -34,6 +34,7 @@ namespace ShopThuCungMVC.Controllers
                 if (cus != null)
                 {
                     Session["user"] = cus;
+                    Session["cart"] = new ShoppingCart();
                     return RedirectToAction("Index", "Home");
                 }
                 else
