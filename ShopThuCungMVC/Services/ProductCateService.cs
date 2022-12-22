@@ -15,6 +15,10 @@ namespace ShopThuCungMVC.Services
             return ProductCategoryDAO.listProductCate();
         }
 
+        public static List<Product> listAllProduct()
+        {
+            return ProductCategoryDAO.listAllProduct();
+        }
         public static List<Product> listProductbyCate(String id)
         {
             return ProductCategoryDAO.listProductbyCate(id);
@@ -38,6 +42,15 @@ namespace ShopThuCungMVC.Services
         public static List<Product> listProductAccessorybyCate(String id)
         {
             return ProductCategoryDAO.listProductAccessorybyCate(id);
+        }
+
+        public static List<Product> getTop8BestSelling()
+        {
+            return ProductCategoryDAO.getTop8BestSelling();
+        }
+        public static List<Blog> get3Blog()
+        {
+            return ProductCategoryDAO.get3Blog();
         }
     }
 }

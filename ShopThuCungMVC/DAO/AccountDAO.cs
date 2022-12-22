@@ -138,5 +138,10 @@ namespace ShopThuCungMVC.DAO
             db.infor_user.Update(inforUser);
             db.SaveChanges();
         }
+
+        public static InforUser getInforUserById(string id)
+        {
+            return db.infor_user.Where(n => n.id_user.Equals(id)).FirstOrDefault();
+        }
     }
 }
