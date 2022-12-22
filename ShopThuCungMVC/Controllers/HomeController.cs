@@ -23,24 +23,24 @@ namespace ShopThuCungMVC.Controllers
            
             return View();
         }
-
-        [HttpGet]
-        public ActionResult AllProduct()
-        {
-            List<Product> listProductById = ProductCateService.listProductbyCate(null).ToList();
-            return View(listProductById);
-        }
-        [HttpPost]
         public ActionResult AllProduct(String Id)
         {
-            List<Product> listProductById = ProductCateService.listProductbyCate(Id).ToList();
-            return View(listProductById);
+            if(Id == null)
+            {
+                List<Product> listProductById = ProductCateService.listAllProduct();
+                return View(listProductById);
+            }
+            else
+            {
+                List<Product> listProductById = ProductCateService.listProductbyCate(Id);
+                return View(listProductById);
+            }
         }
         public JsonResult LoadMoreProduct(string id, int page)
         {
             if (id.Equals("AllProduct"))
             {
-                List<Product> listProductById = ProductCateService.listProductbyCate(null).Skip(page * 6).Take(6).ToList();
+                List<Product> listProductById = ProductCateService.listAllProduct().Skip(page * 6).Take(6).ToList();
                 return Json(new { data = listProductById }, JsonRequestBehavior.AllowGet);
             }
             else
