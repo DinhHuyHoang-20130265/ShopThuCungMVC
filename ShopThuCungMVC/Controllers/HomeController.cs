@@ -25,7 +25,7 @@ namespace ShopThuCungMVC.Controllers
         }
         public ActionResult AllProduct(String Id)
         {
-            if (Id == null)
+            if(Id == null)
             {
                 List<Product> listProductById = ProductCateService.listAllProduct();
                 return View(listProductById);
@@ -36,7 +36,19 @@ namespace ShopThuCungMVC.Controllers
                 return View(listProductById);
             }
         }
-
+        public JsonResult LoadMoreProduct(string id, int page)
+        {
+            if (id.Equals("AllProduct"))
+            {
+                List<Product> listProductById = ProductCateService.listAllProduct().Skip(page * 6).Take(6).ToList();
+                return Json(new { data = listProductById }, JsonRequestBehavior.AllowGet);
+            }
+            else
+            {
+                List<Product> listProductById = ProductCateService.listProductbyCate(id).Skip(page * 6).Take(6).ToList();
+                return Json( new { data = listProductById }, JsonRequestBehavior.AllowGet);
+            }
+        }
         public ActionResult Contact()
         {
             return View();
