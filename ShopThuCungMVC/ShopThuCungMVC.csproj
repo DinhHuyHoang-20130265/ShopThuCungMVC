@@ -275,7 +275,6 @@
     <Compile Include="Models\Product.cs" />
     <Compile Include="Models\ProductCategory.cs" />
     <Compile Include="Models\ProductFromCate.cs" />
-    <Compile Include="Models\ShoppingCartViewModel.cs" />
     <Compile Include="Models\UserAccount.cs" />
     <Compile Include="Models\Contact.cs" />
     <Compile Include="Models\ShopThuCungDBContext.cs" />
@@ -1111,6 +1110,7 @@
     <Content Include="Views\User\ForgotPassWord.cshtml" />
     <Content Include="Views\User\Login.cshtml" />
     <Content Include="Views\User\Register.cshtml" />
+    <Content Include="Views\User\InforUser.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

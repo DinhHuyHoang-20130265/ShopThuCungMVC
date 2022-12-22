@@ -1,4 +1,5 @@
 ﻿@model ShopThuCungMVC.Models.Product
+@using System.Globalization;
 @{
     ViewData["Title"] = "ProductDetails";
     Layout = "~/Views/Shared/_LayoutSite.cshtml";
@@ -58,9 +59,9 @@
                         <i class="fa fa-star-half-o"></i>
                         <span>(18 người đã mua)</span>
                     </div>
-                    <div class="product__details__price">@Model.Price</div>
+                    <div class="product__details__price">@Model.Price.ToString("N0") ₫</div>
                     <p>
-                       @Model.Desription
+                        @Model.Desription
                     </p>
                     <div class="product__details__quantity">
                         <div class="quantity">
@@ -69,8 +70,7 @@
                             </div>
                         </div>
                     </div>
-                    <a href="#" class="primary-btn">Thêm vào giỏ hàng</a>
-                    <a href="#" class="heart-icon"><span class="icon_heart_alt"></span></a>
+                    <a href="#" class="primary-btn" id="btnAddToCart" data-id="@Model.productId">Thêm vào giỏ hàng</a>
                     <ul>
                         <li><b>Giống: </b> <span>@Model.giong</span></li>
                         <li><b>Màu Sắc: </b> <span>@Model.mausac</span></li>
@@ -95,13 +95,13 @@
                                aria-selected="true">Giới thiệu</a>
                         </li>
                         @*<li class="nav-item">
-                            <a class="nav-link" data-toggle="tab" href="#tabs-2" role="tab"
-                               aria-selected="false">Thông tin</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" data-toggle="tab" href="#tabs-3" role="tab"
-                               aria-selected="false">Đánh giá <span>(0)</span></a>
-                        </li>*@
+                                <a class="nav-link" data-toggle="tab" href="#tabs-2" role="tab"
+                                   aria-selected="false">Thông tin</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" data-toggle="tab" href="#tabs-3" role="tab"
+                                   aria-selected="false">Đánh giá <span>(0)</span></a>
+                            </li>*@
                     </ul>
                     <div class="tab-content">
                         <div class="tab-pane active" id="tabs-1" role="tabpanel">
@@ -119,7 +119,7 @@
                                     @Model.Dital
                                 </p>
                                 <p>
-                                 
+
                                 </p>
                             </div>
                         </div>
@@ -133,7 +133,6 @@
                     </div>
                 </div>
             </div>
-            }
         </div>
     </div>
 </section>
@@ -213,3 +212,22 @@
     </div>
 </section>
 <!-- Related Product Section End -->
+<script src="~/Scripts/jquery-3.6.1.js"></script>
+<script>
+    $(document).ready(function () {
+        $('.product__item').on('click', '.btnAddToCart', function (e) {
+            e.preventDefault();
+            var id = $(this).data('id');
+            var quantity = 1;
+            
+            $.ajax({
+                url: '/ProductBag/AddToCart',
+                type: 'POST',
+                data: { id: id, quantity: quantity },
+                success: function (rs) {
+                    alert(rs.id + ", " + rs.quantity)
+                }
+            })
+        })
+    })
+</script>

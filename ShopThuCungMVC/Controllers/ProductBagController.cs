@@ -1,21 +1,27 @@
-﻿using System;
+﻿using ShopThuCungMVC.Models;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using static ShopThuCungMVC.Models.ShoppingCart;
 
 namespace ShopThuCungMVC.Controllers
 {
     public class ProductBagController : Controller
-    {
-        public ActionResult ListLike()
-        {
-            return View();
-        }
-
+    {         
         public ActionResult Cart()
         {
             return View();
+        }
+        [HttpPost]
+        public ActionResult AddToCart(string id, int quantity)
+        {
+            ShoppingCart cart = (ShoppingCart)Session["cart"];
+            cart.Put(id, quantity);
+            Session["cart"] = cart;
+            int quantity1 = cart.getQuantityCart();
+            return Json(new { id = id, quantity = quantity1 }, JsonRequestBehavior.AllowGet);
         }
     }
 }
