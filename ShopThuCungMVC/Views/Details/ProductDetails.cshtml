@@ -15,7 +15,7 @@
                         @Model.ProductName
                     </h2>
                     <div class="breadcrumb__option">
-                        <a href="@Url.Action("Index","Home")">Home</a>
+                        <a href="@Url.Action("Index", "Home")">Home</a>
                         <a href="#">Chó cảnh</a>
                         <span><strong>Phốc sóc</strong></span>
                     </div>
@@ -61,16 +61,24 @@
                     </div>
                     <div class="product__details__price">@Model.Price.ToString("N0") ₫</div>
                     <p>
-                       @Model.Desription
+                        @Model.Desription
                     </p>
-                    <div class="product__details__quantity">
+                    <div class="product__details__quantity" style="display: flex">
                         <div class="quantity">
                             <div class="pro-qty">
                                 <input type="text" value="1">
                             </div>
                         </div>
+                        @if (Session["user"] == null)
+                        {
+                            <a href="@Url.Action("Login", "User")" class="primary-btn">Đăng nhập để thêm vào giỏ hàng</a>
+                        }
+                        else
+                        {
+                            <a class="primary-btn" id="btnAddToCart" data-id="@Model.productId" style="cursor: pointer;">Thêm vào giỏ hàng</a>
+                        }
                     </div>
-                    <a href="#" class="primary-btn">Thêm vào giỏ hàng</a>
+                
                     <ul>
                         <li><b>Giống: </b> <span>@Model.giong</span></li>
                         <li><b>Màu Sắc: </b> <span>@Model.mausac</span></li>
@@ -95,13 +103,13 @@
                                aria-selected="true">Giới thiệu</a>
                         </li>
                         @*<li class="nav-item">
-                            <a class="nav-link" data-toggle="tab" href="#tabs-2" role="tab"
-                               aria-selected="false">Thông tin</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" data-toggle="tab" href="#tabs-3" role="tab"
-                               aria-selected="false">Đánh giá <span>(0)</span></a>
-                        </li>*@
+                                <a class="nav-link" data-toggle="tab" href="#tabs-2" role="tab"
+                                   aria-selected="false">Thông tin</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" data-toggle="tab" href="#tabs-3" role="tab"
+                                   aria-selected="false">Đánh giá <span>(0)</span></a>
+                            </li>*@
                     </ul>
                     <div class="tab-content">
                         <div class="tab-pane active" id="tabs-1" role="tabpanel">
@@ -119,7 +127,7 @@
                                     @Model.Dital
                                 </p>
                                 <p>
-                                 
+
                                 </p>
                             </div>
                         </div>
@@ -212,3 +220,25 @@
     </div>
 </section>
 <!-- Related Product Section End -->
+<script src="~/Scripts/jquery-3.6.1.js"></script>
+<script>
+    $(document).ready(function () {
+        $('#btnAddToCart').on('click', function (e) {
+            e.preventDefault();
+            var id = $(this).data('id');
+            var tQuantity = $('.pro-qty input').val();
+            if (tQuantity != '') {
+                quantity = parseInt(tQuantity);
+            }
+            $.ajax({
+                url: '/ProductBag/AddToCart',
+                type: 'POST',
+                data: { id: id, quantity: tQuantity },
+                success: function (rs) {
+                    $(".header__cart ul li a span").text(rs.quantity)
+                    $(".product__details__quantity").html(`<a class="notify" style="color:green; font-size: 21px; font-weight: 600;"><i class="fas fa-check" style="color: green"></i> Thêm sản phẩm vào giỏ hàng thành công !</a>`)
+                }
+            })
+        })
+    })
+</script>
