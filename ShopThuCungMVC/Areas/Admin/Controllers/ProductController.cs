@@ -38,7 +38,7 @@ namespace ShopThuCungMVC.Areas.Admin.Controllers
                     file.SaveAs(_path);
                 }
                 ViewBag.Message = "File Uploaded Successfully!!";
-                return Json(new { path =_path });
+                return Json(new { path = _path });
             }
             catch
             {
@@ -54,6 +54,5 @@ namespace ShopThuCungMVC.Areas.Admin.Controllers
             else
                 return RedirectToAction("Login", "Auth");
         }
-        
     }
 }
