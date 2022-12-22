@@ -81,11 +81,13 @@ namespace ShopThuCungMVC.DAO
             List<Product> list = db.product.FromSqlRaw($"SELECT pd.productId, pd.ProductName, pd.`Status`,pd.Image,pd.Price,pd.PromotionalPrice,pd.Quantity,pd.Warranty,pd.New,pd.Desription,pd.Dital,pd.CreateBy,pd.CreateDate,pd.UpdateBy,pd.UpdateDate,pd.giong,pd.mausac,pd.cannang FROM orderdetail o join product pd ON o.ProductID = pd.productId GROUP BY ProductName ORDER BY SUM(o.Quantity) DESC limit 8").ToList();
             return list;
         }
-
         public static List<Blog> get3Blog()
         {
             List<Blog> list = db.blogs.FromSqlRaw($"SELECT * from blogs LIMIT 3").ToList();
             return list;
         }
+
+       
+
     }
 }

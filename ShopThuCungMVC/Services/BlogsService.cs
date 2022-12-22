@@ -4,7 +4,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
-
+using System.Threading.Tasks;
 namespace ShopThuCungMVC.Services
 {
     public class BlogsService
@@ -18,5 +18,12 @@ namespace ShopThuCungMVC.Services
         {
             return BlogsDAO.BlogById(id);
         }
+
+        public static List<Blog> get3BlogNew()
+        {
+            return BlogsDAO.get3BlogNew();
+        }
+
+
     }
 }
