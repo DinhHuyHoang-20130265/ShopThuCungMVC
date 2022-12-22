@@ -170,7 +170,14 @@
                             <div class="product__item">
                                 <div class="product__item__pic set-bg" data-setbg="@Model.ElementAt(i).Image">
                                     <ul class="product__item__pic__hover">
-                                        <li><a class="btnAddToCart" data-id="@Model.ElementAt(i).productId"><i class="fa fa-shopping-cart"></i></a></li>
+                                        @if (Session["user"] == null)
+                                        {
+                                            <li><a href="@Url.Action("Login", "User")"><i class="fa fa-shopping-cart"></i></a></li>
+                                        }
+                                        else
+                                        {
+                                            <li><a class="btnAddToCart" data-id="@Model.ElementAt(i).productId"><i class="fa fa-shopping-cart"></i></a></li>
+                                        }
                                     </ul>
                                 </div>
                                 <div class="product__item__text">
@@ -204,7 +211,7 @@
                 type: 'POST', 
                 data: { id: id, quantity: quantity },
                 success: function (rs) {
-                    alert(rs.id + ", " + rs.quantity)
+                    $(".header__cart ul li a span").text(rs.quantity)
                 }
             })
         })

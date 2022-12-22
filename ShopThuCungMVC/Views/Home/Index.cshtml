@@ -1,135 +1,161 @@
-﻿@{
-    ViewData["Title"] = "Index";
-    Layout = "~/Views/Shared/_LayoutIndex.cshtml";
-}
+﻿@model List<ShopThuCungMVC.Models.Product>
+    @{
+        ViewData["Title"] = "Index";
+        Layout = "~/Views/Shared/_LayoutIndex.cshtml";
+    }
 
-<!-- Hero Section Begin -->
-<!-- example for run value-->
-<!-- Categories Section Begin -->
-<section class="categories">
-    <div class="container">
-        <div class="row">
-            <div class="categories__slider owl-carousel">
-                <div class="col-lg-3">
-                    <div class="categories__item set-bg" data-setbg="https://localhost:44322/Content/img/categories/cat-5.jpg">
-                        <h5><a href="#">Mèo Lông Xám</a></h5>
-                    </div>
-                </div>
-                <div class="col-lg-3">
-                    <div class="categories__item set-bg" data-setbg="https://localhost:44322/Content/img/categories/cat-6.jpg">
-                        <h5><a href="#">Mèo Chân Ngắn</a></h5>
-                    </div>
-                </div>
-                <div class="col-lg-3">
-                    <div class="categories__item set-bg" data-setbg="https://localhost:44322/Content/img/categories/cat-3.jpg">
-                        <h5><a href="#">Chó Poodle</a></h5>
-                    </div>
-                </div>
-                <div class="col-lg-3">
-                    <div class="categories__item set-bg" data-setbg="https://localhost:44322/Content/img/categories/cat-4.jpg">
-                        <h5><a href="#">Chó Shiba</a></h5>
-                    </div>
-                </div>
-                <div class="col-lg-3">
-                    <div class="categories__item set-bg" data-setbg="https://localhost:44322/Content/img/categories/cat-2.jpg">
-                        <h5><a href="#">Mèo Lông Ngắn</a></h5>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-</section>
-<!-- Categories Section End -->
-<!-- Featured Section Begin -->
-<section class="featured spad">
-    <div class="container">
-        <div class="row">
-            <div class="col-lg-12">
-                <div class="section-title">
-                    <h2>Thú Cưng Bán Chạy</h2>
-                </div>
-                
-            </div>
-        </div>
-        <div class="row featured__filter">
-            @{
-                List<ShopThuCungMVC.Models.Product> listPD = ShopThuCungMVC.Services.ProductCateService.getTop8BestSelling();
-                foreach (var item in listPD)
-                {
-                    <div class="col-lg-3 col-md-4 col-sm-6 mix oranges fresh-meat">
-                        <div class="featured__item">
-                            <div class="featured__item__pic set-bg" data-setbg="@item.Image">
-                                <ul class="featured__item__pic__hover">
-                                    <li><a href="#"><i class="fa fa-shopping-cart"></i></a></li>
-                                </ul>
-                            </div>
-                            <div class="featured__item__text">
-                                <h6>@Html.ActionLink(item.ProductName, "ProductDetails", "Details", new { @Id = item.productId }, null)</h6>
-                                <h5>@item.Price</h5>
-                            </div>
+    <!-- Hero Section Begin -->
+    <!-- example for run value-->
+    <!-- Categories Section Begin -->
+    <section class="categories">
+        <div class="container">
+            <div class="row">
+                <div class="categories__slider owl-carousel">
+                    <div class="col-lg-3">
+                        <div class="categories__item set-bg" data-setbg="https://localhost:44322/Content/img/categories/cat-5.jpg">
+                            <h5><a href="#">Mèo Lông Xám</a></h5>
                         </div>
                     </div>
-                }
-            }
-
-
-        </div>
-    </div>
-</section>
-<!-- Featured Section End -->
-<!-- Banner Begin -->
-<div class="banner">
-    <div class="container">
-        <div class="row">
-            <div class="col-lg-6 col-md-6 col-sm-6">
-                <div class="banner__pic">
-                    <img src="img/banner/banner-1.jpg" alt="">
-                </div>
-            </div>
-            <div class="col-lg-6 col-md-6 col-sm-6">
-                <div class="banner__pic">
-                    <img src="img/banner/banner-2.jpg" alt="">
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
-<!-- Blog Section Begin -->
-<section class="from-blog spad">
-    <div class="container">
-        <div class="row">
-            <div class="col-lg-12">
-                <div class="section-title from-blog__title">
-                    <h2>Bài Viết Bạn Có Thể Thích</h2>
-                </div>
-            </div>
-        </div>
-        <div class="row">
-            @{
-                List<ShopThuCungMVC.Models.Blog> listB = ShopThuCungMVC.Services.ProductCateService.get3Blog();
-                foreach (var item in listB)
-                {
-                    <div class="col-lg-4 col-md-4 col-sm-6">
-                        <div class="blog__item">
-                            <div class="blog__item__pic">
-                                <img src="@item.Image" alt="">
-                            </div>
-                            <div class="blog__item__text">
-                                <ul>
-                                    <li><i class="fa fa-calendar-o"></i>@item.CreateDate</li>
-                                    
-                                </ul>
-                                <h5>@Html.ActionLink(item.BlogName, "BlogDetails", "Details", new { @Id = item.BlogId }, null)</h5>
-                                <p>@item.Desription</p>
-                            </div>
+                    <div class="col-lg-3">
+                        <div class="categories__item set-bg" data-setbg="https://localhost:44322/Content/img/categories/cat-6.jpg">
+                            <h5><a href="#">Mèo Chân Ngắn</a></h5>
                         </div>
                     </div>
+                    <div class="col-lg-3">
+                        <div class="categories__item set-bg" data-setbg="https://localhost:44322/Content/img/categories/cat-3.jpg">
+                            <h5><a href="#">Chó Poodle</a></h5>
+                        </div>
+                    </div>
+                    <div class="col-lg-3">
+                        <div class="categories__item set-bg" data-setbg="https://localhost:44322/Content/img/categories/cat-4.jpg">
+                            <h5><a href="#">Chó Shiba</a></h5>
+                        </div>
+                    </div>
+                    <div class="col-lg-3">
+                        <div class="categories__item set-bg" data-setbg="https://localhost:44322/Content/img/categories/cat-2.jpg">
+                            <h5><a href="#">Mèo Lông Ngắn</a></h5>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- Categories Section End -->
+    <!-- Featured Section Begin -->
+    <section class="featured spad">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="section-title">
+                        <h2>Thú Cưng Bán Chạy</h2>
+                    </div>
 
+                </div>
+            </div>
+            <div class="row featured__filter">
+                @{
+                    List<ShopThuCungMVC.Models.Product> listPD = ShopThuCungMVC.Services.ProductCateService.getTop8BestSelling();
+                    foreach (var item in listPD)
+                    {
+                        <div class="col-lg-3 col-md-4 col-sm-6 mix oranges fresh-meat">
+                            <div class="featured__item">
+                                <div class="featured__item__pic set-bg" data-setbg="@item.Image">
+                                    <ul class="featured__item__pic__hover">
+                                        @if (Session["user"] == null)
+                                        {
+                                            <li><a href="@Url.Action("Login", "User")"><i class="fa fa-shopping-cart"></i></a></li>
+                                        }
+                                        else
+                                        {
+                                            <li><a class="btnAddToCart" data-id="@item.productId"><i class="fa fa-shopping-cart"></i></a></li>
+                                        }
+                                    </ul>
+                                </div>
+                                <div class="featured__item__text">
+                                    <h6>@Html.ActionLink(item.ProductName, "ProductDetails", "Details", new { @Id = item.productId }, null)</h6>
+                                    <h5>@item.Price</h5>
+                                </div>
+                            </div>
+                        </div>
+                    }
                 }
-            }
-   
 
+
+            </div>
+        </div>
+    </section>
+    <!-- Featured Section End -->
+    <!-- Banner Begin -->
+    <div class="banner">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-6 col-md-6 col-sm-6">
+                    <div class="banner__pic">
+                        <img src="img/banner/banner-1.jpg" alt="">
+                    </div>
+                </div>
+                <div class="col-lg-6 col-md-6 col-sm-6">
+                    <div class="banner__pic">
+                        <img src="img/banner/banner-2.jpg" alt="">
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
-</section>
-<!-- Blog Section End -->
+    <!-- Blog Section Begin -->
+    <section class="from-blog spad">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="section-title from-blog__title">
+                        <h2>Bài Viết Bạn Có Thể Thích</h2>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                @{
+                    List<ShopThuCungMVC.Models.Blog> listB = ShopThuCungMVC.Services.ProductCateService.get3Blog();
+                    foreach (var item in listB)
+                    {
+                        <div class="col-lg-4 col-md-4 col-sm-6">
+                            <div class="blog__item">
+                                <div class="blog__item__pic">
+                                    <img src="@item.Image" alt="">
+                                </div>
+                                <div class="blog__item__text">
+                                    <ul>
+                                        <li><i class="fa fa-calendar-o"></i>@item.CreateDate</li>
+
+                                    </ul>
+                                    <h5>@Html.ActionLink(item.BlogName, "BlogDetails", "Details", new { @Id = item.BlogId }, null)</h5>
+                                    <p>@item.Desription</p>
+                                </div>
+                            </div>
+                        </div>
+
+                    }
+                }
+
+
+            </div>
+        </div>
+    </section>
+    <!-- Blog Section End -->
+    <script src="~/Scripts/jquery-3.6.1.js"></script>
+    <script>
+        $(document).ready(function () {
+            $('.featured__item').on('click', '.btnAddToCart', function (e) {
+                e.preventDefault();
+                var id = $(this).data('id');
+                var quantity = 1;
+                $.ajax({
+                    url: '/ProductBag/AddToCart',
+                    type: 'POST',
+                    data: { id: id, quantity: quantity },
+                    success: function (rs) {
+                        $(".header__cart ul li a span").text(rs.quantity)
+                    }
+                })
+            })
+        })
+    </script>

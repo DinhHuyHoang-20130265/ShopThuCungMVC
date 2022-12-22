@@ -275,9 +275,9 @@
     <Compile Include="Models\Product.cs" />
     <Compile Include="Models\ProductCategory.cs" />
     <Compile Include="Models\ProductFromCate.cs" />
-    <Compile Include="Models\ShoppingCartViewModel.cs" />
     <Compile Include="Models\UserAccount.cs" />
     <Compile Include="Models\Contact.cs" />
+	<Compile Include="Models\ShoppingCart.cs" />
     <Compile Include="Models\ShopThuCungDBContext.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Services\AccountService.cs" />

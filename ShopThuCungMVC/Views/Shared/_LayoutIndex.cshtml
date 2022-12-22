@@ -211,8 +211,13 @@
                 <div class="col-lg-3">
                     <div class="header__cart">
                         <ul>
-                            <li><a href="@Url.Action("ListLike","ProductBag")"><i class="fa fa-heart"></i> <span>1</span></a></li>
-                            <li><a href="@Url.Action("Cart","ProductBag")"><i class="fa fa-shopping-bag"></i> <span>3</span></a></li>
+                            @if (Session["user"] == null)
+                            {
+                                <li><a href="@Url.Action("Login","User")"><i class="fa fa-shopping-bag"></i></a></li>
+                            } else {
+                                ShoppingCart cart = (ShoppingCart)Session["cart"];
+                                <li><a href="@Url.Action("Cart","ProductBag")"><i class="fa fa-shopping-bag"></i><span>@cart.getQuantityCart()</span></a></li>
+                            }
                         </ul>
                         <div class="header__cart__price">Giỏ hàng: <span>85.000.000 Đồng</span></div>
                     </div>
