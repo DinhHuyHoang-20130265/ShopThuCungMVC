@@ -161,5 +161,11 @@ namespace ShopThuCungMVC.Controllers
             Session["registerSuccess"] = "Chúc mừng bạn đã đổi mật khẩu thành công, mời bạn đăng nhập";
             return RedirectToAction("Login", "User");
         }
+
+        public ActionResult InforUser()
+        {
+            return View();
+        }
+
     }
 }
