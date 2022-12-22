@@ -1,4 +1,5 @@
 ﻿using Microsoft.Extensions.Logging;
+using Org.BouncyCastle.Utilities;
 using ShopThuCungMVC.Models;
 using ShopThuCungMVC.Services;
 using System;
@@ -25,16 +26,28 @@ namespace ShopThuCungMVC.Controllers
         [HttpGet]
         public ActionResult AllProduct()
         {
-            List<Product> listProductById = ProductCateService.listProductbyCate(null);
+            List<Product> listProductById = ProductCateService.listProductbyCate(null).ToList();
             return View(listProductById);
         }
         [HttpPost]
         public ActionResult AllProduct(String Id)
         {
-            List<Product> listProductById = ProductCateService.listProductbyCate(Id);
+            List<Product> listProductById = ProductCateService.listProductbyCate(Id).ToList();
             return View(listProductById);
         }
-
+        public JsonResult LoadMoreProduct(string id, int page)
+        {
+            if (id.Equals("AllProduct"))
+            {
+                List<Product> listProductById = ProductCateService.listProductbyCate(null).Skip(page * 6).Take(6).ToList();
+                return Json(new { data = listProductById }, JsonRequestBehavior.AllowGet);
+            }
+            else
+            {
+                List<Product> listProductById = ProductCateService.listProductbyCate(id).Skip(page * 6).Take(6).ToList();
+                return Json( new { data = listProductById }, JsonRequestBehavior.AllowGet);
+            }
+        }
         public ActionResult Contact()
         {
             return View();
