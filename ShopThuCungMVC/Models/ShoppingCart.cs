@@ -1,4 +1,6 @@
-﻿using System;
+﻿using Google.Protobuf.Collections;
+using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -9,71 +11,39 @@ namespace ShopThuCungMVC.Models
 
     public class ShoppingCart
     {
-        public List<ShoppingCartItem> Items { get; set; }
-        public ShoppingCart(List<ShoppingCartItem> Items)
-        { 
-            this.Items = new List<ShoppingCartItem>();
-        }
+        Dictionary<string, int> data;
 
-        public void AddToCart(ShoppingCartItem item, int QuantityCart)
+        public ShoppingCart()
         {
-            var checkExist = Items.FirstOrDefault(x => x.ProductID == item.ProductID);
-            if (checkExist != null)
+            data = new Dictionary<string, int>();
+        } 
+
+        public int Put(string id, int quantity)
+        {
+            if (data.ContainsKey(id))
             {
-                checkExist.Quantity += QuantityCart;
-                checkExist.TotalPrice = checkExist.ProductPrice * checkExist.Quantity;
+                int temp = data[id];
+
+                data[id] = temp + quantity;
             }
             else
             {
-                Items.Add(item);
+                data.Add(id, quantity);
             }
+            return 0;
         }
-        public void Remove(string id)
+        public bool remove(string id)
         {
-            var checkExist = Items.SingleOrDefault(x => x.ProductID == id);
-            if (checkExist != null)
+            return data.Remove(id);
+        }
+        public int getQuantityCart()
+         {
+            int count = 0;
+            foreach (var id in data.Keys)
             {
-                Items.Remove(checkExist);
+                 count += data[id];   
             }
-        }
-
-        public void UpdateQuantityCart(string id, int quantity)
-        {
-            var checkExist = Items.SingleOrDefault(x => x.ProductID == id);
-            if (checkExist != null)
-            {
-                checkExist.Quantity = quantity;
-                checkExist.TotalPrice = checkExist.ProductPrice * checkExist.Quantity;
-            }
-        }
-
-        public Double GetTotalPrice()
-        {
-            return Items.Sum(x=>x.TotalPrice);
-        }
-        public int GetTotalQuantity()
-        {
-            return Items.Sum(x => x.Quantity);
-        }
-        public class ShoppingCartItem
-        {
-
-            public string ProductID { get; set; }
-            public string ProductIMG { get; set; }
-            public string ProductName { get; set; } 
-            public double ProductPrice { get; set; }
-            public int Quantity { get; set; }
-            public double TotalPrice { get; set; }
-
-            //public ShoppingCartViewModel(string productID, string productName, double productPrice, int quantity, double totalPrice)
-            //{
-            //    ProductID = productID;
-            //    ProductName = productName;
-            //    ProductPrice = productPrice;
-            //    Quantity = quantity;
-            //    TotalPrice = totalPrice;
-            //}
+            return count;
         }
     }
-
 }
