@@ -277,8 +277,9 @@
     <Compile Include="Models\ProductFromCate.cs" />
     <Compile Include="Models\UserAccount.cs" />
     <Compile Include="Models\Contact.cs" />
-	<Compile Include="Models\ShoppingCart.cs" />
+    <Compile Include="Models\ShoppingCart.cs" />
     <Compile Include="Models\ShopThuCungDBContext.cs" />
+    <Compile Include="Models\ShoppingCart.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Services\AccountService.cs" />
     <Compile Include="Services\BlogsService.cs" />
@@ -1111,11 +1112,11 @@
     <Content Include="Views\User\ForgotPassWord.cshtml" />
     <Content Include="Views\User\Login.cshtml" />
     <Content Include="Views\User\Register.cshtml" />
-    <Content Include="Views\User\InforUser.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="Areas\Admin\Data\" />
+    <Folder Include="Controllers\App_LocalResources\" />
     <Folder Include="Views\Search\" />
   </ItemGroup>
   <ItemGroup>

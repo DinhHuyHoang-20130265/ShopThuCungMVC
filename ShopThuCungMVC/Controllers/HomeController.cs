@@ -1,4 +1,5 @@
 ﻿using Microsoft.Extensions.Logging;
+using MySqlX.XDevAPI.Common;
 using Org.BouncyCastle.Utilities;
 using ShopThuCungMVC.Models;
 using ShopThuCungMVC.Services;
@@ -56,6 +57,11 @@ namespace ShopThuCungMVC.Controllers
         public ActionResult Policy()
         {
             return View();
+        }
+        public JsonResult Filter(String price, String category,String size)
+        {
+            List<Product> list = ProductCateService.Filter(price, category, size);
+            return Json(new { data = list}, JsonRequestBehavior.AllowGet);
         }
     }
 }

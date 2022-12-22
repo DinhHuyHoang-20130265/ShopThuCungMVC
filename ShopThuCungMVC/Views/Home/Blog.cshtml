@@ -27,63 +27,24 @@
         <div class="row">
             <div class="col-lg-4 col-md-5">
                 <div class="blog__sidebar">
-                    <div class="blog__sidebar__search">
-                        <form action="#">
-                            <input type="text" placeholder="Tìm kiếm...">
-                            <button type="submit"><span class="icon_search"></span></button>
-                        </form>
-                    </div>
-                    <div class="blog__sidebar__item">
-                        <h4>Thể loại</h4>
-                        <ul>
-                            <li><a href="#">Tất Cả</a></li>
-                            <li><a href="#">Chó</a></li>
-                            <li><a href="#">Mèo</a></li>
-                            <li><a href="#">Life Style</a></li>
-                            <li><a href="#">Chăm sóc</a></li>
-                        </ul>
-                    </div>
+                   
                     <div class="blog__sidebar__item">
                         <h4>Tin mới nhất</h4>
                         <div class="blog__sidebar__recent">
-                            <a href="#" class="blog__sidebar__recent__item">
-                                <div class="blog__sidebar__recent__item__pic">
-                                    <img src="img/blog/sidebar/sr-1.jpg" alt="">
-                                </div>
-                                <div class="blog__sidebar__recent__item__text">
-                                    <h6>Danh sách các thuốc tẩy giun<br> cho chó con an toàn</h6>
-                                    <span>11/12/2021</span>
-                                </div>
-                            </a>
-                            <a href="#" class="blog__sidebar__recent__item">
-                                <div class="blog__sidebar__recent__item__pic">
-                                    <img src="img/blog/sidebar/sr-2.jpg" alt="">
-                                </div>
-                                <div class="blog__sidebar__recent__item__text">
-                                    <h6>Từng bước cách chăm sóc <br> chó mẹ sau sinh mổ đẻ</h6>
-                                    <span>12/10/2021</span>
-                                </div>
-                            </a>
-                            <a href="#" class="blog__sidebar__recent__item">
-                                <div class="blog__sidebar__recent__item__pic">
-                                    <img src="img/blog/sidebar/sr-3.jpg" alt="">
-                                </div>
-                                <div class="blog__sidebar__recent__item__text">
-                                    <h6>Cách chăm sóc chó mang<br> thai tại nhà cần phải biết</h6>
-                                    <span>20/08/ 2021</span>
-                                </div>
-                            </a>
+                            @{
+                                List<ShopThuCungMVC.Models.Blog> listB = ShopThuCungMVC.Services.BlogsService.get3BlogNew();
+                                foreach (var item in listB)
+                                {
+                                    <div class="blog__sidebar__recent__item">
+                                            <img src="@item.Image" alt="">
+                                            <h5>@Html.ActionLink(item.BlogName, "BlogDetails", "Details", new { @Id = item.BlogId }, null)</h5>
+                                            <span>@item.CreateDate</span>
+                                    </div>
+                                }
+                            }
                         </div>
                     </div>
-                    <div class="blog__sidebar__item">
-                        <h4>Từ khóa</h4>
-                        <div class="blog__sidebar__item__tags">
-                            <a href="#">Chó</a>
-                            <a href="#">Mèo</a>
-                            <a href="#">Chăm sóc</a>
-                            <a href="#">Đời Sống</a>
-                        </div>
-                    </div>
+                   
                 </div>
             </div>
             <div class="col-lg-8 col-md-7">

@@ -1,8 +1,9 @@
-﻿@model List<ShopThuCungMVC.Models.Product>
-    @{
-        ViewData["Title"] = "Index";
-        Layout = "~/Views/Shared/_LayoutIndex.cshtml";
-    }
+@using ShopThuCungMVC.Models;
+@using ShopThuCungMVC.Services;
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Views/Shared/_LayoutIndex.cshtml";
+}
 
     <!-- Hero Section Begin -->
     <!-- example for run value-->
@@ -79,8 +80,6 @@
                         </div>
                     }
                 }
-
-
             </div>
         </div>
     </section>
@@ -112,32 +111,28 @@
                     </div>
                 </div>
             </div>
-            <div class="row">
-                @{
-                    List<ShopThuCungMVC.Models.Blog> listB = ShopThuCungMVC.Services.ProductCateService.get3Blog();
+        </div>
+        <div class="row">
+            @{
+                    List<Blog> listB = ProductCateService.get3Blog();
                     foreach (var item in listB)
                     {
-                        <div class="col-lg-4 col-md-4 col-sm-6">
-                            <div class="blog__item">
-                                <div class="blog__item__pic">
-                                    <img src="@item.Image" alt="">
-                                </div>
-                                <div class="blog__item__text">
-                                    <ul>
-                                        <li><i class="fa fa-calendar-o"></i>@item.CreateDate</li>
-
-                                    </ul>
-                                    <h5>@Html.ActionLink(item.BlogName, "BlogDetails", "Details", new { @Id = item.BlogId }, null)</h5>
-                                    <p>@item.Desription</p>
-                                </div>
+                    <div class="col-lg-4 col-md-4 col-sm-6">
+                        <div class="blog__item">
+                            <div class="blog__item__pic">
+                                <img src="@item.Image" alt="">
                             </div>
-                        </div>
-
+                            <div class="blog__item__text">
+                                <ul>
+                                    <li><i class="fa fa-calendar-o"></i>@item.CreateDate</li>
+                                </ul>
+                                <h5>@Html.ActionLink(item.BlogName, "BlogDetails", "Details", new { @Id = item.BlogId }, null)</h5>
+                                <p>@item.Desription</p>
+                             </div>
+                         </div>
+                     </div>
                     }
                 }
-
-
-            </div>
         </div>
     </section>
     <!-- Blog Section End -->
