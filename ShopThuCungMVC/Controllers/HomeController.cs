@@ -23,6 +23,7 @@ namespace ShopThuCungMVC.Controllers
            
             return View();
         }
+
         [HttpGet]
         public ActionResult AllProduct()
         {
