@@ -55,7 +55,7 @@
                         @{ 
                             ShopThuCungMVC.Models.UserAccount user = (ShopThuCungMVC.Models.UserAccount)Session["admin"];
                         }
-                        <input type="text" id="userid" name="userid" value="@user.id" />
+                        <input type="text" id="userid" name="userid" value="@user.id" style="display: none;"/>
                         <div class="row g-3 flex-between-end mb-5">
                             <div class="col-auto">
                                 <h2 class="mb-2">Thêm thú cưng</h2>
@@ -280,11 +280,14 @@
                                                  role="tabpanel"
                                                  aria-labelledby="advancedTab">
                                                 <div class="row g-3">
-
                                                     <div class="col-12 col-lg-6">
                                                         <h5 class="mb-2 text-1000">ID thú cưng</h5>
-                                                        <p name="pid" class="form-control">Sản phẩm chưa có id</p>
-
+                                                        @if (Request.Url.AbsoluteUri.Substring(Request.Url.AbsoluteUri.LastIndexOf('/') + 1).Equals("AddProduct")) {
+                                                        <input name="pid" class="form-control" id="pid" value="Sản phẩm chưa có id" disabled>
+                                                        }
+                                                        else {
+                                                        <input name="pid" class="form-control" id="pid" value="@Request.Url.AbsoluteUri.LastIndexOf('/') + 1)" disabled>
+                                                        }
                                                     </div>
                                                 </div>
                                             </div>

@@ -46,17 +46,18 @@ namespace ShopThuCungMVC.Areas.Admin.Controllers
                 return RedirectToAction("Login", "Auth");
         }
         [HttpPost]
-        public ActionResult AddProduct(string userid, string productname, string desc, HttpPostedFileBase file, string price, string promoPrice, string quantity, string cannang, string mausac, DateTime date, string giong, string size) 
+        public ActionResult AddProduct(string userid, string productname, string desc, HttpPostedFileBase file, string price, string promoPrice, string quantity, string cannang, string mausac, string date, string giong, string size) 
         {
             UserAccount account = (UserAccount)Session["admin"];
             if (account != null)
             {
                 UploadFile(file);
-                ProductCateService.AddNewProduct(userid, productname, desc, price, promoPrice, quantity, cannang, mausac, date, giong, size);
+                string _FileName = Path.GetFileName(file.FileName);
+                ProductCateService.AddNewProduct(userid, productname, _FileName , desc, price, promoPrice, quantity, cannang, mausac, date, giong, size);
+                return RedirectToAction("Products", "Admin/Product");
             }
             else
                 return RedirectToAction("Login", "Auth");
-            return null;
         }
     }
 }

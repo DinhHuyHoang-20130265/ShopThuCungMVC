@@ -9,6 +9,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using System.Web;
 using System.Web.Helpers;
+using System.Text;
 
 namespace ShopThuCungMVC.DAO
 {
@@ -115,11 +116,44 @@ namespace ShopThuCungMVC.DAO
             List<Product> list = db.product.FromSqlRaw(final).ToList();
             return list;
         }
-
-        internal static void AddNewProduct(string userid, string productname, string desc, string price, string promoPrice, string quantity, string cannang, string mausac, DateTime date, string giong, string size)
+        public static string generateIDProduct()
         {
-            string id = "";
-            String query = $"INSERT INTO product VALUES({null}, {productname}, 1, null)";
+            List<string> id = new List<string>();
+            foreach (var p in db.product.ToList())
+            {
+                id.Add(p.productId);
+            }
+            String upperAlphabet = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+            String lowerAlphabet = "abcdefghijklmnopqrstuvwxyz";
+            String numbers = "0123456789";
+            String alphaNumeric = upperAlphabet + lowerAlphabet + numbers;
+
+            StringBuilder sb = new StringBuilder();
+
+            // create an object of Random class
+            Random random = new Random();
+            // specify length of random string
+            int length = 10;
+            for (int i = 0; i<length; i++) {
+                int index = random.Next(alphaNumeric.Length);
+                char randomChar = alphaNumeric.ElementAt(index);
+                sb.Append(randomChar);
+            }
+            if (id.Contains(sb.ToString())) 
+                    return generateIDProduct();
+            else 
+                    return sb.ToString();
+        }
+        internal static void AddNewProduct(string userid, string productname, string _FileName, string desc, string price, string promoPrice, string quantity, string cannang, string mausac, string date, string giong, string size)
+        {
+            string idProduct = generateIDProduct();
+            Product product = new Product(idProduct, productname, 1, "https://localhost:44322/Content/img/products/" + _FileName, Double.Parse(price), promoPrice, Int32.Parse(quantity), 1, null, desc, null, userid, date, null, null, giong, mausac, cannang);
+            ProductCategory cate = db.product_category.FromSqlRaw($"select * from product_category where CatName = '{giong}'").FirstOrDefault(); 
+            ProductFromCate productFromCate = new ProductFromCate(idProduct, cate.CatId);
+            db.product.Add(product);
+            db.SaveChanges();
+            db.product_from_cate.Add(productFromCate);
+            db.SaveChanges();
         }
     }
 }

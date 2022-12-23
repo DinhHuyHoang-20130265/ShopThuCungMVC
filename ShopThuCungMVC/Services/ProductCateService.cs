@@ -57,9 +57,9 @@ namespace ShopThuCungMVC.Services
             return ProductCategoryDAO.Filter(id,price,size);
         }
 
-        internal static void AddNewProduct(string userid, string productname, string desc, string price, string promoPrice, string quantity, string cannang, string mausac, DateTime date, string giong, string size)
+        internal static void AddNewProduct(string userid, string productname, string _FileName, string desc, string price, string promoPrice, string quantity, string cannang, string mausac, string date, string giong, string size)
         {
-            ProductCategoryDAO.AddNewProduct(userid, productname, desc, price, promoPrice, quantity, cannang, mausac, date, giong, size);
+            ProductCategoryDAO.AddNewProduct(userid, productname, _FileName, desc, price, promoPrice, quantity, cannang, mausac, date, giong, size);
         }
     }
 }
