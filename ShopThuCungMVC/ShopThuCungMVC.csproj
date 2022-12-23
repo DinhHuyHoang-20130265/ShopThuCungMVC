@@ -742,6 +742,7 @@
     <Content Include="Content\img\categories\cat-4.jpg" />
     <Content Include="Content\img\categories\cat-5.jpg" />
     <Content Include="Content\img\categories\cat-6.jpg" />
+    <Content Include="Content\img\favicon-16x16.png" />
     <Content Include="Content\img\favicons\favicon-16x16.png" />
     <Content Include="Content\img\featured\feature-1.jpg" />
     <Content Include="Content\img\featured\feature-2.jpg" />
