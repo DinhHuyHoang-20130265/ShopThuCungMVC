@@ -5,7 +5,6 @@
 }
 @section script {
     <script src="@Url.Content("~/Content/AdminResources/bonus/js/lodash.min.js")"></script>
-    <script src="@Url.Content("~/Content/AdminResources/bonus/js/dropzone.min.js")"></script>
     <script src="@Url.Content("~/Content/AdminResources/bonus/js/phoenix.js")"></script>
     <script src="@Url.Content("~/Content/ckeditor/ckeditor.js")"></script>
     <script>
@@ -52,7 +51,11 @@
         <div class="row">
             <main class="main" id="top">
                 <div class="container-fluid px-0" data-layout="container">
-                    <form class="mb-9">
+                    <form class="mb-9" method="post" action="/Product/AddProduct" enctype="multipart/form-data">
+                        @{ 
+                            ShopThuCungMVC.Models.UserAccount user = (ShopThuCungMVC.Models.UserAccount)Session["admin"];
+                        }
+                        <input type="text" id="userid" name="userid" value="@user.id" />
                         <div class="row g-3 flex-between-end mb-5">
                             <div class="col-auto">
                                 <h2 class="mb-2">Thêm thú cưng</h2>
@@ -72,25 +75,24 @@
                         <h4 class="mb-3">Tên thú cưng</h4>
                         <div class="row g-5">
                             <div class="col-12 col-xl-8">
-                                <input class="form-control mb-5" type="text" placeholder="Viết tên thú cưng tại đây..." required />
+                                <input class="form-control mb-5" type="text" name="productname" placeholder="Viết tên thú cưng tại đây..." required />
                                 <div class="mb-6">
                                     <h4 class="mb-3">Chi tiết thú cưng</h4>
-                                    <input type="text" id="desc" placeholder="Nhập 
+                                    <input type="text" id="desc" placeholder="Nhập
                                            sản phẩm" />
                                 </div>
                                 <h4 class="mb-3">Thêm ảnh</h4>
-                                <div class="dropzone dropzone-multiple p-0 mb-5 dz-clickable"
-                                     id="my-awesome-dropzone"
-                                     data-dropzone="data-dropzone">
-                                    <div class="dz-preview d-flex flex-wrap"></div>
+                                <div class="containimg" style="width: 130px; margin: 15px; display: none;">
+                                    <a style="cursor: pointer;"><i class="fa fa-window-close" aria-hidden="true"></i></a>
+                                    <img id="preview" src="" style="width: 120px; margin-left: 10px; border-radius: 5px;" />
+                                </div>
+                                <div class="dropzone dropzone-multiple p-0 mb-5 dz-clickable">
                                     <div class="dz-message text-600"
                                          data-dz-message="data-dz-message">
-                                        Thêm ảnh <span class="text-800">hoặc </span><button class="btn btn-link p-0" type="button">
-                                            tìm trong thiết bị
-                                        </button><br /><img class="mt-3 me-2"
-                                                            src="~/AdminResources/assets/img/icons/image-icon.png"
-                                                            width="40"
-                                                            alt="" />
+                                        <label for="file-upload" class="custom-file-upload" style="border: 1px solid #ccc; display: inline-block; padding: 6px 12px; cursor: pointer;">
+                                            <i class="fa fa-cloud-upload"></i> Up ảnh cho sản phẩm
+                                        </label>
+                                        <input id="file-upload" name="file" type="file" style="display: none;" />
                                     </div>
                                 </div>
                                 <h4 class="mb-3">Danh mục</h4>
@@ -268,7 +270,7 @@
 
                                                     <input class="form-control inventory-attributes"
                                                            id="inventory"
-                                                           type="date"
+                                                           type="date" name="date"
                                                            style="max-width: 350px" />
 
                                                 </div>
@@ -304,7 +306,6 @@
                                                             </div><select id="giong" name="giong" class="form-select mb-3" aria-label="category">
                                                                 <option value="Chó">Chó</option>
                                                                 <option value="Mèo">Mèo</option>
-
                                                             </select>
                                                         </div>
                                                     </div>
@@ -321,10 +322,10 @@
                                                         <div class="mb-4 border-dashed-bottom pb-4">
                                                             <div class="d-flex flex-wrap justify-content-between mb-2">
                                                                 <h5>Kích cỡ</h5>
-                                                            </div><select class="form-select mb-3">
-                                                                <option value="size">Nhỏ</option>
-                                                                <option value="color">Vừa</option>
-                                                                <option value="weight">Lớn</option>
+                                                            </div><select name="size" class="form-select mb-3">
+                                                                <option value="small">Nhỏ</option>
+                                                                <option value="medium">Vừa</option>
+                                                                <option value="high">Lớn</option>
                                                             </select>
                                                         </div>
                                                     </div>
@@ -342,3 +343,17 @@
     </div>
 </div>
 <!-- [ Main Content ] end -->
+<script src="~/Content/js/jquery-3.3.1.min.js"></script>
+<script>
+    $("#file-upload").change(function (e) {
+        e.preventDefault();
+        const preview = document.getElementById('preview');
+        const file = document.getElementById('file-upload').files[0];
+        const reader = new FileReader();
+        reader.addEventListener("load", function () {
+            preview.src = reader.result;
+        }, false);
+        reader.readAsDataURL(file);
+        $(".containimg").css("display", "block");
+    })
+</script>

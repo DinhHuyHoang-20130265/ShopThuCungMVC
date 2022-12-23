@@ -115,5 +115,11 @@ namespace ShopThuCungMVC.DAO
             List<Product> list = db.product.FromSqlRaw(final).ToList();
             return list;
         }
+
+        internal static void AddNewProduct(string userid, string productname, string desc, string price, string promoPrice, string quantity, string cannang, string mausac, DateTime date, string giong, string size)
+        {
+            string id = "";
+            String query = $"INSERT INTO product VALUES({null}, {productname}, 1, null)";
+        }
     }
 }
