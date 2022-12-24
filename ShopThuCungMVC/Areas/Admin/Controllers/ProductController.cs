@@ -20,13 +20,7 @@ namespace ShopThuCungMVC.Areas.Admin.Controllers
             else
                 return RedirectToAction("Login", "Auth");
         }
-        [HttpGet]
-        public ActionResult UploadFile()
-        {
-            return View();
-        }
-        [HttpPost]
-        public ActionResult UploadFile(HttpPostedFileBase file)
+        public void UploadFile(HttpPostedFileBase file)
         {
             try
             {
@@ -37,20 +31,31 @@ namespace ShopThuCungMVC.Areas.Admin.Controllers
                     _path = Path.Combine(Server.MapPath("~/Content/img/products"), _FileName);
                     file.SaveAs(_path);
                 }
-                ViewBag.Message = "File Uploaded Successfully!!";
-                return Json(new { path = _path });
             }
             catch
             {
-                ViewBag.Message = "File upload failed!!";
-                return Json(new { path = "Lỗi" });
             }
         }
+        [HttpGet]
         public ActionResult AddProduct()
         {
             UserAccount account = (UserAccount)Session["admin"];
             if (account != null)
                 return View();
+            else
+                return RedirectToAction("Login", "Auth");
+        }
+        [HttpPost]
+        public ActionResult AddProduct(string userid, string productname, string desc, HttpPostedFileBase file, string price, string promoPrice, string quantity, string cannang, string mausac, string date, string giong, string size) 
+        {
+            UserAccount account = (UserAccount)Session["admin"];
+            if (account != null)
+            {
+                UploadFile(file);
+                string _FileName = Path.GetFileName(file.FileName);
+                ProductCateService.AddNewProduct(userid, productname, _FileName , desc, price, promoPrice, quantity, cannang, mausac, date, giong, size);
+                return RedirectToAction("Products", "Admin/Product");
+            }
             else
                 return RedirectToAction("Login", "Auth");
         }

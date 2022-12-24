@@ -25,7 +25,7 @@ namespace ShopThuCungMVC.Models
             Status = status;
             Image = image;
             Desription = desription;
-            Dital = Dital;
+            this.Dital = Dital;
             CreateBy = createBy;
             CreateDate = createDate;
             UpdateBy = updateBy;

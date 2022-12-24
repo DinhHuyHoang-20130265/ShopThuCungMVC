@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace ShopThuCungMVC.Services
 {
-    public class ProductCateService
+    public static class ProductCateService
     {
         public static List<ProductCategory> listProductCate()
         {
@@ -57,5 +57,9 @@ namespace ShopThuCungMVC.Services
             return ProductCategoryDAO.Filter(id,price,size);
         }
 
+        internal static void AddNewProduct(string userid, string productname, string _FileName, string desc, string price, string promoPrice, string quantity, string cannang, string mausac, string date, string giong, string size)
+        {
+            ProductCategoryDAO.AddNewProduct(userid, productname, _FileName, desc, price, promoPrice, quantity, cannang, mausac, date, giong, size);
+        }
     }
 }
