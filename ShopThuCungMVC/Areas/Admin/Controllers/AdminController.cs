@@ -33,5 +33,9 @@ namespace ShopThuCungMVC.Areas.Admin.Controllers
             else
                 return RedirectToAction("Login", "Auth");
         }
+        public ActionResult InfoAdmin()
+        {
+            return View();
+        }
     }
 }
