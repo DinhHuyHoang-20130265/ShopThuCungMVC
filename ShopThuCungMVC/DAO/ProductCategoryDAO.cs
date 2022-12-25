@@ -266,7 +266,6 @@ namespace ShopThuCungMVC.DAO
             dbtest2.Update(productFromCate);
             dbtest2.SaveChanges();
         }
-<<<<<<< HEAD
         internal static void UpdateAccessory(string productid, string userid, string productname, string fileName, string desc, string price, string promoPrice, string quantity, string date, string giong, string size)
         {
 
@@ -303,9 +302,6 @@ namespace ShopThuCungMVC.DAO
             dbtest2.SaveChanges();
         }
         public static List<ProductCategory> listCate(String category)
-=======
-        /*public static List<ProductCategory> listCate(String category)
->>>>>>> c6f1a992f04f7e5a9fcdb026db4655628e4d1dfe
         {
             string query = $"SELECT DISTINCT p.* FROM product p join product_from_cate pfc ON p.productId = pfc.product_id \r\nWHERE p.`Status` =1";
             if (category != null)
@@ -326,6 +322,6 @@ namespace ShopThuCungMVC.DAO
             }
             List<ProductCategory> list = db.product_category.FromSqlRaw(query).ToList();
             return list;
-        }*/
+        }
     }
 }

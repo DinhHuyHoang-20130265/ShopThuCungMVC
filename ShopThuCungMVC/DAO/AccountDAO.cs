@@ -242,5 +242,26 @@ namespace ShopThuCungMVC.DAO
         {
             return db.user_account.Where(p => p.id.Equals(id)).FirstOrDefault();
         }
+
+        internal static void UpdateUser(string userid, string username, string email, string address, string fullname, string passwd, string phone, int status)
+        {
+            UserAccount user = getUserById(userid);
+            db.SaveChanges();
+            user.user_name = username;
+            user.pass = passwd;
+            user.passMaHoa = MD5.CreateMD5(passwd);
+            user.status = status;
+            ShopThuCungDBContext dbtest = new ShopThuCungDBContext();
+            dbtest.Update(user);
+            dbtest.SaveChanges();
+            InforUser infor = getInforUserById(userid);
+            infor.name = fullname;
+            infor.email = email;
+            infor.address = address;
+            infor.phone = phone;
+            ShopThuCungDBContext dbtest2 = new ShopThuCungDBContext();
+            dbtest2.Update(infor);
+            dbtest2.SaveChanges();
+        }
     }
 }

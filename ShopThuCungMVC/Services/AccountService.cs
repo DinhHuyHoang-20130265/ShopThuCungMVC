@@ -83,5 +83,10 @@ namespace ShopThuCungMVC.Services
         {
             AccountDAO.UpdateAdmin(userid, username, email, address, fullname, passwd, phone, status);
         }
+
+        internal static void UpdateUser(string userid, string username, string email, string address, string fullname, string passwd, string phone, int status)
+        {
+            AccountDAO.UpdateUser(userid, username, email, address, fullname, passwd, phone, status);
+        }
     }
 }

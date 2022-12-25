@@ -42,6 +42,10 @@
                                    placeholder="Tên tài khoản">
                         }
                     </div>
+                    @if (Model != null)
+                    {
+                        <input type="text" name="userid" id="userid" value="@Model.id" style="display: none" />
+                    }
                     <div class="form-group col-md-6">
                         <label class="form-label" for="inputPassword4">Email</label>
                         @if (Model != null)
@@ -65,7 +69,7 @@
                         else
                         {
                             <input type="text" class="form-control" id="validationTooltip05" name="address" required
-                           placeholder="Địa chỉ">
+                                   placeholder="Địa chỉ">
                         }
 
                     </div>
@@ -88,13 +92,13 @@
                         <label class="form-label" for="inputPassword4">Mật khẩu</label>
                         @if (Model != null)
                         {
-                           <input type="password" class="form-control" id="inputPassword4" name="passwd"
-                                  value="@Model.pass">
+                            <input type="password" class="form-control" id="inputPassword4" name="passwd"
+                                   value="@Model.pass">
                         }
                         else
                         {
-                        <input type="password" class="form-control" id="inputPassword4" name="passwd"
-                           placeholder="Mật khẩu">
+                            <input type="password" class="form-control" id="inputPassword4" name="passwd"
+                                   placeholder="Mật khẩu">
                         }
                     </div>
                     <div class="col-md-3 position-relative">
@@ -107,7 +111,7 @@
                         else
                         {
                             <input type="password" class="form-control" id="passwdconfirm" name="passwdconfirm" required
-                           placeholder="Nhập lại mật khẩu">
+                                   placeholder="Nhập lại mật khẩu">
                         }
                     </div>
                     <div class="col-md-3 position-relative">
@@ -145,17 +149,25 @@
                         }
                         else
                         {
-                                <select class="form-select" id="validationTooltip04" name="status" required>
-                                    <option value="1"> Mở khóa</option>
-                                    <option value="0" selected>Khóa</option>
-                                </select>
+                            <select class="form-select" id="validationTooltip04" name="status" required>
+                                <option value="1"> Mở khóa</option>
+                                <option value="0" selected>Khóa</option>
+                            </select>
                         }
 
                     </div>
                 </div>
                 <h4 style="text-align: center; font-size: 16px; color: red;">@ViewBag.PassError</h4>
                 <h4 style="text-align: center; font-size: 16px; color: green;">@ViewBag.Error</h4>
-                <button type="submit" class="btn  btn-primary" style="margin-left: 450px; padding:10px 40px 10px 40px; font-size: large;">Thêm người dùng</button>
+                @if (Model != null)
+                {
+                    <button type="submit" class="btn  btn-primary" style="margin-left: 450px; padding:10px 40px 10px 40px; font-size: large;">Lưu Thay đổi</button>
+                }
+                else
+                {
+                    <button type="submit" class="btn  btn-primary" style="margin-left: 450px; padding:10px 40px 10px 40px; font-size: large;">Thêm người dùng</button>
+                }
+
             </form>
         </div>
     </div>
