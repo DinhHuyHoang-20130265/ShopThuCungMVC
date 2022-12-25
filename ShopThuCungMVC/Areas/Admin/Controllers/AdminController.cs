@@ -35,6 +35,10 @@ namespace ShopThuCungMVC.Areas.Admin.Controllers
             else
                 return RedirectToAction("Login", "Auth");
         }
+        public ActionResult InfoAdmin()
+        {
+            return View();
+        }
 
         [HttpPost]
         public ActionResult AddAdmin(string username, string email, string address, string fullname, string passwd, string passwdconfirm, string phone, string status)
