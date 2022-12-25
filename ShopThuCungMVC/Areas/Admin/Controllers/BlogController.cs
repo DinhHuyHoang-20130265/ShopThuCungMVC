@@ -38,7 +38,7 @@ namespace ShopThuCungMVC.Areas.Admin.Controllers
             {
                 UploadFile(file);
                 string _FileName = Path.GetFileName(file.FileName);
-                BlogCateService.AddBlog(userid, name, _FileName, desc);
+               /* BlogCateService.AddBlog(userid, name, _FileName, desc);*/
                 return RedirectToAction("Blog", "Admin/Blog");
             }
             else

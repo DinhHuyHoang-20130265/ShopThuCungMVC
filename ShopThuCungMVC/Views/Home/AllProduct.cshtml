@@ -33,131 +33,155 @@
                         <h4>Danh mục</h4>
                         <ul>
                             @{
-                                
-                            
                                 String id = Request.Url.AbsoluteUri.Substring(Request.Url.AbsoluteUri.LastIndexOf('/') + 1);
                                 List<ProductCategory> list = ShopThuCungMVC.Services.ProductCateService.listProCateClassify(id);
                                 foreach (var item in list)
                                 {
-                                <li>
-                                <label for="@item.CatId" name="option1">
-                                <input type="radio" class="form-check-input checkcate" id="@item.CatId" value="@item.CatId" >
-                                    <span style="width:100px">
-                                    @item.CatName
-                                    </span>
-                                </label>
-                                </li>
-                                
-                                }
-                            }
-                            @* @{
-                    String id = Request.Url.AbsoluteUri.Substring(Request.Url.AbsoluteUri.LastIndexOf('/') + 1);
-                    List<Product> list = ShopThuCungMVC.Services.ProductCateService.listCate(id);
-                    foreach (var item in list)
-                    {
-                <li>
-                    <label for="cat0" name="option1">
-                        <input type="radio" class="form-cate" id="cat0">
-                        @item.giong
-                    </label>
-                </li>
-            }
 
-        }*@
-                            @* <li><a href="#">Chó Beagle</a></li>
-        <li><a href="#">Chó Corgi</a></li>
-        <li><a href="#">Chó Golden Retriever</a></li>
-        <li><a href="#">Chó Husky</a></li>
-        <li><a href="#">Chó Phốc sóc</a></li>
-        <li><a href="#">Mèo Anh</a></li>
-        <li><a href="#">Mèo lông ngắn</a></li>
-        <li><a href="#">Mèo chân ngắn</a></li>
-        <li><a href="#">Mèo tai cụp</a></li>
-        <li><a href="#">Mèo tam thể</a></li>*@
+                                    <li>
+                                        <input type="radio" id="@item.CatId" name="age" class="checkcate" value="@item.CatId">
+                                        <label class="form-check-label" for="@item.CatId">@item.CatName</label><br>
+                                    </li>
+                                    }
+                                }
                         </ul>
                     </div>
                     <div class="sidebar__item">
                         <h4>Khoảng giá</h4>
+                        @**@
+        <input type="radio" id="a1" class="checkGia" name="class="checkGia" value="-1">
+        <label for="a1">Tất cả</label><br>
 
-                        <ul id="khoanggia" class="product__filter-ckeckbox">
-                            <li class="product__filter-item">
-                                <label class="form-check-label" for="kg0">
-                                    <input type="radio" class="form-check-input checkGia" id="kg0"
-                                           name="optradio"
-                                           value="-1"><span>Tất cả</span>
-                                </label>
-                            </li>
-                            <bR>
-                            <li class="product__filter-item">
-                                <label class="form-check-label" for="kg1">
-                                    <input type="radio" class="form-check-input checkGia" id="kg1" name="optradio"
-                                           value="0-5000000"><span>Dưới 5,000,000đ</span>
-                                </label>
-                            </li>
-                            <bR>
-                            <li class="product__filter-item">
-                                <label class="form-check-label" for="kg2">
-                                    <input type="radio" class="form-check-input checkGia" id="kg2" name="optradio"
-                                           value="5000000-10000000"><span> 5,000,000đ - 10,000,000đ</span>
-                                </label>
-                            </li>
-                            <bR>
-                            <li class="product__filter-item">
-                                <label class="form-check-label" for="kg3">
-                                    <input type="radio" class="form-check-input checkGia" id="kg3" name="optradio"
-                                           value="10000000-15000000"><span>10,000,000đ - 15,000,000đ</span>
-                                </label>
-                            </li>
-                            <bR>
-                            <li class="product__filter-item">
-                                <label class="form-check-label" for="kg4">
-                                    <input type="radio" class="form-check-input checkGia" id="kg4" name="optradio"
-                                           value="15000000-20000000"><span>15,000,000đ - 20,000,000đ</span>
-                                </label>
-                            </li>
-                            <bR>
-                            <li class="product__filter-item">
-                                <label class="form-check-label" for="kg5">
-                                    <input type="radio" class="form-check-input checkGia" id="kg5" name="optradio"
-                                           value="20000000-100000000"><span>Trên 20,000,000đ</span>
-                                </label>
-                            </li>
-                            <bR>
-                        </ul>
+        <input type="radio" id="a2" class="checkGia" name="class="checkGia"  value="0-5000000">
+        <label for="a2">Dưới 5,000,000đ</label><br>
+
+
+        <input type="radio" id="a3" class="checkGia" name="class="checkGia" value="5000000-10000000">
+        <label for="a3">5,000,000đ - 10,000,000đ</label><br>
+
+
+        <input type="radio" id="a4" class="checkGia" name="class="checkGia" value="10000000-15000000">
+        <label for="a4">10,000,000đ - 15,000,000đ</label><br>
+
+
+        <input type="radio" id="a5" class="checkGia" name="class="checkGia" value="15000000-20000000">
+        <label for="a5">15,000,000đ - 20,000,000đ</label><br>
+
+
+        <input type="radio" id="a6" class="checkGia" name="class="checkGia" value="20000000-200000000">
+        <label for="a6">Trên 20,000,000đ</label><br>
+
+                      @*  <li class="product__filter-item">
+                            <label class="form-check-label" for="kg0">
+                                <input type="radio" class="form-check-input checkGia" id="kg0"
+                                       name="optradio"
+                                       value="-1"><span>Tất cả</span>
+                            </label>
+                        </li>
+                        <bR>
+                        <li class="product__filter-item">
+                            <label class="form-check-label" for="kg1">
+                                <input type="radio" class="form-check-input checkGia" id="kg1" name="optradio"
+                                       value="0-5000000"><span>Dưới 5,000,000đ</span>
+                            </label>
+                        </li>
+                        <bR>
+                        <li class="product__filter-item">
+                            <label class="form-check-label" for="kg2">
+                                <input type="radio" class="form-check-input checkGia" id="kg2" name="optradio"
+                                       value="5000000-10000000"><span> 5,000,000đ - 10,000,000đ</span>
+                            </label>
+                        </li>
+                        <bR>
+                        <li class="product__filter-item">
+                            <label class="form-check-label" for="kg3">
+                                <input type="radio" class="form-check-input checkGia" id="kg3" name="optradio"
+                                       value="10000000-15000000"><span>10,000,000đ - 15,000,000đ</span>
+                            </label>
+                        </li>
+                        <bR>
+                        <li class="product__filter-item">
+                            <label class="form-check-label" for="kg4">
+                                <input type="radio" class="form-check-input checkGia" id="kg4" name="optradio"
+                                       value="15000000-20000000"><span>15,000,000đ - 20,000,000đ</span>
+                            </label>
+                        </li>
+                        <bR>
+                        <li class="product__filter-item">
+                            <label class="form-check-label" for="kg5">
+                                <input type="radio" class="form-check-input checkGia" id="kg5" name="optradio"
+                                       value="20000000-100000000"><span>Trên 20,000,000đ</span>
+                            </label>
+                        </li>
+                        <bR>*@
 
                     </div>
                     <div class="sidebar__item">
                         <h4>Kích Cỡ</h4>
-                        <div class="sidebar__item__size">
-                            <label for="large">
-                                Trên 10kg
-                                <input type="radio" class="checkSize" id="large" value="10-100">
-                            </label>
-                        </div>
-                        <div class="sidebar__item__size">
-                            <label for="large">
-                                5kg - 10kg
-                                <input type="radio" class="checkSize" id="large" value="5-10">
-                            </label>
-                        </div>
-                        <div class="sidebar__item__size">
-                            <label for="medium">
-                                3kg - 5kg
-                                <input type="radio" class="checkSize" id="medium" value="3-5">
-                            </label>
-                        </div>
-                        <div class="sidebar__item__size">
-                            <label for="small">
-                                2kg-3kg
-                                <input type="radio" class="checkSize" id="small" value="2-3">
-                            </label>
-                        </div>
-                        <div class="sidebar__item__size">
-                            <label for="tiny">
-                                dưới 2kg
-                                <input type="radio" class="checkSize" id="tiny" value="0-2">
-                            </label>
-                        </div>
+                     @*   <ul>
+                            <li>
+                                <input type="radio" id="age1" class="checkSize"  value="10-100">
+                                <label for="age1">Trên 10kg</label><br>
+                            </li>
+                            <li>
+                                <input type="radio" id="age2" class="checkSize" value="5-10">
+                                <label for="age2">5kg-10kg</label><br>
+                            </li>
+                            <li>
+                                <input type="radio" id="age3" class="checkSize" value="3-5">
+                                <label for="age3">3kg-5kg</label><br>
+                            </li>
+                            <li>
+                                <input type="radio" id="age4" class="checkSize" value="2-3">
+                                <label for="age4">2kg-3kg</label><br>
+                            </li>
+                            <li>
+                                <input type="radio" id="age5" class="checkSize" value="0-2">
+                                <label for="age5">dưới 2kg</label><br>
+                            </li>
+                        </ul>*@
+              @**@
+                        <input type="radio" id="age1" class="checkSize" name="checkSize" value="10-100">
+                        <label for="age1">Trên 10kg</label><br>
+                        <input type="radio" id="age2" class="checkSize" name="checkSize" value="5-10">
+                        <label for="age2">5kg-10kg</label><br>
+                        <input type="radio" id="age3" class="checkSize" name="checkSize" value="3-5">
+                        <label for="age3">3kg-5kg</label><br>
+                        <input type="radio" id="age4" class="checkSize" name="checkSize" value="2-3">
+                        <label for="age4">2kg-3kg</label><br>
+                        <input type="radio" id="age5" class="checkSize" name="checkSize" value="0-2">
+                        <label for="age5">3kg-5kg</label><br>
+
+                        @* <div class="">
+            <label for="large">
+                Trên 10kg
+                <input type="radio" class="checkSize" id="large" value="10-100">
+            </label>
+        </div>
+        <div class="">
+            <label for="large">
+                5kg - 10kg
+                <input type="radio" class="checkSize" id="large" value="5-10">
+            </label>
+        </div>
+        <div class="">
+            <label for="medium">
+                3kg - 5kg
+                <input type="radio" class="checkSize" id="medium" value="3-5">
+            </label>
+        </div>
+        <div class="">
+            <label for="small">
+                2kg-3kg
+                <input type="radio" class="checkSize" id="small" value="2-3">
+            </label>
+        </div>
+        <div class="">
+            <label for="tiny">
+                dưới 2kg
+                <input type="radio" class="checkSize" id="tiny" value="0-2">
+            </label>
+        </div>*@
                     </div>
                 </div>
             </div>
@@ -181,11 +205,16 @@
                                 <h6><span>@Model.Count</span> Sản Phẩm</h6>
                             </div>
                         </div>
-                        <div class="col-lg-4 col-md-3">
-                            <div class="sortby2 hidden" style="float: right;">
+                        <div class="col-lg-4 col-md-4">
+                            <button class="btn btn-dark dropdown-toggle" id="filter" style="margin-left:120px">
+                                Lọc sản phẩm
+                            </button>
+                        </div>
+                            <div class="col-lg-4 col-md-3">
+                                <div class="sortby2 hidden" style="float: right;">
+                                </div>
                             </div>
                         </div>
-                    </div>
                 </div>
                 <div class="row" id="items">
 
@@ -300,16 +329,21 @@
 
 <script>
     $(document).ready(function () {
-        $(".checkGia input[type='radio']").each(function () {
+        $("#filter").each(function () {
             this.addEventListener("click", function (e) {
                 filter(e);
             })
         })
-        $(".checkSize input[type='radio']").each(function () {
-            this.addEventListener("click", function (e) {
+      @*  $(".checkSize").each(function () {
+            this.addEventListener("", function (e) {
                 filter(e);
             })
         })
+        $(".checkcate").each(function () {
+            this.addEventListener("", function (e) {
+                filter(e);
+            })
+        })*@
         $("#dropdownSelect").change(function (e) {
             filter(e);
         })
@@ -328,7 +362,7 @@
             type: 'get',
             url: "/Home/Filter",
             data: {
-                price: price,
+                price: price, 
                 category: category,
                 size: size,
                 orderby: orderby
