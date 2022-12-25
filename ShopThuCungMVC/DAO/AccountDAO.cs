@@ -212,6 +212,31 @@ namespace ShopThuCungMVC.DAO
             db.user_account.Remove(user);
             db.SaveChanges();
         }
+        public static UserAccount getAdminById(string id)
+        {
+            return db.user_account.Find(id);
+        }
+
+        internal static void UpdateAdmin(string userid, string username, string email, string address, string fullname, string passwd, string phone, int status)
+        {
+            UserAccount admin = getAdminById(userid);
+            db.SaveChanges();
+            admin.user_name = username;
+            admin.pass = passwd;
+            admin.passMaHoa = MD5.CreateMD5(passwd);
+            admin.status = status;
+            ShopThuCungDBContext dbtest = new ShopThuCungDBContext();
+            dbtest.Update(admin);
+            dbtest.SaveChanges();
+            InforUser infor = getInforUserById(userid);
+            infor.name = fullname;
+            infor.email = email;
+            infor.address = address;
+            infor.phone = phone;
+            ShopThuCungDBContext dbtest2 = new ShopThuCungDBContext();
+            dbtest2.Update(infor);
+            dbtest2.SaveChanges();
+        }
 
     }
 }
