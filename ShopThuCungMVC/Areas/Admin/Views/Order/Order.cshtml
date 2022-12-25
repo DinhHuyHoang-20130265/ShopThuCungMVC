@@ -44,130 +44,59 @@
                                     <tr>
                                         <th data-toggle="tooltip">Mã đơn hàng</th>
                                         <th data-toggle="tooltip">Người mua</th>
-                                        <th>Sản phẩm</th>
-                                        <th>Số lượng</th>
+                                        <th>Tổng tiền</th>
                                         <th>Tình trạng</th>
                                         <th>Ngày mua</th>
+                                        <th>Ngày giao</th>
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    <tr>
-                                        <td scope="row">0151</td>
-                                        <td>Nguyễn Thanh Tùng</td>
-                                        <td>Cún golden siêu phẩm</td>
-                                        <td>01</td>
-                                        <td>
-                                            <a href="" style="font-weight: bold;">
-                                                Hoàn thành
-                                                <i class="material-icons-two-tone" data-feather="check"></i>
-                                            </a>
-                                        </td>
-                                        <td>21/05/2021</td>
-                                    </tr>
-                                    <tr>
-                                        <td scope="row">0152</td>
-                                        <td>Nguyễn Ngọc Sơn</td>
-                                        <td>Mèo chân ngắn tai cụp</td>
-                                        <td>01</td>
-                                        <td>
-                                            <a href="" style="font-weight: bold;">
-                                                Đang xử lý&ensp;
-                                                <i class="material-icons-two-tone" data-feather="loader"></i>
-                                            </a>
-                                        </td>
-                                        <td>26/07/2021</td>
-                                    </tr>
-                                    <tr>
-                                        <td scope="row">0153</td>
-                                        <td>Nguyễn Ngọc My</td>
-                                        <td>Munchkin Bicolor</td>
-                                        <td>02</td>
-                                        <td>
-                                            <a href="" style="font-weight: bold;">
-                                                Hoàn thành
-                                                <i class="material-icons-two-tone" data-feather="check"></i>
-                                            </a>
-                                        </td>
-                                        <td>14/08/2021</td>
-                                    </tr>
-                                    <tr>
-                                        <td scope="row">0154</td>
-                                        <td>Ngô Đức Hòa</td>
-                                        <td>Alaska Giant xám trắng</td>
-                                        <td>01</td>
-                                        <td>
-                                            <a href="" style="font-weight: bold;">
-                                                Hoàn thành
-                                                <i class="material-icons-two-tone" data-feather="check"></i>
-                                            </a>
-                                        </td>
-                                        <td>05/09/2021</td>
-                                    </tr>
-                                    <tr>
-                                        <td scope="row">0155</td>
-                                        <td>Nguyễn Hoài Thương</td>
-                                        <td>Alaska Giant xám trắng</td>
-                                        <td>01</td>
-                                        <td>
-                                            <a href="" style="font-weight: bold;">
-                                                Đang xử lý&ensp;
-                                                <i class="material-icons-two-tone" data-feather="loader"></i>
-                                            </a>
-                                        </td>
-                                        <td>10/09/2021</td>
-                                    </tr>
-                                    <tr>
-                                        <td scope="row">0156</td>
-                                        <td>Vũ Văn Kiệt</td>
-                                        <td>Mèo tai cụp</td>
-                                        <td>01</td>
-                                        <td>
-                                            <a href="" style="font-weight: bold;">
-                                                Hoàn thành
-                                                <i class="material-icons-two-tone" data-feather="check"></i>
-                                            </a>
-                                        </td>
-                                        <td>20/09/2021</td>
-                                    </tr>
-                                    <tr>
-                                        <td scope="row">0157</td>
-                                        <td>Trần Tấn Nhất</td>
-                                        <td>Scottish Van tai cụp</td>
-                                        <td>02</td>
-                                        <td>
-                                            <a href="" style="font-weight: bold;">
-                                                Hủy đơn hàng
-                                                <i class="material-icons-two-tone" data-feather="x"></i>
-                                            </a>
-                                        </td>
-                                        <td>15/10/2021</td>
-                                    </tr>
-                                    <tr>
-                                        <td scope="row">0158</td>
-                                        <td>Lê Chí Công</td>
-                                        <td>Phốc sóc mặt gấu</td>
-                                        <td>01</td>
-                                        <td>
-                                            <a href="" style="font-weight: bold;">
-                                                Hoàn thành
-                                                <i class="material-icons-two-tone" data-feather="check"></i>
-                                            </a>
-                                        </td>
-                                        <td>24/10/2021</td>
-                                    </tr>
-                                    <tr>
-                                        <td scope="row">0159</td>
-                                        <td>Ngô Đức Hòa</td>
-                                        <td>Mèo chân ngắn tai cụp</td>
-                                        <td>01</td>
-                                        <td>
-                                            <a href="" style="font-weight: bold;">
-                                                Hoàn thành
-                                                <i class="material-icons-two-tone" data-feather="check"></i>
-                                            </a>
-                                        </td>
-                                        <td>05/09/2021</td>
-                                    </tr>
+                                    @{
+                                        List<ShopThuCungMVC.Models.Orders> listOrder = ShopThuCungMVC.Services.OrderService.getListOrder();
+                                        foreach (var item in listOrder)
+                                        {
+                                            ShopThuCungMVC.Models.OrderDetail orderDetail = ShopThuCungMVC.Services.OrderService.getOrderDetailById(item.OrderID);
+                                            ShopThuCungMVC.Models.InforUser inforU = ShopThuCungMVC.Services.AccountService.getInforUserById(item.CustomerID);
+
+                                            <tr>
+                                                <td scope="row">@item.OrderID</td>
+                                                <td>@inforU.name</td>
+                                                <td>@orderDetail.Price</td>
+                                                <td>
+                                                    @{
+                                                        if (item.Delivered == 0)
+                                                        {
+                                                            <a href="" style="font-weight: bold;">
+                                                                Đang vận chuyển
+                                                                <i class="material-icons-two-tone" data-feather="loader"></i>
+                                                            </a>
+                                                        }
+                                                        else
+                                                        {
+                                                            <a href="" style="font-weight: bold;">
+                                                                Hoàn thành
+                                                                <i class="material-icons-two-tone" data-feather="check"></i>
+                                                            </a>
+                                                        }
+                                                    }
+
+                                                </td>
+                                                <td>@item.OrderDate</td>
+                                                <td>
+                                                    @{
+                                                        if (item.Delivered == 0)
+                                                        {
+                                                            <h7>Chưa giao hàng</h7>
+                                                        }
+                                                        else
+                                                        {
+                                                            @item.DeliveryDate
+                                                        }
+                                                    }
+                                                </td>
+                                            </tr>
+                                        }
+                                    }
                                 </tbody>
                             </table>
                         </div>
@@ -178,4 +107,3 @@
     </div>
 </div>
 <!-- [ Main Content ] end -->
-
