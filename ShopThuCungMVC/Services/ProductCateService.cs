@@ -56,6 +56,10 @@ namespace ShopThuCungMVC.Services
         {
             return ProductCategoryDAO.get3Blog();
         }
+        public static List<Blog> getBlog()
+        {
+            return BlogsDAO.getBlog();
+        }
         public static List<Product> Filter(String id, String price,String size, String orderby)
         {
             return ProductCategoryDAO.Filter(id,price,size,orderby);
