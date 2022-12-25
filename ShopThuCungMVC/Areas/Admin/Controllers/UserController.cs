@@ -20,11 +20,20 @@ namespace ShopThuCungMVC.Areas.Admin.Controllers
         }
 
         [HttpGet]
-        public ActionResult AddUser()
+        public ActionResult AddUser(string id)
         {
             UserAccount account = (UserAccount)Session["admin"];
             if (account != null)
-                return View();
+            {
+                if (id != null)
+                {
+                    UserAccount account1 = AccountService.getUserById(id);
+                    return View(account1);
+                }
+                else
+                    return View();
+            }
+                
             else
                 return RedirectToAction("Login", "Auth");
         }
@@ -66,8 +75,6 @@ namespace ShopThuCungMVC.Areas.Admin.Controllers
                         }
                     }
                 }
-                
-                
             }
             else
                 return RedirectToAction("Login", "Auth");

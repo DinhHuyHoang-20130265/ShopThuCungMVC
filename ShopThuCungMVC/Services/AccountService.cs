@@ -12,6 +12,11 @@ namespace ShopThuCungMVC.Services
         {
             return AccountDAO.loginSite(username, password);
         }
+
+        public static UserAccount getUserById(string id)
+        {
+            return AccountDAO.getUserById(id);
+        }
         public static UserAccount loginAdmin(string username, string password)
         {
             return AccountDAO.loginAdmin(username, password);

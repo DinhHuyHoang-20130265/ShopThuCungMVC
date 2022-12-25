@@ -213,5 +213,9 @@ namespace ShopThuCungMVC.DAO
             db.SaveChanges();
         }
 
+        internal static UserAccount getUserById(string id)
+        {
+            return db.user_account.Where(p => p.id.Equals(id)).FirstOrDefault();
+        }
     }
 }
