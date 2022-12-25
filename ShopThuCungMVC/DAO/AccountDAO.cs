@@ -143,5 +143,51 @@ namespace ShopThuCungMVC.DAO
         {
             return db.infor_user.Where(n => n.id_user.Equals(id)).FirstOrDefault();
         }
+
+        public static string generateIDUser()
+        {
+            List<string> id = new List<string>();
+            foreach (var u in db.user_account.ToList())
+            {
+                id.Add(u.id);
+            }
+            String upperAlphabet = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+            String lowerAlphabet = "abcdefghijklmnopqrstuvwxyz";
+            String numbers = "0123456789";
+            String alphaNumeric = upperAlphabet + lowerAlphabet + numbers;
+
+            StringBuilder sb = new StringBuilder("C");
+
+            // create an object of Random class
+            Random random = new Random();
+            // specify length of random string
+            int length = 3;
+            for (int i = 0; i < length; i++)
+            {
+                int index = random.Next(alphaNumeric.Length);
+                char randomChar = alphaNumeric.ElementAt(index);
+                sb.Append(randomChar);
+            }
+            if (id.Contains(sb.ToString()))
+                return generateIDUser();
+            else
+                return sb.ToString();
+        }
+
+        public static void addUser(string username, string email, string address, string fullname, string passwd, string phone, int status)
+        {
+            String id = generateIDUser();
+            UserAccount user = new UserAccount(id, username, MD5.CreateMD5(passwd), passwd, status, 0);
+            InforUser inforUser = new InforUser(id, fullname, email, phone, address, null);
+            db.user_account.Add(user);
+            db.SaveChanges();
+            db.infor_user.Add(inforUser);
+            db.SaveChanges();
+        }
+
+        public static List<UserAccount> getListUser()
+        {
+            return db.user_account.ToList();
+        }
     }
 }
