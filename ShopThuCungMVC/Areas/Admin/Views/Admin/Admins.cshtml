@@ -19,17 +19,17 @@
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="" />
     <link href="https://fonts.googleapis.com/css2?family=Nunito+Sans:wght@300;400;600;700;800;900&amp;display=swap"
-      rel="stylesheet" />
+          rel="stylesheet" />
     <link rel="stylesheet"
-      href="https://unicons.iconscout.com/release/v4.0.0/css/line.css" />
+          href="https://unicons.iconscout.com/release/v4.0.0/css/line.css" />
     <link href="@Url.Content("~/Content/AdminResources/bonus/css/theme.min.css")"
-      type="text/css"
-      rel="stylesheet"
-      id="style-default" />
+          type="text/css"
+          rel="stylesheet"
+          id="style-default" />
     <link rel="stylesheet"
-      type="text/css"
-      id="mce-u0"
-      href="@Url.Content("~/Content/AdminResources/bonus/css/skin.min.css")" />
+          type="text/css"
+          id="mce-u0"
+          href="@Url.Content("~/Content/AdminResources/bonus/css/skin.min.css")" />
 }
 <div class="pc-container">
     <div class="pcoded-content">
@@ -82,32 +82,56 @@
                                     <tr>
                                         <th class="sort align-middle pe-5" scope="col" data-sort="total-spent" style="width:10%;">ID</th>
                                         <th class="sort align-middle pe-5" scope="col" data-sort="email" style="width:20%;">Họ và tên</th>
-                                        <th class="sort align-middle " scope="col" data-sort="total-orders" style="width:10%">Email</th>\
+                                        <th class="sort align-middle pe-5" scope="col" data-sort="email" style="width:20%;">Tài khoản</th>
+                                        <th class="sort align-middle " scope="col" data-sort="total-orders" style="width:10%">Email</th>
                                         <th class="sort align-middle ps-7 text-center" scope="col" data-sort="city" style="width:25%;">Nơi làm việc</th>
-                                        <th class="sort align-middle text-end" scope="col" data-sort="last-seen" style="width:15%;">Lần cuối online</th>
                                         <th class="sort align-middle text-end pe-0" scope="col" data-sort="last-order" style="width:10%;">Xóa admin</th>
                                     </tr>
                                 </thead>
                                 <tbody class="list" id="table-latest-review-body">
-                                    <tr class="hover-actions-trigger btn-reveal-trigger position-static">
-                                        <td class="fs--1 align-middle ps-0 py-3">
-                                            <!-- <div class="form-check mb-0 fs-0"><input class="form-check-input" type="checkbox"></div> -->
-                                            <p class="mb-0 text-1100 fw-bold">001</p>
-                                        </td>
-                                        <td class="customer align-middle white-space-nowrap pe-5">
-                                            <a class="d-flex align-items-center" href="#!">
-                                                <div class="avatar avatar-m"><img class="rounded-circle" src="assets/images/user/avatar-2.png" alt=""></div>
-                                                <p class="mb-0 ms-3 text-1100 fw-bold">Nguyễn Sĩ Hoàng</p>
-                                            </a>
-                                        </td>
-                                        <td class="email align-middle white-space-nowrap pe-5"><a class="fw-semi-bold text-1100" href="mailto:annac34@gmail.com">sihoang@gmail.com</a></td>
-                                        <!-- <td class="total-orders align-middle white-space-nowrap fw-semi-bold text-center">2</td> -->
+                                    @{
+                                        List<ShopThuCungMVC.Models.UserAccount> admins = ShopThuCungMVC.Services.AccountService.getListAdmin();
+                                        foreach (var item in admins)
+                                        {
+                                            ShopThuCungMVC.Models.InforUser infor = ShopThuCungMVC.Services.AccountService.getInforUserById(item.id);
 
-                                        <td class="city align-middle white-space-nowrap text-900 ps-7 text-center">TPHCM</td>
-                                        <td class="last-seen align-middle white-space-nowrap text-700 text-end">34 phút trước</td>
-                                        <td class="last-order align-middle white-space-nowrap text-700 text-center"><i data-feather="x"></i></td>
-                                    </tr>
-                            </table>
+                                                                        <tr class="hover-actions-trigger btn-reveal-trigger position-static">
+                                                                            <td class="fs--1 align-middle ps-0 py-3">
+                                                                                <!-- <div class="form-check mb-0 fs-0"><input class="form-check-input" type="checkbox"></div> -->
+                                                                                <p class="mb-0 text-1100 fw-bold">@item.id</p>
+                                                                            </td>
+                                                                            <td class="customer align-middle white-space-nowrap pe-5">
+                                                                                <a class="d-flex align-items-center" href="#!">
+                                                                                    @{
+                                                                                        if (infor.avt == null)
+                                                                                        {
+                                                                                            <div class="avatar avatar-m"><img class="rounded-circle" src="https://localhost:44322/Content/AdminResources/assets/images/user/user.png" alt=""></div>
+                                                                                        }
+                                                                                        else
+                                                                                        {
+                                                                                            <div class="avatar avatar-m"><img class="rounded-circle" src="@infor.avt" alt=""></div>
+
+                                                                                        }
+                                                                                    }
+                                                                                    <p class="mb-0 ms-3 text-1100 fw-bold">@infor.name</p>
+                                                                                </a>
+                                                                            </td>
+                                                                            <td class="customer align-middle white-space-nowrap pe-5">@item.user_name</td>
+                                                                            <td class="email align-middle white-space-nowrap pe-5"><a class="fw-semi-bold text-1100" href="mailto: + @infor.email">@infor.email</a></td>
+                                                                            <!-- <td class="total-orders align-middle white-space-nowrap fw-semi-bold text-center">2</td> -->
+
+                                                                            <td class="city align-middle white-space-nowrap text-900 ps-7 text-center">@infor.address</td>
+                                                                            <td class="last-seen align-middle white-space-nowrap text-700 text-end">
+                                                                                <a href="#" class="btn btn-primary"><span>Sửa</span></a>
+                                                                                @Html.ActionLink("Xóa", "Remove", "Admin", new { @id = item.id }, new { @class = "btn btn-primary ", @style = "background-color:crimson;" })
+
+                                                                            </td>
+
+                                                                        </tr>
+                                        }
+                                    }
+
+</table>
                         </div>
                         <div class="row align-items-center justify-content-between py-2 pe-0 fs--1">
                             <div class="col-auto d-flex">

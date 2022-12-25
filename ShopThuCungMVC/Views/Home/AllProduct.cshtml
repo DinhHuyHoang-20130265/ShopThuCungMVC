@@ -4,7 +4,9 @@
     ViewData["Title"] = "AllProduct";
     Layout = "~/Views/Shared/_LayoutSite.cshtml";
 }
+@using ShopThuCungMVC.Models;
 <!-- Breadcrumb Section Begin -->
+
 <section class="breadcrumb-section set-bg" data-setbg="https://localhost:44322/Content/img/breadcrumb.jpg">
     <div class="container">
         <div class="row">
@@ -12,7 +14,7 @@
                 <div class="breadcrumb__text">
                     <h2>Sản Phẩm</h2>
                     <div class="breadcrumb__option">
-                        <a href="@Url.Action("Index","Home")">Trang chủ</a>
+                        <a href="@Url.Action("Index", "Home")">Trang chủ</a>
                         <span><strong>Cửa hàng</strong></span>
                     </div>
                 </div>
@@ -30,22 +32,48 @@
                     <div class="sidebar__item">
                         <h4>Danh mục</h4>
                         <ul>
-                            <li>
-                                <label for="cat0" name="option1">
-                                    <input type="radio" class="form-cate" id="cat0">
-                                    Chó Alaska
+                            @{
+                                
+                            
+                                String id = Request.Url.AbsoluteUri.Substring(Request.Url.AbsoluteUri.LastIndexOf('/') + 1);
+                                List<ProductCategory> list = ShopThuCungMVC.Services.ProductCateService.listProCateClassify(id);
+                                foreach (var item in list)
+                                {
+                                <li>
+                                <label for="@item.CatId" name="option1">
+                                <input type="radio" class="form-check-input checkcate" id="@item.CatId" value="@item.CatId" >
+                                    <span style="width:100px">
+                                    @item.CatName
+                                    </span>
                                 </label>
-                            </li>
-                            <li><a href="#">Chó Beagle</a></li>
-                            <li><a href="#">Chó Corgi</a></li>
-                            <li><a href="#">Chó Golden Retriever</a></li>
-                            <li><a href="#">Chó Husky</a></li>
-                            <li><a href="#">Chó Phốc sóc</a></li>
-                            <li><a href="#">Mèo Anh</a></li>
-                            <li><a href="#">Mèo lông ngắn</a></li>
-                            <li><a href="#">Mèo chân ngắn</a></li>
-                            <li><a href="#">Mèo tai cụp</a></li>
-                            <li><a href="#">Mèo tam thể</a></li>
+                                </li>
+                                
+                                }
+                            }
+                            @* @{
+                    String id = Request.Url.AbsoluteUri.Substring(Request.Url.AbsoluteUri.LastIndexOf('/') + 1);
+                    List<Product> list = ShopThuCungMVC.Services.ProductCateService.listCate(id);
+                    foreach (var item in list)
+                    {
+                <li>
+                    <label for="cat0" name="option1">
+                        <input type="radio" class="form-cate" id="cat0">
+                        @item.giong
+                    </label>
+                </li>
+            }
+
+        }*@
+                            @* <li><a href="#">Chó Beagle</a></li>
+        <li><a href="#">Chó Corgi</a></li>
+        <li><a href="#">Chó Golden Retriever</a></li>
+        <li><a href="#">Chó Husky</a></li>
+        <li><a href="#">Chó Phốc sóc</a></li>
+        <li><a href="#">Mèo Anh</a></li>
+        <li><a href="#">Mèo lông ngắn</a></li>
+        <li><a href="#">Mèo chân ngắn</a></li>
+        <li><a href="#">Mèo tai cụp</a></li>
+        <li><a href="#">Mèo tam thể</a></li>*@
                         </ul>
                     </div>
                     <div class="sidebar__item">
@@ -139,10 +167,10 @@
                         <div class="col-lg-4 col-md-5">
                             <div class="filter__sort">
                                 <span>Sắp xếp</span>
-                                <select>
-                                    <option value="0">Mặc Định</option>
-                                    <option value="1">Bán Chạy</option>
-                                    <option value="2">Phổ Biến</option>
+                                <select id="dropdownSelect">
+                                    <option selected value="0">Mặc Định</option>
+                                    <option value="1">A - Z</option>
+                                    <option value="2">Z - A</option>
                                     <option value="3">Giá Tăng Dần</option>
                                     <option value="4">Giá Giảm Dần</option>
                                 </select>
@@ -155,11 +183,6 @@
                         </div>
                         <div class="col-lg-4 col-md-3">
                             <div class="sortby2 hidden" style="float: right;">
-                                <div class="dropdown">
-                                    <button class="btn btn-dark dropdown-toggle" id="filter">
-                                        Lọc sản phẩm
-                                    </button>
-                                </div>
                             </div>
                         </div>
                     </div>
@@ -282,19 +305,28 @@
                 filter(e);
             })
         })
+        $("#dropdownSelect").change(function (e) {
+            filter(e);
+        })
     })
     function filter(e) {
         e.preventDefault();
-        const category = $("#cateId").val();
+        let category = $("#cateId").val();
         const price = $("input[type='radio']:checked.checkGia").val();
         const size = $("input[type='radio']:checked.checkSize").val();
+        const orderby = $("#dropdownSelect option:selected").val();
+        const listcate = $("input[type='radio']:checked.checkcate").val();
+        if (listcate != null) {
+            category = listcate
+        }
         $.ajax({
             type: 'get',
             url: "/Home/Filter",
             data: {
                 price: price,
                 category: category,
-                size: size
+                size: size,
+                orderby: orderby
             },
             dataType: 'json',
             contentType: 'application/json;charset=utf-8',
@@ -318,6 +350,7 @@
                         </div>`;
                 });
                 $("#items").html(str);
+                $(".filter__found h6 span").text(result.count);
             },
             error: function (xhr) {
                 //Do Something to handle error

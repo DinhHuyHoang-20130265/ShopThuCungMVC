@@ -1,4 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
+using System.Data.Entity.ModelConfiguration.Conventions;
 
 namespace ShopThuCungMVC.Models
 {
@@ -11,9 +12,15 @@ namespace ShopThuCungMVC.Models
         public DbSet<ProductCategory> product_category { get; set; }
         public DbSet<ProductFromCate> product_from_cate { get; set; }
         public DbSet<Blog> blogs { get; set; }
+
+        public DbSet<Orders> orders { get; set; }
+        public DbSet<OrderDetail> orderdetail { get; set; }
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
-            optionsBuilder.UseMySQL("server=localhost;database=shopthucungdb;user=root;password=;Charset=utf8;Convert Zero Datetime=True;allow zero datetime=no");
+           
+            optionsBuilder.UseMySQL("server=localhost;database=shopthucungdb;user=root;password=;Charset=utf8; pooling = false; Convert Zero Datetime=True;allow zero datetime=true");
+            optionsBuilder.UseQueryTrackingBehavior(QueryTrackingBehavior.NoTracking);
+            optionsBuilder.EnableSensitiveDataLogging();
         }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
@@ -25,6 +32,8 @@ namespace ShopThuCungMVC.Models
             modelBuilder.Entity<ProductCategory>().ToTable("product_category");
             modelBuilder.Entity<ProductFromCate>().ToTable("product_from_cate");
             modelBuilder.Entity<Blog>().ToTable("blogs");
+            modelBuilder.Entity<Orders>().ToTable("orders");
+            modelBuilder.Entity<OrderDetail>().ToTable("orderdetail");
         }
     }
 }

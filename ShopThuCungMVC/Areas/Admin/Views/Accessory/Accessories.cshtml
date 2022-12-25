@@ -75,7 +75,8 @@
                                     </div>
                                 </div>
                                 <div class="d-grid">
-                                    <button class="btn_2">Chi tiết</button>
+                                    @Html.ActionLink("Sửa sản phẩm", "AddAccessory", "Accessory", new { @pid = item.productId }, new { @class = "btn_2 edit", @style = "margin-top: 3px; text-align: center; color: red; cursor: pointer;" })
+                                    <button class="btn_2 delete" id="remove-@item.productId" style="margin-top: 3px; text-align: center;">Xóa</button>
                                 </div>
                             </div>
                         </div>
@@ -86,3 +87,32 @@
     </div>
 </div>
 <!-- [ Main Content ] end -->
+<script src="~/Content/js/jquery-3.3.1.min.js"></script>
+<script>
+    function deleteupdate() {
+        $(".delete").each(function () {
+            $(this).click(function (e) {
+                e.preventDefault();
+                const pid = $(this).attr("id").substr(7);
+                $.ajax({
+                    url: "/Product/DeleteProduct",
+                    type: "post",
+                    data: {
+                        pid: pid
+                    },
+                    success: function (result) {
+                        if (result.status) {
+                            alert("xóa sản phẩm thành công");
+                            location.reload();
+                        } else {
+                            alert("Không có productid để xóa");
+                        }
+                    }
+                })
+            })
+        })
+    }
+    $(document).ready(function(){
+        deleteupdate();
+    })
+</script>

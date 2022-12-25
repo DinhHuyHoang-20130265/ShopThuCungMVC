@@ -43,5 +43,30 @@ namespace ShopThuCungMVC.Services
         {
             return AccountDAO.getInforUserById(id);
         }
+
+        public static void addUser(string username, string email, string address, string fullname, string passwd, string phone, int status)
+        {
+            AccountDAO.addUser(username, email, address, fullname, passwd, phone, status);
+        }
+
+        public static void addAdmin(string username, string email, string address, string fullname, string passwd, string phone, int status)
+        {
+            AccountDAO.addAdmin(username, email, address, fullname, passwd, phone, status);
+        }
+
+        public static List<UserAccount> getListUser()
+        {
+            return AccountDAO.getListUser();
+        }
+
+        public static List<UserAccount> getListAdmin()
+        {
+            return AccountDAO.getListAdmin();
+        }
+
+        public static void removeAccount(string id)
+        {
+            AccountDAO.removeAccount(id);
+        }
     }
 }

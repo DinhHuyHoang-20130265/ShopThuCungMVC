@@ -9,7 +9,7 @@ namespace ShopThuCungMVC.Areas.Admin.Controllers
 {
     public class OrderController : Controller
     {
-        public ActionResult Orders()
+        public ActionResult Order()
         {
             UserAccount account = (UserAccount)Session["admin"];
             if (account != null)
