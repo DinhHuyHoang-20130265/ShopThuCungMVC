@@ -42,14 +42,14 @@ namespace ShopThuCungMVC.Areas.Admin.Controllers
             {
                 if (AccountService.checkEmailExist(email))
                 {
-                    Session["errorAddUser"] = "Email đã tồn tại!";
+                    ViewBag.errorAddUser = "Email đã tồn tại!";
                     return View();
                 }
                 else
                 {
                     if (AccountService.checkUsernameExist(username))
                     {
-                        Session["errorAddUser"] = "Tên tài Khoản đã tồn tại!";
+                        ViewBag.errorAddUser = "Tên tài Khoản đã tồn tại!";
                         return View();
                     }
                     else

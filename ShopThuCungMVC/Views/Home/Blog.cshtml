@@ -26,7 +26,7 @@
     <div class="container">
         <div class="row">
             <div class="col-lg-4 col-md-5">
-                <div class="blog__sidebar">
+                <div class="blog__sidebar" style="padding: 20px;">
                    
                     <div class="blog__sidebar__item">
                         <h4>Tin mới nhất</h4>
@@ -37,8 +37,8 @@
                                 {
                                     <div class="blog__sidebar__recent__item">
                                             <img src="@item.Image" alt="">
-                                            <h5>@Html.ActionLink(item.BlogName, "BlogDetails", "Details", new { @Id = item.BlogId }, null)</h5>
-                                            <span>@item.CreateDate</span>
+                                            <h5>@Html.ActionLink(item.BlogName, "BlogDetails", "Details", new { @Id = item.BlogId }, new {@style="color: black; font-size: 15px;"})</h5>
+                                            <span style="color: black; font-size: 15px;">@item.CreateDate</span>
                                     </div>
                                 }
                             }
