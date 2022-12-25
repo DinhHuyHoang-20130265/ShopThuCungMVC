@@ -7,6 +7,14 @@ namespace ShopThuCungMVC.Models
 {
     public class Blog
     {
+        private int v1;
+        private string v2;
+        private object value1;
+        private object value2;
+        private object value3;
+        private string userid;
+        private object value4;
+
         public string BlogId { get; set; }
         public string BlogName { get; set;}
         public int Status { get; set;}
@@ -30,6 +38,19 @@ namespace ShopThuCungMVC.Models
             CreateDate = createDate;
             UpdateBy = updateBy;
             UpdateDate = updateDate;
+        }
+
+        public Blog(string blogId, string blogName, int v1, string v2, object value1, object value2, object value3, string userid, object value4)
+        {
+            BlogId = blogId;
+            BlogName = blogName;
+            this.v1 = v1;
+            this.v2 = v2;
+            this.value1 = value1;
+            this.value2 = value2;
+            this.value3 = value3;
+            this.userid = userid;
+            this.value4 = value4;
         }
     }
 }

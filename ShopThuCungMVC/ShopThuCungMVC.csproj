@@ -262,6 +262,7 @@
     <Compile Include="Controllers\UserController.cs" />
     <Compile Include="DAO\AccountDAO.cs" />
     <Compile Include="DAO\BlogsDAO.cs" />
+    <Compile Include="DAO\BlogCategoryDAO.cs" />
     <Compile Include="DAO\OrderDAO.cs" />
     <Compile Include="DAO\ProductCategoryDAO.cs" />
     <Compile Include="Global.asax.cs">

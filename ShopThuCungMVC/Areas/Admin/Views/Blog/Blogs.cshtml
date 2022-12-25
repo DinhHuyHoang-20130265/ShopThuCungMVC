@@ -1,52 +1,52 @@
-﻿
+﻿@model List<ShopThuCungMVC.Models.Blog>
 @{
     ViewData["Title"] = "Blogs";
     Layout = "~/Areas/Admin/Views/Shared/_LayoutAdmin.cshtml";
 }
 @section stylesheet {
-        <link href="@Url.Content("~/Content/AdminResources/bonus/css/dropzone.min.css")" rel="stylesheet" />
-        <link href="@Url.Content("~/Content/AdminResources/bonus/css/line.css")" rel="stylesheet" />
-        <link href="@Url.Content("~/Content/AdminResources/bonus/css/choices.min.css")" rel="stylesheet" />
-        <link rel="preconnect" href="https://fonts.googleapis.com" />
-        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="" />
-        <link href="https://fonts.googleapis.com/css2?family=Nunito+Sans:wght@300;400;600;700;800;900&amp;display=swap"
-      rel="stylesheet" />
-        <link rel="stylesheet"
-      href="https://unicons.iconscout.com/release/v4.0.0/css/line.css" />
-        <link href="@Url.Content("~/Content/AdminResources/bonus/css/theme.min.css")"
-      type="text/css"
-      rel="stylesheet"
-      id="style-default" />
-        <link rel="stylesheet"
-      type="text/css"
-      id="mce-u0"
-      href="@Url.Content("~/Content/AdminResources/bonus/css/skin.min.css")" />
-      <style>
-      .blog_btn {
-	      display: inline-block;
-	      font-size: 14px;
-	      color: #1c1c1c;
-	      text-transform: uppercase;
-	      letter-spacing: 1px;
-	      border: 1px solid #b2b2b2;
-	      padding: 10px 20px 10px;
-	      border-radius: 25px;
-      }
+    <link href="@Url.Content("~/Content/AdminResources/bonus/css/dropzone.min.css")" rel="stylesheet" />
+    <link href="@Url.Content("~/Content/AdminResources/bonus/css/line.css")" rel="stylesheet" />
+    <link href="@Url.Content("~/Content/AdminResources/bonus/css/choices.min.css")" rel="stylesheet" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="" />
+    <link href="https://fonts.googleapis.com/css2?family=Nunito+Sans:wght@300;400;600;700;800;900&amp;display=swap"
+          rel="stylesheet" />
+    <link rel="stylesheet"
+          href="https://unicons.iconscout.com/release/v4.0.0/css/line.css" />
+    <link href="@Url.Content("~/Content/AdminResources/bonus/css/theme.min.css")"
+          type="text/css"
+          rel="stylesheet"
+          id="style-default" />
+    <link rel="stylesheet"
+          type="text/css"
+          id="mce-u0"
+          href="@Url.Content("~/Content/AdminResources/bonus/css/skin.min.css")" />
+    <style>
+        .blog_btn {
+            display: inline-block;
+            font-size: 14px;
+            color: #1c1c1c;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            border: 1px solid #b2b2b2;
+            padding: 10px 20px 10px;
+            border-radius: 25px;
+        }
 
-      .blog__btn i {
-	      position: relative;
-	      top: 1px;
-	      margin-left: 5px;
-      }
+        .blog__btn i {
+            position: relative;
+            top: 1px;
+            margin-left: 5px;
+        }
     </style>
 }
 @section script {
-            <script src="@Url.Content("~/Content/AdminResources/bonus/js/popper.min.js")"></script>
-            <script src="@Url.Content("~/Content/AdminResources/bonus/js/all.min.js")"></script>
-            <script src="@Url.Content("~/Content/AdminResources/bonus/js/lodash.min.js")"></script>
-            <script src="@Url.Content("~/Content/AdminResources/bonus/js/list.min.js")"></script>
-            <script src="@Url.Content("~/Content/AdminResources/bonus/js/dropzone.min.js")"></script>
-            <script src="@Url.Content("~/Content/AdminResources/bonus/js/phoenix.js")"></script>
+    <script src="@Url.Content("~/Content/AdminResources/bonus/js/popper.min.js")"></script>
+    <script src="@Url.Content("~/Content/AdminResources/bonus/js/all.min.js")"></script>
+    <script src="@Url.Content("~/Content/AdminResources/bonus/js/lodash.min.js")"></script>
+    <script src="@Url.Content("~/Content/AdminResources/bonus/js/list.min.js")"></script>
+    <script src="@Url.Content("~/Content/AdminResources/bonus/js/dropzone.min.js")"></script>
+    <script src="@Url.Content("~/Content/AdminResources/bonus/js/phoenix.js")"></script>
 }
 <!-- [ Main Content ] start -->
 <div class="pc-container">
@@ -71,6 +71,7 @@
         <div class="row">
             <div class="row gx-3 gy-2 mb-3">
                 <h2 style=" font-weight: 800; text-align: center; margin-bottom: 30px;">Danh sách tin tức</h2>
+              
                 <div class="col-12 col-sm-6 col-md-4 col-xxl-2">
                     <div class="product-card-container h-100">
                         <div class="position-relative text-decoration-none product-card h-100">

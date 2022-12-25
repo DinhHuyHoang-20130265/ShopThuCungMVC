@@ -297,7 +297,12 @@
 
 <script>
     $(document).ready(function () {
-        $("input[type='radio']").each(function () {
+        $(".checkGia input[type='radio']").each(function () {
+            this.addEventListener("click", function (e) {
+                filter(e);
+            })
+        })
+        $(".checkSize input[type='radio']").each(function () {
             this.addEventListener("click", function (e) {
                 filter(e);
             })

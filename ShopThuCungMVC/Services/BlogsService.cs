@@ -23,7 +23,14 @@ namespace ShopThuCungMVC.Services
         {
             return BlogsDAO.get3BlogNew();
         }
+/*
+        internal static void AddBlog(string userid, string BlogId, string BlogName, string desc);*//*
+        internal static void AddBlog(string userid, string BlogId, string BlogName, string desc);*/
+           /* BlogCategoryDAO.AddBlog(string userid, string BlogId, string BlogName, string desc);*/
+        }
+
 
 
     }
-}
+
+
