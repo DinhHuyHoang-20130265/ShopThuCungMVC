@@ -13,5 +13,13 @@ namespace ShopThuCungMVC.DAO
         {
             return db.orders.Where(n=>n.CustomerID==id).ToList();
         }
+        public static List<Orders> getListOrder()
+        {
+            return db.orders.ToList();
+        }
+        public static OrderDetail getOrderDetailById(string id)
+        {
+            return db.orderdetail.Where(n => n.OrderId.Equals(id)).FirstOrDefault();
+        }
     }
 }
