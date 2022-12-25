@@ -1,4 +1,4 @@
-﻿
+﻿@using ShopThuCungMVC.Models;
 @{
     ViewData["Title"] = "Cart";
     Layout = "~/Views/Shared/_LayoutSite.cshtml";
@@ -12,7 +12,7 @@
                 <div class="breadcrumb__text">
                     <h2>Giỏ hàng của bạn</h2>
                     <div class="breadcrumb__option">
-                        <a href="@Url.Action("Index","Home")">Trang chủ</a>
+                        <a href="@Url.Action("Index", "Home")">Trang chủ</a>
                         <span><strong>Giỏ hàng</strong></span>
                     </div>
                 </div>
@@ -23,125 +23,181 @@
 <!-- Breadcrumb Section End -->
 <!-- Shoping Cart Section Begin -->
 <section class="shoping-cart spad">
-    <div class="container">
-        <div class="row">
-            <div class="col-lg-12">
-                <div class="shoping__cart__table">
-                    <table>
-                        <thead>
-                            <tr>
-                                <th class="shoping__product">Sản phẩm</th>
-                                <th>Giá</th>
-                                <th>Số lượng</th>
-                                <th>Tổng tiền</th>
-                                <th></th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr>
-                                <td class="shoping__cart__item">
-                                    <img src="../img/cart/cart-1.jpg" alt="">
-                                    <h5>Alaska Giant xám trắng</h5>
-                                </td>
-                                <td class="shoping__cart__price">
-                                    25.000.000đ
-                                </td>
-                                <td class="shoping__cart__quantity">
-                                    <div class="quantity">
-                                        <div class="pro-qty">
-                                            <input type="text" value="1">
-                                        </div>
-                                    </div>
-                                </td>
-                                <td class="shoping__cart__total">
-                                    25.000.000đ
-                                </td>
-                                <td class="shoping__cart__item__close">
-                                    <span class="icon_close"></span>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td class="shoping__cart__item">
-                                    <img src="../img/cart/cart-2.jpg" alt="">
-                                    <h5>Cún golden siêu phẩm</h5>
-                                </td>
-                                <td class="shoping__cart__price">
-                                    30.000.000đ
-                                </td>
-                                <td class="shoping__cart__quantity">
-                                    <div class="quantity">
-                                        <div class="pro-qty">
-                                            <input type="text" value="1">
-                                        </div>
-                                    </div>
-                                </td>
-                                <td class="shoping__cart__total">
-                                    30.000.000đ
-                                </td>
-                                <td class="shoping__cart__item__close">
-                                    <span class="icon_close"></span>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td class="shoping__cart__item">
-                                    <img src="../img/cart/cart-3.jpg" alt="">
-                                    <h5>Mèo chân ngắn tai cụp</h5>
-                                </td>
-                                <td class="shoping__cart__price">
-                                    30.000.000đ
-                                </td>
-                                <td class="shoping__cart__quantity">
-                                    <div class="quantity">
-                                        <div class="pro-qty">
-                                            <input type="text" value="1">
-                                        </div>
-                                    </div>
-                                </td>
-                                <td class="shoping__cart__total">
-                                    30.000.000đ
-                                </td>
-                                <td class="shoping__cart__item__close">
-                                    <span class="icon_close"></span>
-                                </td>
-                            </tr>
-                        </tbody>
-                    </table>
-                </div>
-            </div>
-        </div>
-        <div class="row">
-            <div class="col-lg-12">
-                <div class="shoping__cart__btns">
-                    <a href="#" class="primary-btn cart-btn">TIẾP TỤC MUA SẮM</a>
-                    <a href="#" class="primary-btn cart-btn cart-btn-right">
-                        <span class="icon_loading"></span>
-                        &nbsp; Cập nhật giỏ hàng
-                    </a>
-                </div>
-            </div>
-            <div class="col-lg-6">
-                <div class="shoping__continue">
-                    <div class="shoping__discount">
-                        <h5>Mã giảm giá</h5>
-                        <form action="#">
-                            <input type="text" placeholder="Nhập mã giảm giá">
-                            <button type="submit" class="site-btn">APPLY</button>
-                        </form>
+    @{
+        ShoppingCart cart = (ShoppingCart)Session["cart"];
+        var AllTotal = decimal.Zero;
+        if (cart != null)
+        {
+                <div class="container">
+                    <div class="row">
+                        <div class="col-lg-12">
+                            <div class="shoping__cart__table">
+                                <table>
+                                    <thead>
+                                        <tr>
+                                            <th class="shoping__product">Sản phẩm</th>
+                                            <th>Giá</th>
+                                            <th>Số lượng</th>
+                                            <th>Tổng tiền</th>
+                                            <th></th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        @foreach (var dictionary in cart.getData())
+                                        {
+                                            Product p = ShopThuCungMVC.Services.ProductCateService.ProductById(dictionary.Key);
+                                        <tr>
+                                            @*src="../img/cart/cart-1.jpg*@
+                                            <td class="shoping__cart__item">
+                                                <img src="@p.Image" alt="" style="height: 150px; width: 150px">
+                                                <h5>@p.ProductName</h5>
+                                            </td>
+                                            <td class="shoping__cart__price">
+                                                @p.Price.ToString("N0")
+                                            </td>
+                                            <td class="shoping__cart__quantity">
+                                                <div class="quantity">
+                                                    <div class="pro-qty" id="@p.productId">
+                                                        <span class="dec qtybtn">-</span>
+                                                        <input type="text" value="@dictionary.Value" readonly>
+                                                        <span class="inc qtybtn">+</span>
+                                                    </div>
+                                                </div>
+                                            </td>
+                                            <td class="shoping__cart__total" id="total-@p.productId">
+                                                @cart.Sum(dictionary.Key, dictionary.Value).ToString("N0")₫
+                                            </td>
+                                            <td class="shoping__cart__item__close" id="@p.productId">
+                                                <button class="icon_close" id="delete-@p.productId" style="border:none"></button>
+                                            </td>
+                                        </tr>
+                                        }
+         
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
                     </div>
-                </div>
-            </div>
-            <div class="col-lg-6">
-                <div class="shoping__checkout">
-                    <h5>Tổng tiền giỏ hàng</h5>
-                    <ul>
-                        <li>Tạm tính <span>85.000.000 Đồng</span></li>
-                        <li>Tổng tiền <span>85.000.000 Đồng</span></li>
-                    </ul>
-                    <a href="checkout.html" class="primary-btn">CHUYỂN ĐẾN PHẦN THANH TOÁN</a>
-                </div>
-            </div>
-        </div>
-    </div>
+                    <div class="row">
+                        <div class="col-lg-6">
+                            <div class="shoping__continue">
+                                <div class="shoping__discount">
+                                    <h5>Mã giảm giá</h5>
+                                    <form action="#">
+                                        <input type="text" placeholder="Nhập mã giảm giá">
+                                        <button type="submit" class="site-btn">APPLY</button>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-lg-6">
+                            <div class="shoping__checkout">
+                                <h5>Tổng tiền giỏ hàng</h5>
+                                <ul>
+                                    <li>Tạm tính <span>@cart.Total().ToString("N0") Đồng</span></li>
+                                    <li>Tổng tiền <span>@cart.Total().ToString("N0") Đồng</span></li>
+                                </ul>
+                                <a href="@Url.Action("Pay", "Pay")" class="primary-btn">CHUYỂN ĐẾN PHẦN THANH TOÁN</a>
+
+                                  </div>
+
+
+                              </div>
+
+
+                          </div>
+                      </div>
+            }
+        }
+
 </section>
 <!-- Shoping Cart Section End -->
+<script src="~/Scripts/jquery-3.6.1.js"></script>
+<script>
+    function deleteProduct() {
+        $(".shoping__cart__item__close").each(function () {
+            var id = $(this).attr("id");
+            $("#delete-" + id).on('click', function (e) {
+                e.preventDefault();
+                console.log(id);
+                $.ajax({
+                    url: "/ProductBag/RemoveProduct",
+                    type: "GET", 
+                    dataType: 'json',
+                    contentType: 'application/json;charset=utf-8',
+                    success: function (data) {
+                        const formatter = new Intl.NumberFormat('vn-VN');
+                        $(".shoping__checkout ul li span").each(function () {
+                            $(this).text(formatter.format(data.total) + " Đồng");
+                        })
+                        $(".header__cart__price span").each(function () {
+                            $(this).text(formatter.format(data.total) + " Đồng")
+                        })
+                    },
+                    error: function () {
+                        console.log("fail");
+                    }
+                })
+            })
+        })
+    }
+
+    function update() {
+        $(".pro-qty").each(function () {
+            var id = $(this).attr("id");
+            $(this).children(".qtybtn").each(function () {
+                $(this).on("click", function (e) {
+                    e.preventDefault();
+                    const quantity = parseInt($("#" + id + ".pro-qty input[type='text']").val());
+                    $.ajax({
+                        url: "/ProductBag/QuantityCart",
+                        type: "get",
+                        data: {
+                            quantity: quantity,
+                            id: id
+                        },
+                        dataType: 'json',
+                        contentType: 'application/json;charset=utf-8',
+                        success: function (data) {
+                            const formatter = new Intl.NumberFormat('vn-VN');
+                            $("#total-" + id).text(formatter.format(data.sumId) + "₫");
+                            $(".shoping__checkout ul li span").each(function () {
+                                $(this).text(formatter.format(data.total) + " Đồng");
+                            })
+                            $(".header__cart__price span").each(function () {
+                                $(this).text(formatter.format(data.total) + " Đồng");
+                            })
+                            $(".header__cart ul li a span").text(data.quantityleft);
+                            
+                        },
+                        error: function () {
+                            console.log("fail");
+                        }
+                    })
+                })
+            })
+        })
+    }
+
+    $(document).ready(function () {
+        $(".pro-qty").children('.qtybtn').each(function () {
+            const id = $(this).parent().attr("id");
+            $(this).click(function () {
+                var oldValue = $(".pro-qty#" + id).children('input').val();
+                if ($(this).hasClass('inc')) {
+                    var newVal = parseInt(oldValue) + 1;
+                } else if ($(this).hasClass('dec')) {
+                    if (oldValue > 1) {
+                        var newVal = parseInt(oldValue) - 1;
+                    } else {
+                        var newVal = parseInt(oldValue);
+                    }
+                }
+                $(".pro-qty#" + id).children('input').val(newVal);
+            })
+        });
+        update();
+        deleteProduct();
+    })
+</script>
 

@@ -73,5 +73,15 @@ namespace ShopThuCungMVC.Services
         {
             AccountDAO.removeAccount(id);
         }
+
+        public static UserAccount getAdminById(string id)
+        {
+            return AccountDAO.getAdminById(id);
+        }
+
+        public static void UpdateAdmin(string userid, string username, string email, string address, string fullname, string passwd, string phone, int status)
+        {
+            AccountDAO.UpdateAdmin(userid, username, email, address, fullname, passwd, phone, status);
+        }
     }
 }

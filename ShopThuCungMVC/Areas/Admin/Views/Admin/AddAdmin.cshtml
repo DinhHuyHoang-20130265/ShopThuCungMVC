@@ -1,4 +1,4 @@
-﻿
+﻿@model ShopThuCungMVC.Models.UserAccount
 @{
     ViewData["Title"] = "AddAdmin";
     Layout = "~/Areas/Admin/Views/Shared/_LayoutAdmin.cshtml";
@@ -27,64 +27,186 @@
             <h2 style=" font-weight: bolder; text-align: center; margin-top: 10px; margin-bottom: 30px;">Thêm admin mới</h2>
             <hr>
             <form method="post" action="/Admin/Admin/AddAdmin">
+                @{
+                    ShopThuCungMVC.Models.InforUser infor = null;
+                    if (Model != null)
+                    {
+                        infor = ShopThuCungMVC.Services.AccountService.getInforUserById(Model.id);
+                    }
+                }
+                @if (Model != null)
+                {
+                    <input type="text" name="userid" id="userid" value="@Model.id" style="display: none" />
+                }
                 <div class="row">
                     <div class="form-group col-md-6">
                         <label class="form-label" for="inputEmail4">Tài khoản</label>
-                        <input type="text" class="form-control" id="username" name="username"
-                               placeholder="Tên tài khoản">
+                        @if (Model != null)
+                        {
+                            <input type="text" class="form-control" id="username" name="username"
+                                   value="@Model.user_name">
+                        }
+                        else
+                        {
+                            <input type="text" class="form-control" id="username" name="username"
+                                   placeholder="Tên tài khoản">
+                        }
+
                     </div>
                     <div class="form-group col-md-6">
                         <label class="form-label" for="inputPassword4">Email</label>
-                        <input type="email" class="form-control" id="inputEmail4" name="email" placeholder="Email">
+                        @if (Model != null)
+                        {
+                            <input type="email" class="form-control" id="inputEmail4" name="email" value="@infor.email">
+                        }
+                        else
+                        {
+                            <input type="email" class="form-control" id="inputEmail4" name="email" placeholder="Email">
+                        }
+
                     </div>
                 </div>
                 <div class="row">
                     <div class="form-group col-md-6">
                         <label for="validationTooltip05" class="form-label">Số điện thoại</label>
-                        <input type="text" class="form-control" id="validationTooltip05" name="phone" required
-                               placeholder="+84">
+                        @if (Model != null)
+                        {
+                            <input type="text" class="form-control" id="validationTooltip05" name="phone" required
+                                   value="@infor.phone">
+                        }
+                        else
+                        {
+                            <input type="text" class="form-control" id="validationTooltip05" name="phone" required
+                                   placeholder="+84">
+                        }
+
 
                     </div>
                     <div class="form-group col-md-6">
                         <label class="form-label" for="inputEmail4">Họ và tên</label>
-                        <input type="text" class="form-control" id="fullname" name="fullname" placeholder="Họ và tên">
+                        @if (Model != null)
+                        {
+                            <input type="text" class="form-control" id="fullname" name="fullname" value="@infor.name">
+                        }
+                        else
+                        {
+                            <input type="text" class="form-control" id="fullname" name="fullname" placeholder="Họ và tên">
+                        }
+
                     </div>
 
                 </div>
                 <div class="row">
                     <div class="col-md-3 position-relative">
                         <label class="form-label" for="inputPassword4">Mật khẩu</label>
-                        <input type="password" class="form-control" id="inputPassword4" name="passwd"
-                               placeholder="Mật khẩu">
+                        @if (Model != null)
+                        {
+                            <input type="password" class="form-control" id="inputPassword4" name="passwd"
+                                   value="@Model.pass">
+                        }
+                        else
+                        {
+                            <input type="password" class="form-control" id="inputPassword4" name="passwd"
+                                   placeholder="Mật khẩu">
+                        }
+
                     </div>
                     <div class="col-md-3 position-relative">
                         <label class="form-label">Nhập lại mật khẩu</label>
-                        <input type="password" class="form-control" id="passwdconfirm" name="passwdconfirm" required
-                               placeholder="Nhập lại mật khẩu">
+                        @if (Model != null)
+                        {
+                            <input type="password" class="form-control" id="passwdconfirm" name="passwdconfirm" required
+                                   value="@Model.pass">
+                        }
+                        else
+                        {
+                            <input type="password" class="form-control" id="passwdconfirm" name="passwdconfirm" required
+                                   placeholder="Nhập lại mật khẩu">
+                        }
+
                     </div>
                     <div class="col-md-3 position-relative">
                         <label for="validationTooltip04" class="form-label">Chọn vị trí làm việc</label>
-                        <select class="form-select" id="validationTooltip04" name="address" required>
-                            <option>TP.HCM</option>
-                            <option>Hà Nội</option>
-                        </select>
+                        @if (Model != null)
+                        {
+
+
+                            if (infor.address.Equals("TP.HCM"))
+                            {
+                                <select class="form-select" id="validationTooltip04" name="address" required>
+                                    <option value="TP.HCM" selected>TP.HCM</option>
+                                    <option value="Hà Nội">Hà Nội</option>
+                                </select>
+                            }
+                            else
+                            {
+                                <select class="form-select" id="validationTooltip04" name="address" required>
+                                    <option value="TP.HCM">TP.HCM</option>
+                                    <option value="Hà Nội" selected>Hà Nội</option>
+                                </select>
+                            }
+                        }
+                        else
+                        {
+                            <select class="form-select" id="validationTooltip04" name="address" required>
+                                <option value="TP.HCM" selected>TP.HCM</option>
+                                <option value="Hà Nội">Hà Nội</option>
+                            </select>
+                        }
+
 
                     </div>
                     <div class="col-md-3 position-relative">
                         <label for="validationTooltip04" class="form-label">Trạng thái tài khoản</label>
-                        <select class="form-select" id="validationTooltip04" name="status" required>
-                            <option>Mở khóa</option>
-                            <option>Khóa</option>
-                        </select>
+                        @if (Model != null)
+                        {
+
+
+                            if (Model.status == 1)
+                            {
+                                <select class="form-select" id="validationTooltip04" name="status" required>
+                                    <option value="1" selected>Mở khóa</option>
+                                    <option value="0">Khóa</option>
+                                </select>
+                            }
+                            else
+                            {
+                                <select class="form-select" id="validationTooltip04" name="status" required>
+                                    <option value="1">Mở khóa</option>
+                                    <option value="0" selected>Khóa</option>
+                                </select>
+                            }
+                        }
+                        else
+                        {
+                            <select class="form-select" id="validationTooltip04" name="status" required>
+                                <option value="1" selected>Mở khóa</option>
+                                <option value="0">Khóa</option>
+                            </select>
+                        }
+
 
                     </div>
                 </div>
                 <h4 style="text-align: center; font-size: 16px; color: red;">@ViewBag.PassError</h4>
-                <h4 style="text-align: center; font-size: 16px; color: green;">@Session["errorAddAdmin"]</h4>
-                <button type="submit" class="btn  btn-primary"
-                        style="margin-left: 490px; padding:10px 40px 10px 40px; font-size: large;    margin-top: 40px;margin-left: 0;">
-                    Thêm admin
-                </button>
+                <h4 style="text-align: center; font-size: 16px; color: red;">@ViewBag.errorAddAdmin</h4>
+                @if (Model != null)
+                {
+                    <button type="submit" class="btn  btn-primary"
+                            style="margin-left: 490px; padding:10px 40px 10px 40px; font-size: large;    margin-top: 40px;margin-left: 0;">
+
+                        Lưu thay đổi
+                    </button>
+                }
+                else
+                {
+                    <button type="submit" class="btn  btn-primary"
+                            style="margin-left: 490px; padding:10px 40px 10px 40px; font-size: large;    margin-top: 40px;margin-left: 0;">
+
+                        Thêm admin
+                    </button>
+                }
+
             </form>
 
         </div>
