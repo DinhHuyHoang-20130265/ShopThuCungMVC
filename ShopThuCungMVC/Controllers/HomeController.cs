@@ -61,7 +61,7 @@ namespace ShopThuCungMVC.Controllers
         public JsonResult Filter(String price, String category, String size, String orderby)
         {
             List<Product> list = ProductCateService.Filter(price, category, size, orderby);
-            return Json(new { data = list }, JsonRequestBehavior.AllowGet);
+            return Json(new { data = list, count = list.Count }, JsonRequestBehavior.AllowGet);
         }
         public ActionResult listCate(String category)
         {

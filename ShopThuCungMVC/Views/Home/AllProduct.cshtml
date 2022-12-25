@@ -41,7 +41,7 @@
                                 {
                                 <li>
                                 <label for="@item.CatId" name="option1">
-                                <input type="radio" class="checkcate" id="@item.CatId" value="@item.CatId" >
+                                <input type="radio" class="form-check-input checkcate" id="@item.CatId" value="@item.CatId" >
                                     <span style="width:100px">
                                     @item.CatName
                                     </span>
@@ -347,6 +347,7 @@
                         </div>`;
                 });
                 $("#items").html(str);
+                $(".filter__found h6 span").text(result.count);
             },
             error: function (xhr) {
                 //Do Something to handle error
