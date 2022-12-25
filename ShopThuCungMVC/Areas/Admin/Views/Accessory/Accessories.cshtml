@@ -95,7 +95,7 @@
                 e.preventDefault();
                 const pid = $(this).attr("id").substr(7);
                 $.ajax({
-                    url: "/Product/DeleteProduct",
+                    url: "/Accessory/DeleteProduct",
                     type: "post",
                     data: {
                         pid: pid

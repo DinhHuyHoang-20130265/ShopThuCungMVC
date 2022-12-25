@@ -90,7 +90,7 @@
                                     <h5><a href="">@item.BlogName</a></h5>
                                     <p>@item.Desription</p>
                                     @Html.ActionLink("Sửa tin tức", "AddBlog", "Blog", new { @bid = item.BlogId }, new { @class = "blog_btn edit", @style = "margin-top: 3px; text-align: center; color: red; cursor: pointer;" })
-                                    @Html.ActionLink("Xóa", "DeleteBlog", "Blog", new { @bid = item.BlogId }, new { @class = "blog_btn delete", @style = "margin-top: 3px; text-align: center; color: red; cursor: pointer;" })
+                                    <a class="blog_btn delete" id="delete-@item.BlogId" style="margin-top: 3px; text-align: center; color: red; cursor: pointer;">Xóa tin tức</a>
                                 </div>
                             </div>
                         </div>
@@ -129,7 +129,7 @@
         $(".delete").each(function () {
             $(this).click(function (e) {
                 e.preventDefault();
-                const bid = $(this).attr("bid").substr(7);
+                const bid = $(this).attr("id").substr(7);
                 $.ajax({
                     url: "/Blog/DeleteBlog",
                     type: "post",

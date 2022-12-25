@@ -62,12 +62,12 @@
                                     <div class="p-t-10">
                                         <label class="radio-container m-r-45">
                                             Nam
-                                            <input type="radio" checked="checked" name="gender">
+                                            <input type="radio" checked="checked" name="gender" value="1">
                                             <span class="checkmark"></span>
                                         </label>
                                         <label class="radio-container" style="margin-left:15px">
                                             Nữ
-                                            <input type="radio" name="gender">
+                                            <input type="radio" name="gender" value="0">
                                             <span class="checkmark"></span>
                                         </label>
                                     </div>
@@ -78,7 +78,7 @@
                             <div class="col-6">
                                 <div class="input-group">
                                     <label class="label">Mật khẩu</label>
-                                    <input id="upass" class="input--style-4" type="password" name="passwd">
+                                    <input id="passwd" class="input--style-4" type="password" name="passwd">
                                 </div>
                             </div>
                             <div class="col-6">
@@ -88,8 +88,6 @@
                                 </div>
                             </div>
                         </div>
-
-
                         <div class="row row-space">
                             <div class="col-6">
                                 <div class="input-group">
@@ -99,9 +97,8 @@
                                 </div>
                             </div>
                             <div class="col-6">
-                                
                                 <div class="p-t-15">
-                                    <input class="btn btn-pill text-white btn-primary button_login" type="submit" value="Đăng Ký" style="border-radius: 30px; width: 250px; margin-left:20px ">
+                                    <input class="btn btn-pill text-white btn-primary button_login" id="register" value="Đăng Ký" style="border-radius: 30px; width: 250px; margin-left:20px; cursor: pointer" readonly>
                                 </div>
                             </div>
                         </div>
@@ -112,7 +109,7 @@
                             <div class="col-2">
                                 <div class="input-group">
                                     <label class="label">Mã xác nhận</label>
-                                    <input class="input--style-4" type="text" name="code" id="code" required>
+                                    <input class="input--style-4" type="text" name="code" id="code" required style="width: 100px;">
                                 </div>
                             </div>
                         </div>
@@ -130,15 +127,19 @@
 <script src="~/Content/js/jquery-3.3.1.min.js"></script>
 <script>
     $("#register").click(function () {
-        const name = $("#name").val();
-        const birthday = new Date($('#birthday').val());
-        const birthdayConvert = birthday.getFullYear + "/" + birthday.getMonth + "/" + birthday.getDay;
+        const fullname = $("#fullname").val();
         const gender = $("input[type='radio']:checked").val();
         const email = $("#email").val();
         const phone = $("#phone").val();
-        const username = $("#username").val();
-        const password = $("#password").val();
-        if (name == null || birthday == null || gender == null || email == null || phone == null || username == null || password == null) {
+        const user = $("#user").val();
+        const passwd = $("#passwd").val();
+        console.log(fullname);
+        console.log(gender);
+        console.log(email);
+        console.log(phone);
+        console.log(user);
+        console.log(passwd);
+        if (fullname == null || gender == null || email == null || phone == null || user == null || passwd == null) {
             alert("Yêu cầu nhập đầy đủ thông tin");
         }
         else {
@@ -146,13 +147,12 @@
                 url: "/User/Register",
                 type: "post",
                 data: {
-                    name: name,
-                    birthday: birthdayConvert,
+                    name: fullname,
                     gender: gender,
                     email: email,
                     phone: phone,
-                    username: username,
-                    password: password
+                    username: user,
+                    password: passwd
                 },
                 success: function (response) {
                     $("#error").text(response.status);
