@@ -253,7 +253,7 @@ namespace ShopThuCungMVC.DAO
             dbtest2.Update(productFromCate);
             dbtest2.SaveChanges();
         }
-        public static List<ProductCategory> listCate(String category)
+        /*public static List<ProductCategory> listCate(String category)
         {
             string query = $"SELECT DISTINCT p.* FROM product p join product_from_cate pfc ON p.productId = pfc.product_id \r\nWHERE p.`Status` =1";
             if (category != null)
@@ -274,6 +274,6 @@ namespace ShopThuCungMVC.DAO
             }
             List<Product> list = db.product.FromSqlRaw(query).ToList();
             return list;
-        }
+        }*/
     }
 }
