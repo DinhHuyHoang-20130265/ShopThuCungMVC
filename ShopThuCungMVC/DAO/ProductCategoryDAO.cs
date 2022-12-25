@@ -208,6 +208,17 @@ namespace ShopThuCungMVC.DAO
             db.product_from_cate.Add(productFromCate);
             db.SaveChanges();
         }
+        internal static void AddNewAccessory(string userid, string productname, string _FileName, string desc, string price, string promoPrice, string quantity, string date, string giong, string size)
+        {
+            string idProduct = generateIDProduct();
+            Product product = new Product(idProduct, productname, 1, "https://localhost:44322/Content/img/products/" + _FileName, Double.Parse(price), promoPrice, Int32.Parse(quantity), 1, null, desc, null, userid, date, null, null, giong, null, null);
+            ProductCategory cate = db.product_category.FromSqlRaw($"select * from product_category where CatName = '{giong}'").FirstOrDefault();
+            ProductFromCate productFromCate = new ProductFromCate(idProduct, cate.CatId);
+            db.product.Add(product);
+            db.SaveChanges();
+            db.product_from_cate.Add(productFromCate);
+            db.SaveChanges();
+        }
         public static void DeleteProduct(string id)
         {
             Product product = db.product.FromSqlRaw($"Select * from product where productId = '{id}'").FirstOrDefault();
@@ -253,7 +264,7 @@ namespace ShopThuCungMVC.DAO
             dbtest2.Update(productFromCate);
             dbtest2.SaveChanges();
         }
-        public static List<ProductCategory> listCate(String category)
+        /*public static List<ProductCategory> listCate(String category)
         {
             string query = $"SELECT DISTINCT p.* FROM product p join product_from_cate pfc ON p.productId = pfc.product_id \r\nWHERE p.`Status` =1";
             if (category != null)
@@ -274,6 +285,6 @@ namespace ShopThuCungMVC.DAO
             }
             List<ProductCategory> list = db.product_category.FromSqlRaw(query).ToList();
             return list;
-        }
+        }*/
     }
 }
