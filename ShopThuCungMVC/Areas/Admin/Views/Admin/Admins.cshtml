@@ -122,7 +122,7 @@
 
                                                                             <td class="city align-middle white-space-nowrap text-900 ps-7 text-center">@infor.address</td>
                                                                             <td class="last-seen align-middle white-space-nowrap text-700 text-end">
-                                                                                <a href="#" class="btn btn-primary"><span>Sửa</span></a>
+                                                                                @Html.ActionLink("Sửa", "AddAdmin", "Admin", new { @aid = item.id }, new { @class = "btn_2 edit btn btn-primary" })
                                                                                 @Html.ActionLink("Xóa", "Remove", "Admin", new { @id = item.id }, new { @class = "btn btn-primary ", @style = "background-color:crimson;" })
 
                                                                             </td>
