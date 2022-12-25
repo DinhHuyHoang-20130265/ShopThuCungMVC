@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Web;
 
@@ -7,6 +8,7 @@ namespace ShopThuCungMVC.Models
 {
     public class Orders
     {
+        [Key]
         public string OrderID { get; set; }
         public string OrderDate { get; set; }
         public int status { get; set; }

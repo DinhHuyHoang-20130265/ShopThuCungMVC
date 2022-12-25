@@ -187,7 +187,7 @@ namespace ShopThuCungMVC.DAO
 
         public static List<UserAccount> getListUser()
         {
-            return db.user_account.ToList();
+            return db.user_account.Where(n=>n.role == 0).ToList();
         }
     }
 }

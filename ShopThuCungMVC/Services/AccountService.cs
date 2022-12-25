@@ -48,5 +48,10 @@ namespace ShopThuCungMVC.Services
         {
             AccountDAO.addUser(username, email, address, fullname, passwd, phone, status);
         }
+
+        public static List<UserAccount> getListUser()
+        {
+            return AccountDAO.getListUser();
+        }
     }
 }
