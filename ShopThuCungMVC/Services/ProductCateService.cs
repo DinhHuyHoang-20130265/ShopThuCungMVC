@@ -52,9 +52,9 @@ namespace ShopThuCungMVC.Services
         {
             return ProductCategoryDAO.get3Blog();
         }
-        public static List<Product> Filter(String id, String price,String size)
+        public static List<Product> Filter(String id, String price,String size, String orderby)
         {
-            return ProductCategoryDAO.Filter(id,price,size);
+            return ProductCategoryDAO.Filter(id,price,size,orderby);
         }
 
         internal static void AddNewProduct(string userid, string productname, string _FileName, string desc, string price, string promoPrice, string quantity, string cannang, string mausac, string date, string giong, string size)
@@ -70,6 +70,10 @@ namespace ShopThuCungMVC.Services
         internal static void UpdateProduct(string pid, string userid, string productname, string fileName, string desc, string price, string promoPrice, string quantity, string cannang, string mausac, string date, string giong, string size)
         {
             ProductCategoryDAO.UpdateProduct(pid, userid, productname, fileName, desc, price, promoPrice, quantity, cannang, mausac, date, giong, size);
+        }
+      public static List<ProductCategory> listProCateClassify(String id)
+        {
+            return ProductCategoryDAO.listProCateClassify(id);
         }
     }
 }

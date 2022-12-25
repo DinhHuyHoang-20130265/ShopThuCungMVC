@@ -10,6 +10,7 @@ using System.Threading.Tasks;
 using System.Web;
 using System.Web.Helpers;
 using System.Text;
+using Org.BouncyCastle.Math.Field;
 
 namespace ShopThuCungMVC.DAO
 {
@@ -19,6 +20,30 @@ namespace ShopThuCungMVC.DAO
         public static List<ProductCategory> listProductCate()
         {
             return db.product_category.ToList();
+        }
+
+        public static List<ProductCategory> listProCateClassify (String id)
+        {
+            String query = $"\tSELECT DISTINCT pc.* \r\n\tFROM  product_category pc join product_from_cate pfc on pfc.cate_id = pc.CatId\r\n\tJOIN product p on p.productId = pfc.product_id \r\n\tWhere p.`Status` =1 ";
+            if (id != null)
+            {
+                switch (id)
+                {
+                    case "AllProduct": query += $"and pc.ParentID IS NOT NULL";
+                        break;
+                    case "1":
+                        query += $"and pc.ParentID = 1";
+                        break;
+                    case"2":
+                        query += $"and pc.ParentID = 2";
+                        break;
+                    case "3":
+                        query += $"and pc.ParentID = 3";
+                        break;
+                }
+            }
+            List<ProductCategory> list = db.product_category.FromSqlRaw(query).ToList();
+            return list;
         }
 
         public static List<Product> listAllProduct()
@@ -89,7 +114,7 @@ namespace ShopThuCungMVC.DAO
             return list;
         }
 
-        public static List<Product> Filter(String price, String category, String size)
+        public static List<Product> Filter(String price, String category, String size, String order_by)
         {
             String query = $"SELECT DISTINCT p.* FROM product p INNER JOIN product_from_cate pc ON p.productId = pc.product_id WHERE p.`Status`=1 ";
             if(price != null)
@@ -113,7 +138,29 @@ namespace ShopThuCungMVC.DAO
                     String[] splited = size.Split('-');
                     query += $" AND p.cannang >= {Double.Parse(splited[0])} AND p.cannang <= {Double.Parse(splited[1])} ";
             }
-            string final = query;
+            if (order_by != null)
+            {
+                switch (order_by)
+                {
+                    case "0": query += "";
+                        break;
+                    case "1":
+                        query += "ORDER BY p.ProductName ASC";
+                        break;
+                    case "2":
+                        query += "ORDER BY p.view_count DESC";
+                        break;
+                    case "3":
+                        query += "ORDER BY p.price ASC";
+                        break;
+                    case "4":
+                        query += "ORDER BY p.price DESC";
+                        break;
+
+                }
+            }
+            
+            String final = query;
             List<Product> list = db.product.FromSqlRaw(final).ToList();
             return list;
         }
@@ -161,7 +208,6 @@ namespace ShopThuCungMVC.DAO
             db.product_from_cate.Add(productFromCate);
             db.SaveChanges();
         }
-
         public static void DeleteProduct(string id)
         {
             Product product = db.product.FromSqlRaw($"Select * from product where productId = '{id}'").FirstOrDefault();
@@ -206,6 +252,28 @@ namespace ShopThuCungMVC.DAO
             ShopThuCungDBContext dbtest2 = new ShopThuCungDBContext();
             dbtest2.Update(productFromCate);
             dbtest2.SaveChanges();
+        }
+        public static List<ProductCategory> listCate(String category)
+        {
+            string query = $"SELECT DISTINCT p.* FROM product p join product_from_cate pfc ON p.productId = pfc.product_id \r\nWHERE p.`Status` =1";
+            if (category != null)
+            {
+                switch (category)
+                {
+                    case "AllProduct": query +=$" ";
+                        break;
+                    case "1": query += $"AND  pfc.cate_id = 1 ";
+                        break;
+                    case "2":
+                        query += $"AND  pfc.cate_id = 2 ";
+                        break;
+                    case "3":
+                        query += $"AND  pfc.cate_id = 3 ";
+                        break;
+                }
+            }
+            List<Product> list = db.product.FromSqlRaw(query).ToList();
+            return list;
         }
     }
 }
