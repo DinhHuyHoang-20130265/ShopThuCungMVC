@@ -155,5 +155,16 @@ namespace ShopThuCungMVC.DAO
             db.product_from_cate.Add(productFromCate);
             db.SaveChanges();
         }
+        internal static void AddNewAccessory(string userid, string productname, string _FileName, string desc, string price, string promoPrice, string quantity, string date, string giong, string size)
+        {
+            string idProduct = generateIDProduct();
+            Product product = new Product(idProduct, productname, 1, "https://localhost:44322/Content/img/products/" + _FileName, Double.Parse(price), promoPrice, Int32.Parse(quantity), 1, null, desc, null, userid, date, null, null, giong, null, null);
+            ProductCategory cate = db.product_category.FromSqlRaw($"select * from product_category where CatName = '{giong}'").FirstOrDefault();
+            ProductFromCate productFromCate = new ProductFromCate(idProduct, cate.CatId);
+            db.product.Add(product);
+            db.SaveChanges();
+            db.product_from_cate.Add(productFromCate);
+            db.SaveChanges();
+        }
     }
 }
