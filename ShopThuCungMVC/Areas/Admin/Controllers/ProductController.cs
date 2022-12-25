@@ -25,11 +25,14 @@ namespace ShopThuCungMVC.Areas.Admin.Controllers
             try
             {
                 string _path = null;
-                if (file.ContentLength > 0)
+                if (file != null)
                 {
-                    string _FileName = Path.GetFileName(file.FileName);
-                    _path = Path.Combine(Server.MapPath("~/Content/img/products"), _FileName);
-                    file.SaveAs(_path);
+                    if (file.ContentLength > 0)
+                    {
+                        string _FileName = Path.GetFileName(file.FileName);
+                        _path = Path.Combine(Server.MapPath("~/Content/img/products"), _FileName);
+                        file.SaveAs(_path);
+                    }
                 }
             }
             catch
@@ -55,15 +58,33 @@ namespace ShopThuCungMVC.Areas.Admin.Controllers
                 return RedirectToAction("Login", "Auth");
         }
         [HttpPost]
-        public ActionResult AddProduct(string userid, string productname, string desc, HttpPostedFileBase file, string price, string promoPrice, string quantity, string cannang, string mausac, string date, string giong, string size) 
+        public ActionResult AddProduct(string productid, string userid, string productname, string desc, HttpPostedFileBase file, string price, string promoPrice, string quantity, string cannang, string mausac, string date, string giong, string size) 
         {
             UserAccount account = (UserAccount)Session["admin"];
             if (account != null)
             {
-                UploadFile(file);
-                string _FileName = Path.GetFileName(file.FileName);
-                ProductCateService.AddNewProduct(userid, productname, _FileName , desc, price, promoPrice, quantity, cannang, mausac, date, giong, size);
-                return RedirectToAction("Products", "Admin/Product");
+               if (productid != null)
+                {
+                    UploadFile(file);
+                    string _FileName = "";
+                    if (file != null)
+                    {
+                        _FileName = Path.GetFileName(file.FileName);
+                    }
+                    ProductCateService.UpdateProduct(productid, userid, productname, _FileName, desc, price, promoPrice, quantity, cannang, mausac, date, giong, size);
+                    return RedirectToAction("Products", "Admin/Product");
+                }
+               else
+                {
+                    UploadFile(file);
+                    string _FileName = "";
+                    if (file != null)
+                    {
+                        _FileName = Path.GetFileName(file.FileName);
+                    }
+                    ProductCateService.AddNewProduct(userid, productname, _FileName, desc, price, promoPrice, quantity, cannang, mausac, date, giong, size);
+                    return RedirectToAction("Products", "Admin/Product");
+                }
             }
             else
                 return RedirectToAction("Login", "Auth");
@@ -80,11 +101,6 @@ namespace ShopThuCungMVC.Areas.Admin.Controllers
             {
                 return Json(new { status = false });
             }
-        }
-        [HttpGet]
-        public ActionResult Edit(string pid)
-        {
-            return RedirectToAction("AddProduct", "Product", pid);
         }
     }
 }

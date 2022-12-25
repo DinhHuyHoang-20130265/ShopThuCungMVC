@@ -17,7 +17,10 @@ namespace ShopThuCungMVC.Models
         public DbSet<OrderDetail> orderdetail { get; set; }
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
-            optionsBuilder.UseMySQL("server=localhost;database=shopthucungdb;user=root;password=;Charset=utf8;Convert Zero Datetime=True;allow zero datetime=no");
+           
+            optionsBuilder.UseMySQL("server=localhost;database=shopthucungdb;user=root;password=;Charset=utf8; pooling = false; Convert Zero Datetime=True;allow zero datetime=true");
+            optionsBuilder.UseQueryTrackingBehavior(QueryTrackingBehavior.NoTracking);
+            optionsBuilder.EnableSensitiveDataLogging();
         }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)

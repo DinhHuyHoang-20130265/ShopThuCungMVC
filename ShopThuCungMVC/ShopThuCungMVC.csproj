@@ -1117,6 +1117,7 @@
     <Content Include="Views\Shared\_ValidationScriptsPartial.cshtml" />
     <Content Include="Views\User\ForgotPassWord.cshtml" />
     <Content Include="Views\User\Login.cshtml" />
+	<Content Include="Views\User\InforUser.cshtml" />
     <Content Include="Views\User\Register.cshtml" />
   </ItemGroup>
   <ItemGroup>

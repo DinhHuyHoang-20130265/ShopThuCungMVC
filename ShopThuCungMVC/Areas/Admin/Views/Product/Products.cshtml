@@ -72,7 +72,7 @@
                                     </div>
                                 </div>
                                 <div class="d-grid">
-                                    @Html.ActionLink("Sửa sản phẩm", "Edit", "Product", new { @pid = item.productId}, new {@class = "btn_2 edit", @style = "margin-top: 3px; text-align: center; color: red; cursor: pointer;" })
+                                    @Html.ActionLink("Sửa sản phẩm", "AddProduct", "Product", new { @pid = item.productId}, new {@class = "btn_2 edit", @style = "margin-top: 3px; text-align: center; color: red; cursor: pointer;" })
                                     <button class="btn_2 delete" id ="remove-@item.productId" style="margin-top: 3px; text-align: center;">Xóa</button>
                                 </div>
                             </div>

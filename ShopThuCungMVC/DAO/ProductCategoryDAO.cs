@@ -64,7 +64,8 @@ namespace ShopThuCungMVC.DAO
 
         public static Product Detail(String id)
         {
-            return db.product.FromSqlRaw($"select distinct pd.productId, pd.ProductName, pd.`Status`,pd.Image,pd.Price,pd.PromotionalPrice,pd.Quantity,pd.Warranty,pd.New,pd.Desription,pd.Dital,pd.CreateBy,pd.CreateDate,pd.UpdateBy,pd.UpdateDate,pd.giong,pd.mausac,pd.cannang from product pd WHERE pd.productId= '{id}' ").FirstOrDefault();
+
+            return db.product.FromSqlRaw($"select pd.productId, pd.ProductName, pd.`Status`,pd.Image,pd.Price,pd.PromotionalPrice,pd.Quantity,pd.Warranty,pd.New,pd.Desription,pd.Dital,pd.CreateBy,pd.CreateDate,pd.UpdateBy,pd.UpdateDate,pd.giong,pd.mausac,pd.cannang from product pd WHERE pd.productId= '{id}' ").FirstOrDefault();
         }
 
         public static List<Product> searchByName(string txt)
@@ -147,7 +148,12 @@ namespace ShopThuCungMVC.DAO
         internal static void AddNewProduct(string userid, string productname, string _FileName, string desc, string price, string promoPrice, string quantity, string cannang, string mausac, string date, string giong, string size)
         {
             string idProduct = generateIDProduct();
-            Product product = new Product(idProduct, productname, 1, "https://localhost:44322/Content/img/products/" + _FileName, Double.Parse(price), promoPrice, Int32.Parse(quantity), 1, null, desc, null, userid, date, null, null, giong, mausac, cannang);
+            string url = "";
+            if (!_FileName.Equals(""))
+            {
+                url = "https://localhost:44322/Content/img/products/" + _FileName;
+            }
+            Product product = new Product(idProduct, productname, 1, url, Double.Parse(price), promoPrice, Int32.Parse(quantity), 1, null, desc, null, userid, date, null, null, giong, mausac, cannang);
             ProductCategory cate = db.product_category.FromSqlRaw($"select * from product_category where CatName = '{giong}'").FirstOrDefault(); 
             ProductFromCate productFromCate = new ProductFromCate(idProduct, cate.CatId);
             db.product.Add(product);
@@ -162,6 +168,44 @@ namespace ShopThuCungMVC.DAO
             
             db.product.Remove(product);
             db.SaveChanges();
+        }
+
+        internal static void UpdateProduct(string productid, string userid, string productname, string fileName, string desc, string price, string promoPrice, string quantity, string cannang, string mausac, string date, string giong, string size)
+        {
+            
+            Product product = Detail(productid);
+            db.SaveChanges();
+            string url = "";
+            if (!fileName.Equals(""))
+            {
+                url = "https://localhost:44322/Content/img/products/" + fileName;
+            }
+            else
+            {
+                url = product.Image;
+            }
+            product.cannang = cannang;
+            product.mausac = mausac;
+            product.Desription = desc;
+            product.giong = giong;
+            product.Price = double.Parse(price);
+            product.PromotionalPrice = promoPrice;
+            product.ProductName = productname;
+            product.Image = url;
+            product.Quantity = int.Parse(quantity);
+            DateTime check = DateTime.Now;
+            product.UpdateDate = check.Year + "/" + check.Month + "/" + check.Day;
+            product.CreateDate = check.Year + "/" + check.Month + "/" + check.Day;
+            product.UpdateBy = userid;
+            ShopThuCungDBContext dbtest = new ShopThuCungDBContext();
+            dbtest.Update(product);
+            dbtest.SaveChanges();
+            ProductCategory cate = db.product_category.Where(p => p.CatName.Equals(giong)).FirstOrDefault();
+            ProductFromCate productFromCate = db.product_from_cate.Where(p => p.product_id.Equals(product.productId)).FirstOrDefault();
+            productFromCate.cate_id = cate.CatId;
+            ShopThuCungDBContext dbtest2 = new ShopThuCungDBContext();
+            dbtest2.Update(productFromCate);
+            dbtest2.SaveChanges();
         }
     }
 }
