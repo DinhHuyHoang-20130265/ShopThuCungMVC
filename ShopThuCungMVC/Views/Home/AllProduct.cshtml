@@ -31,23 +31,20 @@
                 <div class="sidebar">
                     <div class="sidebar__item item1">
                         <h4>Danh mục</h4>
-                            <ul>
-                                @{
-                                    String id = Request.Url.AbsoluteUri.Substring(Request.Url.AbsoluteUri.LastIndexOf('/') + 1);
-                                    List<ProductCategory> list = ShopThuCungMVC.Services.ProductCateService.listProCateClassify(id);
-                                    foreach (var item in list)
-                                    {
-                                        <li>
-                                            <label for="@item.CatId">
-                                                <input type="radio" class="form-check-input checkcate" id="@item.CatId" name="group1" value="@item.CatId">
-                                                <span style="width:100px">
-                                                    @item.CatName
-                                                </span>
-                                            </label>
-                                        </li>
-                                    }
+                        <ul>
+                            @{
+                                String id = Request.Url.AbsoluteUri.Substring(Request.Url.AbsoluteUri.LastIndexOf('/') + 1);
+                                List<ProductCategory> list = ShopThuCungMVC.Services.ProductCateService.listProCateClassify(id);
+                                foreach (var item in list)
+                                {
+                                     <li class="product__filter-item">
+                                         <input type="radio" id="@item.CatId" name="age" class="checkcate" value="@item.CatId">
+                                          <label class="form-check-label" for="@item.CatId">@item.CatName</label><br>
+                                      </li>                                                 
+                                    
                                 }
-                            </ul>
+                            }
+                        </ul>
                     </div>
                     <div class="sidebar__item item2">
                         <h4>Khoảng giá</h4>
