@@ -321,9 +321,17 @@
 
                                                     <div class="form-check">
                                                         @{ 
-                                                            var cut = Model.CreateDate.Substring(0, Model.CreateDate.IndexOf(' '));
-                                                            var split = cut.Split('/');
-                                                            var date = split[2] + "-" + split[1] + "-" + split[0];
+                                                            var date = "";
+                                                            if (Model.CreateDate != null) {
+                                                                var cut = Model.CreateDate.Substring(0, Model.CreateDate.IndexOf(' '));
+                                                                var split = cut.Split('/');
+                                                                date = split[2] + "-" + split[1] + "-" + split[0];
+                                                            }
+                                                            else
+                                                            {
+                                                                DateTime t = DateTime.Now;
+                                                                date = t.Day + "-" + t.Month + "-" + t.Year;
+                                                            }
                                                         }
                                                         <input class="form-control inventory-attributes"
                                                                id="inventory"
