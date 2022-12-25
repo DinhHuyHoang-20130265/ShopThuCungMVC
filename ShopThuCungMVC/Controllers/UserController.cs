@@ -94,7 +94,7 @@ namespace ShopThuCungMVC.Controllers
             }
         }
         [HttpPost]
-        public ActionResult Register(string name, string birthday, string gender, string email, string phone, string username, string password)
+        public ActionResult Register(string name, string gender, string email, string phone, string username, string password)
         {
             if (AccountService.checkEmailExist(email)) {
                 return Json(new {status = "Email đã được sử dụng" }, JsonRequestBehavior.AllowGet);
@@ -110,7 +110,7 @@ namespace ShopThuCungMVC.Controllers
                 Session["timeExists"] = timeExistsTypeDate.Millisecond;
                 string code = GenerateVerifyCode.GenerateNewRandom();
                 Session["code"] = code;
-                RegisterModel registerModel = new RegisterModel(username, password, name, email, phone, gender, birthday);
+                RegisterModel registerModel = new RegisterModel(username, password, name, email, phone, gender);
                 MailService.SendMailForSignUp(code, email);
                 Session["registerModel"] = registerModel;
                 return Json(new { check = true }, JsonRequestBehavior.AllowGet);

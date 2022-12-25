@@ -150,7 +150,7 @@ namespace ShopThuCungMVC.DAO
                         query += "ORDER BY p.ProductName ASC";
                         break;
                     case "2":
-                        query += "ORDER BY p.view_count DESC";
+                        query += "ORDER BY p.ProductName DESC";
                         break;
                     case "3":
                         query += "ORDER BY p.price ASC";

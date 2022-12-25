@@ -13,9 +13,8 @@ namespace ShopThuCungMVC.Models
         public string email { get; set; }
         public string phone { get; set; }
         public string gender { get; set; }
-        public string birthday { get; set; }
 
-        public RegisterModel(string user_name, string pass, string name, string email, string phone, string gender, string birthday)
+        public RegisterModel(string user_name, string pass, string name, string email, string phone, string gender)
         {
             this.user_name = user_name;
             this.pass = pass;
@@ -23,7 +22,6 @@ namespace ShopThuCungMVC.Models
             this.email = email;
             this.phone = phone;
             this.gender = gender;
-            this.birthday = birthday;
         }
     }
 }

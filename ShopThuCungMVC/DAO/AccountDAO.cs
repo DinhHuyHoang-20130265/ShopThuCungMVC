@@ -83,7 +83,7 @@ namespace ShopThuCungMVC.DAO
             else 
                 return sb.ToString();
         }
-        public static void InsertUser(string name, string birthday, string gender, string email, string phone, string username, string password)
+        public static void InsertUser(string name, string gender, string email, string phone, string username, string password)
         {
             string id = GenerateIDUser();
             var user = new UserAccount(id, username, MD5.CreateMD5(password), password, 1, 0);

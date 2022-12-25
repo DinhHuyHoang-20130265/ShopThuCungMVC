@@ -31,7 +31,7 @@ namespace ShopThuCungMVC.Services
         }
         public static void InsertUser(RegisterModel registerModel)
         {
-            AccountDAO.InsertUser(registerModel.name, registerModel.birthday, registerModel.gender, registerModel.email, registerModel.phone, registerModel.user_name, registerModel.pass);
+            AccountDAO.InsertUser(registerModel.name, registerModel.gender, registerModel.email, registerModel.phone, registerModel.user_name, registerModel.pass);
         }
 
         public static bool checkStatusEmailAccount(string email)
