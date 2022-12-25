@@ -31,6 +31,8 @@ namespace ShopThuCungMVC.Models
         public string mausac { get; set; }
         public string cannang { get; set; }
 
+       /* public string catName { get; set; }   */
+
         public Product(string productId, string ProductName, int status, string image, double price, string promotionalPrice, int quantity, int warranty, string @new, string desription, string dital, string createBy, string createDate, string updateBy, string updateDate, string giong, string mausac, string cannang)
         {
             this.productId = productId;
@@ -51,6 +53,7 @@ namespace ShopThuCungMVC.Models
             this.giong = giong;
             this.mausac = mausac;
             this.cannang = cannang;
+        /*    this.catName = catName;*/
         }
     }
 }
