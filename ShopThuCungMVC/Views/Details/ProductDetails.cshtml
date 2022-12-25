@@ -235,10 +235,32 @@
                 type: 'POST',
                 data: { id: id, quantity: tQuantity },
                 success: function (rs) {
+                    const formatter = new Intl.NumberFormat('vn-VN');
                     $(".header__cart ul li a span").text(rs.quantity)
+                    $(".header__cart__price span").text(formatter.format(rs.total) + "₫")
                     $(".product__details__quantity").html(`<a class="notify" style="color:green; font-size: 21px; font-weight: 600;"><i class="fas fa-check" style="color: green"></i> Thêm sản phẩm vào giỏ hàng thành công !</a>`)
                 }
             })
         })
     })
+
+
+    var proQty = $('.pro-qty');
+    proQty.prepend('<span class="dec qtybtn">-</span>');
+    proQty.append('<span class="inc qtybtn">+</span>');
+    proQty.on('click', '.qtybtn', function () {
+        var $button = $(this);
+        var oldValue = $button.parent().find('input').val();
+        if ($button.hasClass('inc')) {
+            var newVal = parseFloat(oldValue) + 1;
+        } else {
+            // Don't allow decrementing below zero
+            if (oldValue > 0) {
+                var newVal = parseFloat(oldValue) - 1;
+            } else {
+                newVal = 1;
+            }
+        }
+        $button.parent().find('input').val(newVal);
+    });
 </script>

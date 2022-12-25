@@ -268,7 +268,16 @@
                                 <li><a href="@Url.Action("Cart","ProductBag")"><i class="fa fa-shopping-bag"></i><span>@cart.getQuantityCart()</span></a></li>
                             }
                         </ul>
-                        <div class="header__cart__price">Giỏ hàng: <span>85.000.000 Đồng</span></div>
+                        @if (Session["user"] == null)
+                        {
+                            <div></div>
+                        }
+                        else
+                        {
+                            ShoppingCart cart = (ShoppingCart)Session["cart"];
+                            <div class="header__cart__price">Giỏ hàng: <span>@cart.Total().ToString("N0") Đồng</span></div>
+
+                        }
                     </div>
                 </div>
             </div>
