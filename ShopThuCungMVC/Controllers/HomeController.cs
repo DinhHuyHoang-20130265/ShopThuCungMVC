@@ -21,12 +21,12 @@ namespace ShopThuCungMVC.Controllers
 
         public ActionResult Blog()
         {
-           
+
             return View();
         }
         public ActionResult AllProduct(String Id)
         {
-            if(Id == null)
+            if (Id == null)
             {
                 List<Product> listProductById = ProductCateService.listAllProduct();
                 return View(listProductById);
@@ -47,7 +47,7 @@ namespace ShopThuCungMVC.Controllers
             else
             {
                 List<Product> listProductById = ProductCateService.listProductbyCate(id).Skip(page * 6).Take(6).ToList();
-                return Json( new { data = listProductById }, JsonRequestBehavior.AllowGet);
+                return Json(new { data = listProductById }, JsonRequestBehavior.AllowGet);
             }
         }
         public ActionResult Contact()
@@ -58,10 +58,18 @@ namespace ShopThuCungMVC.Controllers
         {
             return View();
         }
-        public JsonResult Filter(String price, String category,String size)
+        public JsonResult Filter(String price, String category, String size, String orderby)
         {
-            List<Product> list = ProductCateService.Filter(price, category, size);
-            return Json(new { data = list}, JsonRequestBehavior.AllowGet);
+            List<Product> list = ProductCateService.Filter(price, category, size, orderby);
+            return Json(new { data = list, count = list.Count }, JsonRequestBehavior.AllowGet);
+        }
+        public ActionResult listCate(String category)
+        {
+            return View();
+        }
+        public ActionResult listProCateClassify(String id)
+        {
+            return View();
         }
     }
 }
