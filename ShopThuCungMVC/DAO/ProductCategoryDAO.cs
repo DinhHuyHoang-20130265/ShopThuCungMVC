@@ -1,5 +1,4 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using MySqlX.XDevAPI.Relational;
 using ShopThuCungMVC.Models;
 using System;
 using System.Collections.Generic;
@@ -61,7 +60,10 @@ namespace ShopThuCungMVC.DAO
                     .ToList();
             }
         }
-
+        public static Product ProductbyId(String id)
+        {
+            return db.product.FromSqlRaw($"select distinct productId, ProductName, Status, Image, Price, PromotionalPrice, Quantity, Warranty, New, Desription, Dital, CreateBy, CreateDate, UpdateBy, UpdateDate, giong, mausac, cannang FROM product WHERE productId = {id}").FirstOrDefault();
+        }
         public static Product Detail(String id)
         {
             return db.product.FromSqlRaw($"select distinct pd.productId, pd.ProductName, pd.`Status`,pd.Image,pd.Price,pd.PromotionalPrice,pd.Quantity,pd.Warranty,pd.New,pd.Desription,pd.Dital,pd.CreateBy,pd.CreateDate,pd.UpdateBy,pd.UpdateDate,pd.giong,pd.mausac,pd.cannang from product pd WHERE pd.productId= '{id}' ").FirstOrDefault();

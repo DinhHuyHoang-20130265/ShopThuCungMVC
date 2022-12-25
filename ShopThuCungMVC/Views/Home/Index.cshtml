@@ -61,10 +61,10 @@
                         <div class="col-lg-3 col-md-4 col-sm-6 mix oranges fresh-meat">
                             <div class="featured__item">
                                 <div class="featured__item__pic set-bg" data-setbg="@item.Image">
-                                    <ul class="featured__item__pic__hover">
+                                    <ul class="featured__item__pic__hover"  style="cursor:pointer">
                                         @if (Session["user"] == null)
                                         {
-                                            <li><a href="@Url.Action("Login", "User")"><i class="fa fa-shopping-cart"></i></a></li>
+                                            <li><a href="@Url.Action("Login", "User")"><i class="fa fa-shopping-cart" style="cursor:pointer"></i></a></li>
                                         }
                                         else
                                         {
@@ -148,7 +148,9 @@
                     type: 'POST',
                     data: { id: id, quantity: quantity },
                     success: function (rs) {
+                        const formatter = new Intl.NumberFormat('vn-VN');
                         $(".header__cart ul li a span").text(rs.quantity)
+                        $(".header__cart__price span").text(formatter.format(rs.total) + "₫")
                     }
                 })
             })

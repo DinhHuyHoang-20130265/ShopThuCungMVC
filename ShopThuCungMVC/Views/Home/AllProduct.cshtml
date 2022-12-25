@@ -178,10 +178,10 @@
                         <div class="col-lg-4 col-md-6 col-sm-6">
                             <div class="product__item">
                                 <div class="product__item__pic set-bg" data-setbg="@Model.ElementAt(i).Image">
-                                    <ul class="product__item__pic__hover">
+                                    <ul class="product__item__pic__hover"  style="cursor:pointer">
                                         @if (Session["user"] == null)
                                         {
-                                            <li><a href="@Url.Action("Login", "User")"><i class="fa fa-shopping-cart"></i></a></li>
+                                            <li><a href="@Url.Action("Login", "User")"><i class="fa fa-shopping-cart" style="cursor:pointer"></i></a></li>
                                         }
                                         else
                                         {
@@ -215,12 +215,15 @@
             e.preventDefault();
             var id = $(this).data('id');
             var quantity = 1;
+            var alltotal = 0;
             $.ajax({
                 url: '/ProductBag/AddToCart',
-                type: 'POST', 
-                data: { id: id, quantity: quantity },
+                type: 'POST',
+                data: { id: id, quantity: quantity},
                 success: function (rs) {
-                    $(".header__cart ul li a span").text(rs.quantity)
+                    const formatter = new Intl.NumberFormat('vn-VN');
+                    $(".header__cart ul li a span").text(rs.quantity)        
+                    $(".header__cart__price span").text(formatter.format(rs.total) + "₫")
                 }
             })
         })
