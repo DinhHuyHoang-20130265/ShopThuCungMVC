@@ -13,5 +13,13 @@ namespace ShopThuCungMVC.Services
         {
             return OrderDAO.getListOrderByIdUser(id);
         }
+        public static List<Orders> getListOrder()
+        {
+            return OrderDAO.getListOrder();
+        }
+        public static OrderDetail getOrderDetailById(string id)
+        {
+            return OrderDAO.getOrderDetailById(id);
+        }
     }
 }
