@@ -63,7 +63,14 @@
                         }
                         <div class="row g-3 flex-between-end mb-5">
                             <div class="col-auto">
-                                <h2 class="mb-2">Thêm thú cưng</h2>
+                                @if (Model != null)
+                                {
+                                    <h2 class="mb-2">Chỉnh sửa thú cưng</h2>
+                                }
+                                else
+                                {
+                                    <h2 class="mb-2">Thêm thú cưng</h2>
+                                }
                             </div>
                             <div class="col-auto">
                                 @if (Model != null)
@@ -314,9 +321,17 @@
 
                                                     <div class="form-check">
                                                         @{ 
-                                                            var cut = Model.CreateDate.Substring(0, Model.CreateDate.IndexOf(' '));
-                                                            var split = cut.Split('/');
-                                                            var date = split[2] + "-" + split[1] + "-" + split[0];
+                                                            var date = "";
+                                                            if (Model.CreateDate != null) {
+                                                                var cut = Model.CreateDate.Substring(0, Model.CreateDate.IndexOf(' '));
+                                                                var split = cut.Split('/');
+                                                                date = split[2] + "-" + split[1] + "-" + split[0];
+                                                            }
+                                                            else
+                                                            {
+                                                                DateTime t = DateTime.Now;
+                                                                date = t.Day + "-" + t.Month + "-" + t.Year;
+                                                            }
                                                         }
                                                         <input class="form-control inventory-attributes"
                                                                id="inventory"

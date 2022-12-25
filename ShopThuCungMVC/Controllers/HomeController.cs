@@ -37,16 +37,16 @@ namespace ShopThuCungMVC.Controllers
                 return View(listProductById);
             }
         }
-        public JsonResult LoadMoreProduct(string id, int page)
+        public JsonResult LoadMoreProduct(string id, int page, String price, String size, String orderby)
         {
             if (id.Equals("AllProduct"))
             {
-                List<Product> listProductById = ProductCateService.listAllProduct().Skip(page * 6).Take(6).ToList();
+                List<Product> listProductById = ProductCateService.Filter(price, id, size, orderby).Skip(page * 6).Take(6).ToList();
                 return Json(new { data = listProductById }, JsonRequestBehavior.AllowGet);
             }
             else
             {
-                List<Product> listProductById = ProductCateService.listProductbyCate(id).Skip(page * 6).Take(6).ToList();
+                List<Product> listProductById = ProductCateService.Filter(price, id, size, orderby).Skip(page * 6).Take(6).ToList();
                 return Json(new { data = listProductById }, JsonRequestBehavior.AllowGet);
             }
         }

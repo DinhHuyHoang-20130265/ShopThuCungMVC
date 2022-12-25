@@ -12,6 +12,11 @@ namespace ShopThuCungMVC.Services
         {
             return AccountDAO.loginSite(username, password);
         }
+
+        public static UserAccount getUserById(string id)
+        {
+            return AccountDAO.getUserById(id);
+        }
         public static UserAccount loginAdmin(string username, string password)
         {
             return AccountDAO.loginAdmin(username, password);
@@ -26,7 +31,7 @@ namespace ShopThuCungMVC.Services
         }
         public static void InsertUser(RegisterModel registerModel)
         {
-            AccountDAO.InsertUser(registerModel.name, registerModel.birthday, registerModel.gender, registerModel.email, registerModel.phone, registerModel.user_name, registerModel.pass);
+            AccountDAO.InsertUser(registerModel.name, registerModel.gender, registerModel.email, registerModel.phone, registerModel.user_name, registerModel.pass);
         }
 
         public static bool checkStatusEmailAccount(string email)
@@ -77,6 +82,11 @@ namespace ShopThuCungMVC.Services
         public static void UpdateAdmin(string userid, string username, string email, string address, string fullname, string passwd, string phone, int status)
         {
             AccountDAO.UpdateAdmin(userid, username, email, address, fullname, passwd, phone, status);
+        }
+
+        internal static void UpdateUser(string userid, string username, string email, string address, string fullname, string passwd, string phone, int status)
+        {
+            AccountDAO.UpdateUser(userid, username, email, address, fullname, passwd, phone, status);
         }
     }
 }

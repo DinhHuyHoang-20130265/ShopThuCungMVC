@@ -19,6 +19,10 @@ namespace ShopThuCungMVC.Services
         {
             return ProductCategoryDAO.listAllProduct();
         }
+        public static Product ProductById(string id)
+        {
+            return ProductCategoryDAO.ProductbyId(id);
+        }
         public static List<Product> listProductbyCate(String id)
         {
             return ProductCategoryDAO.listProductbyCate(id);
@@ -52,6 +56,10 @@ namespace ShopThuCungMVC.Services
         {
             return ProductCategoryDAO.get3Blog();
         }
+        public static List<Blog> getBlog()
+        {
+            return BlogsDAO.getBlog();
+        }
         public static List<Product> Filter(String id, String price,String size, String orderby)
         {
             return ProductCategoryDAO.Filter(id,price,size,orderby);
@@ -75,7 +83,11 @@ namespace ShopThuCungMVC.Services
         {
             ProductCategoryDAO.UpdateProduct(pid, userid, productname, fileName, desc, price, promoPrice, quantity, cannang, mausac, date, giong, size);
         }
-      public static List<ProductCategory> listProCateClassify(String id)
+        internal static void UpdateAccessory(string pid, string userid, string productname, string fileName, string desc, string price, string promoPrice, string quantity, string date, string giong, string size)
+        {
+            ProductCategoryDAO.UpdateAccessory(pid, userid, productname, fileName, desc, price, promoPrice, quantity, date, giong, size);
+        }
+        public static List<ProductCategory> listProCateClassify(String id)
         {
             return ProductCategoryDAO.listProCateClassify(id);
         }

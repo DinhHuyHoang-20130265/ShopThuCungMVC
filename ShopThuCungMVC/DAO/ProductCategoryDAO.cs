@@ -1,5 +1,4 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using MySqlX.XDevAPI.Relational;
 using ShopThuCungMVC.Models;
 using System;
 using System.Collections.Generic;
@@ -86,7 +85,10 @@ namespace ShopThuCungMVC.DAO
                     .ToList();
             }
         }
-
+        public static Product ProductbyId(String id)
+        {
+            return db.product.FromSqlRaw($"select distinct productId, ProductName, Status, Image, Price, PromotionalPrice, Quantity, Warranty, New, Desription, Dital, CreateBy, CreateDate, UpdateBy, UpdateDate, giong, mausac, cannang FROM product WHERE productId = {id}").FirstOrDefault();
+        }
         public static Product Detail(String id)
         {
 
@@ -148,7 +150,7 @@ namespace ShopThuCungMVC.DAO
                         query += "ORDER BY p.ProductName ASC";
                         break;
                     case "2":
-                        query += "ORDER BY p.view_count DESC";
+                        query += "ORDER BY p.ProductName DESC";
                         break;
                     case "3":
                         query += "ORDER BY p.price ASC";
@@ -264,7 +266,42 @@ namespace ShopThuCungMVC.DAO
             dbtest2.Update(productFromCate);
             dbtest2.SaveChanges();
         }
-        /*public static List<ProductCategory> listCate(String category)
+        internal static void UpdateAccessory(string productid, string userid, string productname, string fileName, string desc, string price, string promoPrice, string quantity, string date, string giong, string size)
+        {
+
+            Product product = Detail(productid);
+            db.SaveChanges();
+            string url = "";
+            if (!fileName.Equals(""))
+            {
+                url = "https://localhost:44322/Content/img/products/" + fileName;
+            }
+            else
+            {
+                url = product.Image;
+            }
+            product.Desription = desc;
+            product.giong = giong;
+            product.Price = double.Parse(price);
+            product.PromotionalPrice = promoPrice;
+            product.ProductName = productname;
+            product.Image = url;
+            product.Quantity = int.Parse(quantity);
+            DateTime check = DateTime.Now;
+            product.UpdateDate = check.Year + "/" + check.Month + "/" + check.Day;
+            product.CreateDate = check.Year + "/" + check.Month + "/" + check.Day;
+            product.UpdateBy = userid;
+            ShopThuCungDBContext dbtest = new ShopThuCungDBContext();
+            dbtest.Update(product);
+            dbtest.SaveChanges();
+            ProductCategory cate = db.product_category.Where(p => p.CatName.Equals(giong)).FirstOrDefault();
+            ProductFromCate productFromCate = db.product_from_cate.Where(p => p.product_id.Equals(product.productId)).FirstOrDefault();
+            productFromCate.cate_id = cate.CatId;
+            ShopThuCungDBContext dbtest2 = new ShopThuCungDBContext();
+            dbtest2.Update(productFromCate);
+            dbtest2.SaveChanges();
+        }
+        public static List<ProductCategory> listCate(String category)
         {
             string query = $"SELECT DISTINCT p.* FROM product p join product_from_cate pfc ON p.productId = pfc.product_id \r\nWHERE p.`Status` =1";
             if (category != null)
@@ -283,8 +320,8 @@ namespace ShopThuCungMVC.DAO
                         break;
                 }
             }
-            List<Product> list = db.product.FromSqlRaw(query).ToList();
+            List<ProductCategory> list = db.product_category.FromSqlRaw(query).ToList();
             return list;
-        }*/
+        }
     }
 }

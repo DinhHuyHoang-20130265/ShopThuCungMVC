@@ -5,7 +5,7 @@
     Layout = "~/Views/Shared/_LayoutSite.cshtml";
 }
 @using ShopThuCungMVC.Models;
-<!-- Breadcrumb Section Begin -->
+<!-- breadcrumb Section Begin -->
 
 <section class="breadcrumb-section set-bg" data-setbg="https://localhost:44322/Content/img/breadcrumb.jpg">
     <div class="container">
@@ -22,142 +22,113 @@
         </div>
     </div>
 </section>
-<!-- Breadcrumb Section End -->
+<!-- breadcrumb Section End -->
 <!-- Product Section Begin -->
 <section class="product spad">
     <div class="container">
         <div class="row">
             <div class="col-lg-3 col-md-5">
                 <div class="sidebar">
-                    <div class="sidebar__item">
+                    <div class="sidebar__item item1">
                         <h4>Danh mục</h4>
-                        <ul>
-                            @{
-                                
-                            
-                                String id = Request.Url.AbsoluteUri.Substring(Request.Url.AbsoluteUri.LastIndexOf('/') + 1);
-                                List<ProductCategory> list = ShopThuCungMVC.Services.ProductCateService.listProCateClassify(id);
-                                foreach (var item in list)
-                                {
-                                <li>
-                                <label for="@item.CatId" name="option1">
-                                <input type="radio" class="form-check-input checkcate" id="@item.CatId" value="@item.CatId" >
-                                    <span style="width:100px">
-                                    @item.CatName
-                                    </span>
-                                </label>
-                                </li>
-                                
+                            <ul>
+                                @{
+                                    String id = Request.Url.AbsoluteUri.Substring(Request.Url.AbsoluteUri.LastIndexOf('/') + 1);
+                                    List<ProductCategory> list = ShopThuCungMVC.Services.ProductCateService.listProCateClassify(id);
+                                    foreach (var item in list)
+                                    {
+                                        <li>
+                                            <label for="@item.CatId">
+                                                <input type="radio" class="form-check-input checkcate" id="@item.CatId" name="group1" value="@item.CatId">
+                                                <span style="width:100px">
+                                                    @item.CatName
+                                                </span>
+                                            </label>
+                                        </li>
+                                    }
                                 }
-                            }
-                            @* @{
-                    String id = Request.Url.AbsoluteUri.Substring(Request.Url.AbsoluteUri.LastIndexOf('/') + 1);
-                    List<Product> list = ShopThuCungMVC.Services.ProductCateService.listCate(id);
-                    foreach (var item in list)
-                    {
-                <li>
-                    <label for="cat0" name="option1">
-                        <input type="radio" class="form-cate" id="cat0">
-                        @item.giong
-                    </label>
-                </li>
-            }
-
-        }*@
-                            @* <li><a href="#">Chó Beagle</a></li>
-        <li><a href="#">Chó Corgi</a></li>
-        <li><a href="#">Chó Golden Retriever</a></li>
-        <li><a href="#">Chó Husky</a></li>
-        <li><a href="#">Chó Phốc sóc</a></li>
-        <li><a href="#">Mèo Anh</a></li>
-        <li><a href="#">Mèo lông ngắn</a></li>
-        <li><a href="#">Mèo chân ngắn</a></li>
-        <li><a href="#">Mèo tai cụp</a></li>
-        <li><a href="#">Mèo tam thể</a></li>*@
-                        </ul>
+                            </ul>
                     </div>
-                    <div class="sidebar__item">
+                    <div class="sidebar__item item2">
                         <h4>Khoảng giá</h4>
-
-                        <ul id="khoanggia" class="product__filter-ckeckbox">
-                            <li class="product__filter-item">
-                                <label class="form-check-label" for="kg0">
-                                    <input type="radio" class="form-check-input checkGia" id="kg0"
-                                           name="optradio"
-                                           value="-1"><span>Tất cả</span>
-                                </label>
-                            </li>
-                            <bR>
-                            <li class="product__filter-item">
-                                <label class="form-check-label" for="kg1">
-                                    <input type="radio" class="form-check-input checkGia" id="kg1" name="optradio"
-                                           value="0-5000000"><span>Dưới 5,000,000đ</span>
-                                </label>
-                            </li>
-                            <bR>
-                            <li class="product__filter-item">
-                                <label class="form-check-label" for="kg2">
-                                    <input type="radio" class="form-check-input checkGia" id="kg2" name="optradio"
-                                           value="5000000-10000000"><span> 5,000,000đ - 10,000,000đ</span>
-                                </label>
-                            </li>
-                            <bR>
-                            <li class="product__filter-item">
-                                <label class="form-check-label" for="kg3">
-                                    <input type="radio" class="form-check-input checkGia" id="kg3" name="optradio"
-                                           value="10000000-15000000"><span>10,000,000đ - 15,000,000đ</span>
-                                </label>
-                            </li>
-                            <bR>
-                            <li class="product__filter-item">
-                                <label class="form-check-label" for="kg4">
-                                    <input type="radio" class="form-check-input checkGia" id="kg4" name="optradio"
-                                           value="15000000-20000000"><span>15,000,000đ - 20,000,000đ</span>
-                                </label>
-                            </li>
-                            <bR>
-                            <li class="product__filter-item">
-                                <label class="form-check-label" for="kg5">
-                                    <input type="radio" class="form-check-input checkGia" id="kg5" name="optradio"
-                                           value="20000000-100000000"><span>Trên 20,000,000đ</span>
-                                </label>
-                            </li>
-                            <bR>
-                        </ul>
-
+                            <ul id="khoanggia" class="product__filter-ckeckbox">
+                                <li class="product__filter-item">
+                                    <label class="form-check-label" for="kg0">
+                                        <input type="radio" class="form-check-input checkGia" id="kg0"
+                                               name="group2"
+                                               value="-1"><span>Tất cả</span>
+                                    </label>
+                                </li>
+                                <br>
+                                <li class="product__filter-item">
+                                    <label class="form-check-label" for="kg1">
+                                        <input type="radio" class="form-check-input checkGia" id="kg1" name="group2"
+                                               value="0-5000000"><span>Dưới 5,000,000đ</span>
+                                    </label>
+                                </li>
+                                <br>
+                                <li class="product__filter-item">
+                                    <label class="form-check-label" for="kg2">
+                                        <input type="radio" class="form-check-input checkGia" id="kg2" name="group2"
+                                               value="5000000-10000000"><span> 5,000,000đ - 10,000,000đ</span>
+                                    </label>
+                                </li>
+                                <br>
+                                <li class="product__filter-item">
+                                    <label class="form-check-label" for="kg3">
+                                        <input type="radio" class="form-check-input checkGia" id="kg3" name="group2"
+                                               value="10000000-15000000"><span>10,000,000đ - 15,000,000đ</span>
+                                    </label>
+                                </li>
+                                <br>
+                                <li class="product__filter-item">
+                                    <label class="form-check-label" for="kg4">
+                                        <input type="radio" class="form-check-input checkGia" id="kg4" name="group2"
+                                               value="15000000-20000000"><span>15,000,000đ - 20,000,000đ</span>
+                                    </label>
+                                </li>
+                                <br>
+                                <li class="product__filter-item">
+                                    <label class="form-check-label" for="kg5">
+                                        <input type="radio" class="form-check-input checkGia" id="kg5" name="group2"
+                                               value="20000000-100000000"><span>Trên 20,000,000đ</span>
+                                    </label>
+                                </li>
+                                <br>
+                            </ul>
                     </div>
-                    <div class="sidebar__item">
+                    <div class="sidebar__item item3">
                         <h4>Kích Cỡ</h4>
-                        <div class="sidebar__item__size">
-                            <label for="large">
-                                Trên 10kg
-                                <input type="radio" class="checkSize" id="large" value="10-100">
-                            </label>
-                        </div>
-                        <div class="sidebar__item__size">
-                            <label for="large">
-                                5kg - 10kg
-                                <input type="radio" class="checkSize" id="large" value="5-10">
-                            </label>
-                        </div>
-                        <div class="sidebar__item__size">
-                            <label for="medium">
-                                3kg - 5kg
-                                <input type="radio" class="checkSize" id="medium" value="3-5">
-                            </label>
-                        </div>
-                        <div class="sidebar__item__size">
-                            <label for="small">
-                                2kg-3kg
-                                <input type="radio" class="checkSize" id="small" value="2-3">
-                            </label>
-                        </div>
-                        <div class="sidebar__item__size">
-                            <label for="tiny">
-                                dưới 2kg
-                                <input type="radio" class="checkSize" id="tiny" value="0-2">
-                            </label>
-                        </div>
+                            <div class="sidebar__item__size">
+                                <label for="large">
+                                    Trên 10kg
+                                    <input name="group3" type="radio" class="checkSize" id="large" value="10-100">
+                                </label>
+                            </div>
+                            <div class="sidebar__item__size">
+                                <label for="large">
+                                    5kg - 10kg
+                                    <input name="group3" type="radio" class="checkSize" id="large" value="5-10">
+                                </label>
+                            </div>
+                            <div class="sidebar__item__size">
+                                <label for="medium">
+                                    3kg - 5kg
+                                    <input name="group3" type="radio" class="checkSize" id="medium" value="3-5">
+                                </label>
+                            </div>
+                            <div class="sidebar__item__size">
+                                <label for="small">
+                                    2kg-3kg
+                                    <input name="group3" type="radio" class="checkSize" id="small" value="2-3">
+                                </label>
+                            </div>
+                            <div class="sidebar__item__size">
+                                <label for="tiny">
+                                    dưới 2kg
+                                    <input name="group3" type="radio" class="checkSize" id="tiny" value="0-2">
+                                </label>
+                            </div>
                     </div>
                 </div>
             </div>
@@ -201,10 +172,10 @@
                         <div class="col-lg-4 col-md-6 col-sm-6">
                             <div class="product__item">
                                 <div class="product__item__pic set-bg" data-setbg="@Model.ElementAt(i).Image">
-                                    <ul class="product__item__pic__hover">
+                                    <ul class="product__item__pic__hover"  style="cursor:pointer">
                                         @if (Session["user"] == null)
                                         {
-                                            <li><a href="@Url.Action("Login", "User")"><i class="fa fa-shopping-cart"></i></a></li>
+                                            <li><a href="@Url.Action("Login", "User")"><i class="fa fa-shopping-cart" style="cursor:pointer"></i></a></li>
                                         }
                                         else
                                         {
@@ -233,7 +204,7 @@
 <!-- Product Section End -->
 <script src="~/Scripts/jquery-3.6.1.js"></script>
 <script>
-    $(document).ready(function () {
+    function addtoCart() {
         $('.product__item').on('click', '.btnAddToCart', function (e) {
             e.preventDefault();
             var id = $(this).data('id');
@@ -243,26 +214,41 @@
                 type: 'POST',
                 data: { id: id, quantity: quantity },
                 success: function (rs) {
+                    const formatter = new Intl.NumberFormat('vn-VN');
                     $(".header__cart ul li a span").text(rs.quantity)
+                    $(".header__cart__price span").text(formatter.format(rs.total) + "₫")
                 }
             })
         })
+    }
+    $(document).ready(function () {
+        addtoCart();
     })
 </script>
 <script>
     $("#loadMoreA").on("click", function (e) {
-        console.log("abc");
         e.preventDefault();
         let id = $("#cateId").val();
-        if (id !== "AllProduct") {
-            id = parseInt(id);
+        const price = $("input[type='radio']:checked.checkGia").val();
+        const size = $("input[type='radio']:checked.checkSize").val();
+        const orderby = $("#dropdownSelect option:selected").val();
+        const listcate = $("input[type='radio']:checked.checkcate").val();
+        if (listcate != null) {
+            id = listcate
         }
         const page = parseInt($("#page").val());
+        console.log(id);
+        console.log(price);
+        console.log(size);
+        console.log(orderby);
         $.ajax({
             url: "/Home/LoadMoreProduct",
             data: {
                 id: id,
-                page: page
+                page: page,
+                price: price,
+                size: size,
+                orderby: orderby
             },
             type: "get",
             dataType: 'json',
@@ -275,7 +261,7 @@
                             <div class="product__item">
                                 <div class="product__item__pic set-bg" data-setbg="` + value.Image + `" style="background-image: url('` + value.Image + `');">
                                     <ul class="product__item__pic__hover">
-                                        <li><a href="#"><i class="fa fa-shopping-cart"></i></a></li>
+                                        <li><a class="btnAddToCart" data-id="`+ value.productId +`"><i class="fa fa-shopping-cart"></i></a></li>
                                     </ul>
                                 </div>
                                 <div class="product__item__text">
@@ -287,6 +273,7 @@
                 });
                 $("#items").append(str);
                 $("#page").val(page + 1);
+                addtoCart();
             },
             error: function (xhr) {
                 //Do Something to handle error
@@ -297,7 +284,17 @@
 
 <script>
     $(document).ready(function () {
-        $("input[type='radio']").each(function () {
+        $("input[type='radio'].checkGia").each(function () {
+            this.addEventListener("click", function (e) {
+                filter(e);
+            })
+        })
+        $("input[type='radio'].checkSize").each(function () {
+            this.addEventListener("click", function (e) {
+                filter(e);
+            })
+        })
+        $("input[type='radio'].checkcate").each(function () {
             this.addEventListener("click", function (e) {
                 filter(e);
             })
@@ -316,6 +313,10 @@
         if (listcate != null) {
             category = listcate
         }
+        console.log(category);
+        console.log(price);
+        console.log(size);
+        console.log(orderby);
         $.ajax({
             type: 'get',
             url: "/Home/Filter",
@@ -329,14 +330,15 @@
             contentType: 'application/json;charset=utf-8',
             success: function (result) {
                 var str = "";
-                console.log(result.data);
                 const formatter = new Intl.NumberFormat('vn-VN');
+                var i = 0;
                 $.each(result.data, function (index, value) {
-                    str += `<div class="col-lg-4 col-md-6 col-sm-6">
+                    if (i < 6) {
+                        str += `<div class="col-lg-4 col-md-6 col-sm-6">
                             <div class="product__item">
                                 <div class="product__item__pic set-bg" data-setbg="` + value.Image + `" style="background-image: url('` + value.Image + `');">
                                     <ul class="product__item__pic__hover">
-                                        <li><a href="#"><i class="fa fa-shopping-cart"></i></a></li>
+                                        <li><a class="btnAddToCart" data-id="`+ value.productId + `"><i class="fa fa-shopping-cart"></i></a></li>
                                     </ul>
                                 </div>
                                 <div class="product__item__text">
@@ -345,9 +347,12 @@
                                 </div>
                             </div>
                         </div>`;
+                        i++;
+                    }
                 });
                 $("#items").html(str);
                 $(".filter__found h6 span").text(result.count);
+                addtoCart();
             },
             error: function (xhr) {
                 //Do Something to handle error

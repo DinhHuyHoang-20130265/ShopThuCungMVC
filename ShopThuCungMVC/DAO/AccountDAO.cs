@@ -83,7 +83,7 @@ namespace ShopThuCungMVC.DAO
             else 
                 return sb.ToString();
         }
-        public static void InsertUser(string name, string birthday, string gender, string email, string phone, string username, string password)
+        public static void InsertUser(string name, string gender, string email, string phone, string username, string password)
         {
             string id = GenerateIDUser();
             var user = new UserAccount(id, username, MD5.CreateMD5(password), password, 1, 0);
@@ -238,5 +238,30 @@ namespace ShopThuCungMVC.DAO
             dbtest2.SaveChanges();
         }
 
+        internal static UserAccount getUserById(string id)
+        {
+            return db.user_account.Where(p => p.id.Equals(id)).FirstOrDefault();
+        }
+
+        internal static void UpdateUser(string userid, string username, string email, string address, string fullname, string passwd, string phone, int status)
+        {
+            UserAccount user = getUserById(userid);
+            db.SaveChanges();
+            user.user_name = username;
+            user.pass = passwd;
+            user.passMaHoa = MD5.CreateMD5(passwd);
+            user.status = status;
+            ShopThuCungDBContext dbtest = new ShopThuCungDBContext();
+            dbtest.Update(user);
+            dbtest.SaveChanges();
+            InforUser infor = getInforUserById(userid);
+            infor.name = fullname;
+            infor.email = email;
+            infor.address = address;
+            infor.phone = phone;
+            ShopThuCungDBContext dbtest2 = new ShopThuCungDBContext();
+            dbtest2.Update(infor);
+            dbtest2.SaveChanges();
+        }
     }
 }
