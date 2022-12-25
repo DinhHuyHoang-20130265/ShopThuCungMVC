@@ -58,13 +58,12 @@ namespace ShopThuCungMVC.Areas.Admin.Controllers
                         ViewBag.PassError = "Mật khẩu nhập lại không đúng!";
                         return View(admin);
                     }
-
-
                 }
                 else
                 {
                     if (AccountService.checkEmailExist(email))
                     {
+
                         ViewBag.errorAddAdmin = "Email đã tồn tại!";
                         return View();
                     }

@@ -726,6 +726,10 @@
     <Content Include="Content\fonts\fontawesome-webfont.svg" />
     <Content Include="Content\img\banner\banner-1.jpg" />
     <Content Include="Content\img\banner\banner-2.jpg" />
+    <Content Include="Content\img\blog\4-phong-kham.png" />
+    <Content Include="Content\img\blog\6-phong-kham.png" />
+    <Content Include="Content\img\blog\benh-da.png" />
+    <Content Include="Content\img\blog\benh.png" />
     <Content Include="Content\img\blog\blog-1.jpg" />
     <Content Include="Content\img\blog\blog-2.jpg" />
     <Content Include="Content\img\blog\blog-3.jpg" />
@@ -734,9 +738,14 @@
     <Content Include="Content\img\blog\blog-6.jpg" />
     <Content Include="Content\img\blog\details\details-author.jpg" />
     <Content Include="Content\img\blog\details\details-hero.jpg" />
+    <Content Include="Content\img\blog\giong-corgi.jpg" />
+    <Content Include="Content\img\blog\oc-mo.png" />
+    <Content Include="Content\img\blog\run.png" />
     <Content Include="Content\img\blog\sidebar\sr-1.jpg" />
     <Content Include="Content\img\blog\sidebar\sr-2.jpg" />
     <Content Include="Content\img\blog\sidebar\sr-3.jpg" />
+    <Content Include="Content\img\blog\van-chuyen.png" />
+    <Content Include="Content\img\blog\vong-dinh-vi.png" />
     <Content Include="Content\img\breadcrumb.jpg" />
     <Content Include="Content\img\cart\cart-1.jpg" />
     <Content Include="Content\img\cart\cart-2.jpg" />
@@ -1119,7 +1128,7 @@
     <Content Include="Views\Shared\_ValidationScriptsPartial.cshtml" />
     <Content Include="Views\User\ForgotPassWord.cshtml" />
     <Content Include="Views\User\Login.cshtml" />
-	<Content Include="Views\User\InforUser.cshtml" />
+    <Content Include="Views\User\InforUser.cshtml" />
     <Content Include="Views\User\Register.cshtml" />
   </ItemGroup>
   <ItemGroup>
