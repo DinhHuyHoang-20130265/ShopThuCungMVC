@@ -185,9 +185,33 @@ namespace ShopThuCungMVC.DAO
             db.SaveChanges();
         }
 
+        public static void addAdmin (string username,string email, string address, string fullname, string passwd, string phone, int status)
+        {
+            String id = generateIDUser();
+            UserAccount user = new UserAccount(id, username, MD5.CreateMD5(passwd), passwd, status, 1);
+            InforUser inforUser = new InforUser(id, fullname, email, phone, address, null);
+            db.user_account.Add(user);
+            db.SaveChanges();
+            db.infor_user.Add(inforUser);
+            db.SaveChanges();
+        }
+
         public static List<UserAccount> getListUser()
         {
             return db.user_account.Where(n=>n.role == 0).ToList();
         }
+
+        public static List<UserAccount> getListAdmin()
+        {
+            return db.user_account.Where(n=>n.role == 1).ToList();
+        }
+
+        public static void removeAccount(string id)
+        {
+            UserAccount user = db.user_account.Find(id);
+            db.user_account.Remove(user);
+            db.SaveChanges();
+        }
+
     }
 }

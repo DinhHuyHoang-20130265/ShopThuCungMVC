@@ -72,5 +72,11 @@ namespace ShopThuCungMVC.Areas.Admin.Controllers
             else
                 return RedirectToAction("Login", "Auth");
         }
+
+        public ActionResult Remove(string id)
+        {
+            AccountService.removeAccount(id);
+            return RedirectToAction("Users", "User");
+        }
     }
 }
