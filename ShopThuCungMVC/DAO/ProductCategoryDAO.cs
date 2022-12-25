@@ -264,6 +264,41 @@ namespace ShopThuCungMVC.DAO
             dbtest2.Update(productFromCate);
             dbtest2.SaveChanges();
         }
+        internal static void UpdateAccessory(string productid, string userid, string productname, string fileName, string desc, string price, string promoPrice, string quantity, string date, string giong, string size)
+        {
+
+            Product product = Detail(productid);
+            db.SaveChanges();
+            string url = "";
+            if (!fileName.Equals(""))
+            {
+                url = "https://localhost:44322/Content/img/products/" + fileName;
+            }
+            else
+            {
+                url = product.Image;
+            }
+            product.Desription = desc;
+            product.giong = giong;
+            product.Price = double.Parse(price);
+            product.PromotionalPrice = promoPrice;
+            product.ProductName = productname;
+            product.Image = url;
+            product.Quantity = int.Parse(quantity);
+            DateTime check = DateTime.Now;
+            product.UpdateDate = check.Year + "/" + check.Month + "/" + check.Day;
+            product.CreateDate = check.Year + "/" + check.Month + "/" + check.Day;
+            product.UpdateBy = userid;
+            ShopThuCungDBContext dbtest = new ShopThuCungDBContext();
+            dbtest.Update(product);
+            dbtest.SaveChanges();
+            ProductCategory cate = db.product_category.Where(p => p.CatName.Equals(giong)).FirstOrDefault();
+            ProductFromCate productFromCate = db.product_from_cate.Where(p => p.product_id.Equals(product.productId)).FirstOrDefault();
+            productFromCate.cate_id = cate.CatId;
+            ShopThuCungDBContext dbtest2 = new ShopThuCungDBContext();
+            dbtest2.Update(productFromCate);
+            dbtest2.SaveChanges();
+        }
         public static List<ProductCategory> listCate(String category)
         {
             string query = $"SELECT DISTINCT p.* FROM product p join product_from_cate pfc ON p.productId = pfc.product_id \r\nWHERE p.`Status` =1";
@@ -283,7 +318,7 @@ namespace ShopThuCungMVC.DAO
                         break;
                 }
             }
-            List<Product> list = db.product.FromSqlRaw(query).ToList();
+            List<ProductCategory> list = db.product_category.FromSqlRaw(query).ToList();
             return list;
         }
     }
