@@ -1,4 +1,4 @@
-﻿
+﻿@model ShopThuCungMVC.Models.Blog
 @{
     ViewData["Title"] = "AddBlog";
     Layout = "~/Areas/Admin/Views/Shared/_LayoutAdmin.cshtml";
@@ -51,43 +51,121 @@
         </div>
         <div class="row">
             <main class="main" id="top">
-                <div class="">
-                    <div class="col-auto">
-                        <h2 class="" style="text-align: center; margin: 10px 0px 20px;">Thêm tin tức mới</h2>
-                        <h5 class="text-900 fw-semi-bold" style="text-align: center;">
-                        </h5>
-                    </div>
-                </div>
-                <h4 class="mb-3">Tên bài viết</h4>
-                <div class="row g-5">
+                <form class="mb-9" method="post" action="/Blog/AddBlog" enctype="multipart/form-data">
+                    @{
+                        ShopThuCungMVC.Models.UserAccount user = (ShopThuCungMVC.Models.UserAccount)Session["admin"];
+                    }
+                    <input type="text" id="userid" name="userid" value="@user.id" style="display: none;" />
+                    @if (Model != null)
+                    {
+                        <input type="text" name="blogid" id="blogid" value="@Model.BlogId" style="display: none" />
+                    }
                     <div class="">
-                        <input class="form-control mb-5"
-                               type="text"
-                               placeholder="Viết tên tin tức tại đây..." />
-                        <h4 class="mb-3">Hình ảnh minh họa</h4>
-                        <div class="dropzone dropzone-multiple p-0 mb-5 dz-clickable"
-                             id="my-awesome-dropzone"
-                             data-dropzone="data-dropzone">
-                            <div class="dz-preview d-flex flex-wrap"></div>
-                            <div class="dz-message text-600"
-                                 data-dz-message="data-dz-message">
-                                Kéo hình ảnh vào đây <span class="text-800">hoặc </span><button class="btn btn-link p-0" type="button">
-                                    Tìm trong thiết bị
-                                </button><br /><img class="mt-3 me-2"
-                                                    src="~/Content/AdminResources/assets/img/icons/image-icon.png"
-                                                    width="40"
-                                                    alt="" />
+                        @if (Model != null)
+                        {
+                            <div class="col-auto">
+                                <h2 class="" style="text-align: center; margin: 10px 0px 20px;">Chỉnh sửa tin tức</h2>
+                                <h5 class="text-900 fw-semi-bold" style="text-align: center;">
+                                </h5>
                             </div>
-                        </div>
-                        <div class="mb-6">
-                            <h4 class="mb-3">Chi tiết tin tức</h4>
-                            <input type="text" id="desc" placeholder="Nhập thông tin sản phẩm" />
-                        </div>
-                        <button type="submit" class="btn  btn-primary" style="margin-bottom: 50px;margin-right: 20px;float: right; padding:10px 40px 10px 40px; font-size: large;">Thêm tin tức</button>
+                        }
+                        else
+                        {
+                            <div class="col-auto">
+                                <h2 class="" style="text-align: center; margin: 10px 0px 20px;">Thêm tin tức</h2>
+                                <h5 class="text-900 fw-semi-bold" style="text-align: center;">
+                                </h5>
+                            </div>
+                        }
+
                     </div>
-                </div>
+                    <h4 class="mb-3">Tên bài viết</h4>
+                    <div class="row g-5">
+                        <div class="">
+                            @if (Model != null)
+                            {
+                                <input class="form-control mb-5" type="text" name="blogname" value="@Model.BlogName" required />
+                            }
+                            else
+                            {
+                                <input class="form-control mb-5" type="text" name="blogname" placeholder="Viết tên tin tức tại đây..." required />
+                            }
+                            <h4 class="mb-3">Hình ảnh minh họa</h4>
+                            @if (Model != null)
+                            {
+                                <div class="containimg" style="width: 130px; margin: 15px;">
+                                    <a style="cursor: pointer;"><i class="fa fa-window-close" aria-hidden="true"></i></a>
+                                    <img id="preview" src="@Model.Image" style="width: 120px; margin-left: 10px; border-radius: 5px;" />
+                                </div>
+                                <div class="dropzone dropzone-multiple p-0 mb-5 dz-clickable">
+                                    <div class="dz-message text-600"
+                                         data-dz-message="data-dz-message">
+                                        <label for="file-upload" class="custom-file-upload" style="border: 1px solid #ccc; display: inline-block; padding: 6px 12px; cursor: pointer;">
+                                            <i class="fa fa-cloud-upload"></i> Up ảnh cho tin tức
+                                        </label>
+                                        <input id="file-upload" name="file" type="file" style="display: none;" />
+                                    </div>
+                                </div>
+                            }
+                            else
+                            {
+                                <div class="containimg" style="width: 130px; margin: 15px; display: none;">
+                                    <a style="cursor: pointer;"><i class="fa fa-window-close" aria-hidden="true"></i></a>
+                                    <img id="preview" src="" style="width: 120px; margin-left: 10px; border-radius: 5px;" />
+                                </div>
+                                <div class="dropzone dropzone-multiple p-0 mb-5 dz-clickable">
+                                    <div class="dz-message text-600"
+                                         data-dz-message="data-dz-message">
+                                        <label for="file-upload" class="custom-file-upload" style="border: 1px solid #ccc; display: inline-block; padding: 6px 12px; cursor: pointer;">
+                                            <i class="fa fa-cloud-upload"></i> Up ảnh cho tin tức
+                                        </label>
+                                        <input id="file-upload" name="file" type="file" style="display: none;" />
+                                    </div>
+                                </div>
+                            }
+                            <div class="mb-6">
+                                <h4 class="mb-3">Chi tiết tin tức</h4>
+                                @if (Model != null)
+                                {
+                                    <textarea id="desc">
+                                        @Model.Desription
+                                    </textarea>
+                                }
+                                else
+                                {
+                                    <textarea id="desc">
+                                    
+                                    </textarea>
+                                }
+                            </div>
+                            @if (Model != null)
+                            {
+                                <button type="submit" class="btn  btn-primary" style="margin-bottom: 50px;margin-right: 20px;float: right; padding:10px 40px 10px 40px; font-size: large;">Lưu tin tức</button>
+                            }
+                            else
+                            {
+                                <button type="submit" class="btn  btn-primary" style="margin-bottom: 50px;margin-right: 20px;float: right; padding:10px 40px 10px 40px; font-size: large;">Đăng tin tức</button>
+                            }
+
+                        </div>
+                    </div>
+                </form>
             </main>
         </div>
     </div>
 </div>
 <!-- [ Main Content ] end -->
+<script src="~/Content/js/jquery-3.3.1.min.js"></script>
+<script>
+    $("#file-upload").change(function (e) {
+        e.preventDefault();
+        const preview = document.getElementById('preview');
+        const file = document.getElementById('file-upload').files[0];
+        const reader = new FileReader();
+        reader.addEventListener("load", function () {
+            preview.src = reader.result;
+        }, false);
+        reader.readAsDataURL(file);
+        $(".containimg").css("display", "block");
+    })
+</script>
