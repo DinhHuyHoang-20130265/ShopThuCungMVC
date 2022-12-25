@@ -185,9 +185,83 @@ namespace ShopThuCungMVC.DAO
             db.SaveChanges();
         }
 
+        public static void addAdmin (string username,string email, string address, string fullname, string passwd, string phone, int status)
+        {
+            String id = generateIDUser();
+            UserAccount user = new UserAccount(id, username, MD5.CreateMD5(passwd), passwd, status, 1);
+            InforUser inforUser = new InforUser(id, fullname, email, phone, address, null);
+            db.user_account.Add(user);
+            db.SaveChanges();
+            db.infor_user.Add(inforUser);
+            db.SaveChanges();
+        }
+
         public static List<UserAccount> getListUser()
         {
             return db.user_account.Where(n=>n.role == 0).ToList();
+        }
+
+        public static List<UserAccount> getListAdmin()
+        {
+            return db.user_account.Where(n=>n.role == 1).ToList();
+        }
+
+        public static void removeAccount(string id)
+        {
+            UserAccount user = db.user_account.Find(id);
+            db.user_account.Remove(user);
+            db.SaveChanges();
+        }
+        public static UserAccount getAdminById(string id)
+        {
+            return db.user_account.Find(id);
+        }
+
+        internal static void UpdateAdmin(string userid, string username, string email, string address, string fullname, string passwd, string phone, int status)
+        {
+            UserAccount admin = getAdminById(userid);
+            db.SaveChanges();
+            admin.user_name = username;
+            admin.pass = passwd;
+            admin.passMaHoa = MD5.CreateMD5(passwd);
+            admin.status = status;
+            ShopThuCungDBContext dbtest = new ShopThuCungDBContext();
+            dbtest.Update(admin);
+            dbtest.SaveChanges();
+            InforUser infor = getInforUserById(userid);
+            infor.name = fullname;
+            infor.email = email;
+            infor.address = address;
+            infor.phone = phone;
+            ShopThuCungDBContext dbtest2 = new ShopThuCungDBContext();
+            dbtest2.Update(infor);
+            dbtest2.SaveChanges();
+        }
+
+        internal static UserAccount getUserById(string id)
+        {
+            return db.user_account.Where(p => p.id.Equals(id)).FirstOrDefault();
+        }
+
+        internal static void UpdateUser(string userid, string username, string email, string address, string fullname, string passwd, string phone, int status)
+        {
+            UserAccount user = getUserById(userid);
+            db.SaveChanges();
+            user.user_name = username;
+            user.pass = passwd;
+            user.passMaHoa = MD5.CreateMD5(passwd);
+            user.status = status;
+            ShopThuCungDBContext dbtest = new ShopThuCungDBContext();
+            dbtest.Update(user);
+            dbtest.SaveChanges();
+            InforUser infor = getInforUserById(userid);
+            infor.name = fullname;
+            infor.email = email;
+            infor.address = address;
+            infor.phone = phone;
+            ShopThuCungDBContext dbtest2 = new ShopThuCungDBContext();
+            dbtest2.Update(infor);
+            dbtest2.SaveChanges();
         }
     }
 }

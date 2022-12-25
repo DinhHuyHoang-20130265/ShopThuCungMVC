@@ -25,11 +25,14 @@ namespace ShopThuCungMVC.Areas.Admin.Controllers
             try
             {
                 string _path = null;
-                if (file.ContentLength > 0)
+                if (file != null)
                 {
-                    string _FileName = Path.GetFileName(file.FileName);
-                    _path = Path.Combine(Server.MapPath("~/Content/img/products"), _FileName);
-                    file.SaveAs(_path);
+                    if (file.ContentLength > 0)
+                    {
+                        string _FileName = Path.GetFileName(file.FileName);
+                        _path = Path.Combine(Server.MapPath("~/Content/img/products"), _FileName);
+                        file.SaveAs(_path);
+                    }
                 }
             }
             catch
@@ -37,27 +40,67 @@ namespace ShopThuCungMVC.Areas.Admin.Controllers
             }
         }
         [HttpGet]
-        public ActionResult AddProduct()
-        {
-            UserAccount account = (UserAccount)Session["admin"];
-            if (account != null)
-                return View();
-            else
-                return RedirectToAction("Login", "Auth");
-        }
-        [HttpPost]
-        public ActionResult AddProduct(string userid, string productname, string desc, HttpPostedFileBase file, string price, string promoPrice, string quantity, string cannang, string mausac, string date, string giong, string size) 
+        public ActionResult AddProduct(string pid)
         {
             UserAccount account = (UserAccount)Session["admin"];
             if (account != null)
             {
-                UploadFile(file);
-                string _FileName = Path.GetFileName(file.FileName);
-                ProductCateService.AddNewProduct(userid, productname, _FileName , desc, price, promoPrice, quantity, cannang, mausac, date, giong, size);
-                return RedirectToAction("Products", "Admin/Product");
+                if (pid != null)
+                {
+                    Product product = ProductCateService.Detail(pid);
+                    return View(product);
+                } else
+                {
+                    return View();
+                }
             }
             else
                 return RedirectToAction("Login", "Auth");
+        }
+        [HttpPost]
+        public ActionResult AddProduct(string productid, string userid, string productname, string desc, HttpPostedFileBase file, string price, string promoPrice, string quantity, string cannang, string mausac, string date, string giong, string size) 
+        {
+            UserAccount account = (UserAccount)Session["admin"];
+            if (account != null)
+            {
+               if (productid != null)
+                {
+                    UploadFile(file);
+                    string _FileName = "";
+                    if (file != null)
+                    {
+                        _FileName = Path.GetFileName(file.FileName);
+                    }
+                    ProductCateService.UpdateProduct(productid, userid, productname, _FileName, desc, price, promoPrice, quantity, cannang, mausac, date, giong, size);
+                    return RedirectToAction("Products", "Admin/Product");
+                }
+               else
+                {
+                    UploadFile(file);
+                    string _FileName = "";
+                    if (file != null)
+                    {
+                        _FileName = Path.GetFileName(file.FileName);
+                    }
+                    ProductCateService.AddNewProduct(userid, productname, _FileName, desc, price, promoPrice, quantity, cannang, mausac, date, giong, size);
+                    return RedirectToAction("Products", "Admin/Product");
+                }
+            }
+            else
+                return RedirectToAction("Login", "Auth");
+        }
+
+        public ActionResult DeleteProduct(string pid)
+        {
+            if (pid != null)
+            {
+                ProductCateService.DeleteProduct(pid);
+                return Json(new { status = true });
+            }
+            else
+            {
+                return Json(new { status = false });
+            }
         }
     }
 }

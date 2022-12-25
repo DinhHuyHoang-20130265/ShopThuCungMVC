@@ -19,6 +19,10 @@ namespace ShopThuCungMVC.Services
         {
             return ProductCategoryDAO.listAllProduct();
         }
+        public static Product ProductById(string id)
+        {
+            return ProductCategoryDAO.ProductbyId(id);
+        }
         public static List<Product> listProductbyCate(String id)
         {
             return ProductCategoryDAO.listProductbyCate(id);
@@ -61,8 +65,25 @@ namespace ShopThuCungMVC.Services
         {
             ProductCategoryDAO.AddNewProduct(userid, productname, _FileName, desc, price, promoPrice, quantity, cannang, mausac, date, giong, size);
         }
+        internal static void AddNewAccessory(string userid, string productname, string _FileName, string desc, string price, string promoPrice, string quantity, string date, string giong, string size)
+        {
+            ProductCategoryDAO.AddNewAccessory(userid, productname, _FileName, desc, price, promoPrice, quantity, date, giong, size);
+        }
 
-      public static List<ProductCategory> listProCateClassify(String id)
+        public static void DeleteProduct(string id)
+        {
+            ProductCategoryDAO.DeleteProduct(id);
+        }
+
+        internal static void UpdateProduct(string pid, string userid, string productname, string fileName, string desc, string price, string promoPrice, string quantity, string cannang, string mausac, string date, string giong, string size)
+        {
+            ProductCategoryDAO.UpdateProduct(pid, userid, productname, fileName, desc, price, promoPrice, quantity, cannang, mausac, date, giong, size);
+        }
+        internal static void UpdateAccessory(string pid, string userid, string productname, string fileName, string desc, string price, string promoPrice, string quantity, string date, string giong, string size)
+        {
+            ProductCategoryDAO.UpdateAccessory(pid, userid, productname, fileName, desc, price, promoPrice, quantity, date, giong, size);
+        }
+        public static List<ProductCategory> listProCateClassify(String id)
         {
             return ProductCategoryDAO.listProCateClassify(id);
         }

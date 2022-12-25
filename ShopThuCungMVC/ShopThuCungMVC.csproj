@@ -269,6 +269,7 @@
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Models\Blog.cs" />
+    <Compile Include="Models\InfoAdmin.cs" />
     <Compile Include="Models\ListProductAdmin.cs" />
     <Compile Include="Models\OrderDetail.cs" />
     <Compile Include="Models\Orders.cs" />
@@ -1081,6 +1082,7 @@
     <Content Include="Content\ckeditor\samples\toolbarconfigurator\lib\codemirror\LICENSE" />
     <Content Include="Content\ckeditor\SECURITY.md" />
     <Content Include="Content\ckeditor\skins\moono-lisa\readme.md" />
+    <Content Include="Areas\Admin\Views\Admin\InfoAdmin.cshtml" />
     <None Include="Scripts\jquery-3.6.1.intellisense.js" />
     <Content Include="Scripts\jquery-3.6.1.js" />
     <Content Include="Scripts\jquery-3.6.1.min.js" />
@@ -1118,6 +1120,7 @@
     <Content Include="Views\Shared\_ValidationScriptsPartial.cshtml" />
     <Content Include="Views\User\ForgotPassWord.cshtml" />
     <Content Include="Views\User\Login.cshtml" />
+	<Content Include="Views\User\InforUser.cshtml" />
     <Content Include="Views\User\Register.cshtml" />
   </ItemGroup>
   <ItemGroup>

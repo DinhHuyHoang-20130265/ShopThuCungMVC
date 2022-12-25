@@ -12,6 +12,11 @@ namespace ShopThuCungMVC.Services
         {
             return AccountDAO.loginSite(username, password);
         }
+
+        public static UserAccount getUserById(string id)
+        {
+            return AccountDAO.getUserById(id);
+        }
         public static UserAccount loginAdmin(string username, string password)
         {
             return AccountDAO.loginAdmin(username, password);
@@ -49,9 +54,39 @@ namespace ShopThuCungMVC.Services
             AccountDAO.addUser(username, email, address, fullname, passwd, phone, status);
         }
 
+        public static void addAdmin(string username, string email, string address, string fullname, string passwd, string phone, int status)
+        {
+            AccountDAO.addAdmin(username, email, address, fullname, passwd, phone, status);
+        }
+
         public static List<UserAccount> getListUser()
         {
             return AccountDAO.getListUser();
+        }
+
+        public static List<UserAccount> getListAdmin()
+        {
+            return AccountDAO.getListAdmin();
+        }
+
+        public static void removeAccount(string id)
+        {
+            AccountDAO.removeAccount(id);
+        }
+
+        public static UserAccount getAdminById(string id)
+        {
+            return AccountDAO.getAdminById(id);
+        }
+
+        public static void UpdateAdmin(string userid, string username, string email, string address, string fullname, string passwd, string phone, int status)
+        {
+            AccountDAO.UpdateAdmin(userid, username, email, address, fullname, passwd, phone, status);
+        }
+
+        internal static void UpdateUser(string userid, string username, string email, string address, string fullname, string passwd, string phone, int status)
+        {
+            AccountDAO.UpdateUser(userid, username, email, address, fullname, passwd, phone, status);
         }
     }
 }
