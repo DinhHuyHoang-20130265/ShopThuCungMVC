@@ -272,7 +272,7 @@ namespace ShopThuCungMVC.DAO
                         break;
                 }
             }
-            List<Product> list = db.product.FromSqlRaw(query).ToList();
+            List<ProductCategory> list = db.product_category.FromSqlRaw(query).ToList();
             return list;
         }
     }

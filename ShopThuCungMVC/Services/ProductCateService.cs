@@ -71,7 +71,7 @@ namespace ShopThuCungMVC.Services
         {
             ProductCategoryDAO.UpdateProduct(pid, userid, productname, fileName, desc, price, promoPrice, quantity, cannang, mausac, date, giong, size);
         }
-      public static List<ProductCategory> listProCateClassify(String id)
+        public static List<ProductCategory> listProCateClassify(String id)
         {
             return ProductCategoryDAO.listProCateClassify(id);
         }
