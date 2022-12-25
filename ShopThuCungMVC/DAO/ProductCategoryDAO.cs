@@ -155,5 +155,13 @@ namespace ShopThuCungMVC.DAO
             db.product_from_cate.Add(productFromCate);
             db.SaveChanges();
         }
+
+        public static void DeleteProduct(string id)
+        {
+            Product product = db.product.FromSqlRaw($"Select * from product where productId = '{id}'").FirstOrDefault();
+            
+            db.product.Remove(product);
+            db.SaveChanges();
+        }
     }
 }

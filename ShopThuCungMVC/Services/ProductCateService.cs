@@ -61,5 +61,10 @@ namespace ShopThuCungMVC.Services
         {
             ProductCategoryDAO.AddNewProduct(userid, productname, _FileName, desc, price, promoPrice, quantity, cannang, mausac, date, giong, size);
         }
+
+        public static void DeleteProduct(string id)
+        {
+            ProductCategoryDAO.DeleteProduct(id);
+        }
     }
 }

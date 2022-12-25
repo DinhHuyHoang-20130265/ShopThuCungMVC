@@ -37,11 +37,20 @@ namespace ShopThuCungMVC.Areas.Admin.Controllers
             }
         }
         [HttpGet]
-        public ActionResult AddProduct()
+        public ActionResult AddProduct(string pid)
         {
             UserAccount account = (UserAccount)Session["admin"];
             if (account != null)
-                return View();
+            {
+                if (pid != null)
+                {
+                    Product product = ProductCateService.Detail(pid);
+                    return View(product);
+                } else
+                {
+                    return View();
+                }
+            }
             else
                 return RedirectToAction("Login", "Auth");
         }
@@ -58,6 +67,24 @@ namespace ShopThuCungMVC.Areas.Admin.Controllers
             }
             else
                 return RedirectToAction("Login", "Auth");
+        }
+
+        public ActionResult DeleteProduct(string pid)
+        {
+            if (pid != null)
+            {
+                ProductCateService.DeleteProduct(pid);
+                return Json(new { status = true });
+            }
+            else
+            {
+                return Json(new { status = false });
+            }
+        }
+        [HttpGet]
+        public ActionResult Edit(string pid)
+        {
+            return RedirectToAction("AddProduct", "Product", pid);
         }
     }
 }
