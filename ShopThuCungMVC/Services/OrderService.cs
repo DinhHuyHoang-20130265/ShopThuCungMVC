@@ -21,5 +21,9 @@ namespace ShopThuCungMVC.Services
         {
             return OrderDAO.getOrderDetailById(id);
         }
+        public static void AddNewOrders(string id, ShoppingCart cart)
+        {
+            OrderDAO.AddNewOrders(id, cart);
+        }
     }
 }

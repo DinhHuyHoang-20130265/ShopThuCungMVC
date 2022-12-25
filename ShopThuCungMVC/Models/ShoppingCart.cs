@@ -15,7 +15,7 @@ namespace ShopThuCungMVC.Models
 
     public class ShoppingCart
     {
-        Dictionary<string, int> data;
+        Dictionary<string, int> data { get; set; }
 
         public ShoppingCart()
         {
@@ -73,5 +73,6 @@ namespace ShopThuCungMVC.Models
             }
             return money;
         }
+
     }
 }
