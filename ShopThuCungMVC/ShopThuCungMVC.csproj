@@ -913,6 +913,8 @@
     <Content Include="Content\lib\jquery\dist\jquery.js" />
     <Content Include="Content\lib\jquery\dist\jquery.min.js" />
     <Content Include="Content\lib\jquery\LICENSE.txt" />
+    <Content Include="Content\Login\css\main.css" />
+    <Content Include="Content\Login\css\style.css" />
     <Content Include="Content\Login\global.js" />
     <Content Include="Content\Login\vendor\datepicker\daterangepicker.css" />
     <Content Include="Content\Login\vendor\datepicker\daterangepicker.js" />
